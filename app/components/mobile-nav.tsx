@@ -2,15 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 
 type Item = { href: string; label: string; note: string };
 
 export function MobileNav({ items }: { items: Item[] }) {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -38,7 +34,11 @@ export function MobileNav({ items }: { items: Item[] }) {
       {open && (
         <nav id="nav-panel" className="nav-panel" aria-label="Main">
           {items.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+            >
               {item.label}
               <span className="nav-panel-note">{item.note}</span>
             </Link>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   createContext,
   useCallback,
@@ -9,7 +10,6 @@ import {
   useState,
 } from "react";
 import { legs, quote, tiers, type LegId, type TierId } from "@/lib/fares";
-import type { ResolvedSlot } from "@/lib/media";
 import {
   currencies,
   formatFare,
@@ -240,7 +240,8 @@ export function Ledger() {
 
       <p className="ledger-foot">
         Fares are per vehicle, not per person, and hold from quote to drop-off.
-        Travelling a different route? <a href="/#contact">Send it to us</a> and
+        Travelling a different route? <Link href="/#contact">Send it to us</Link>{" "}
+        and
         we&apos;ll price it the same way.
       </p>
     </div>
@@ -253,11 +254,9 @@ export function Ledger() {
 
 export function FleetTiers({
   photos,
-  children,
 }: {
-  /** Vehicle photography per tier, resolved on the server. */
+  /** Vehicle photography per tier, rendered on the server and passed in. */
   photos?: Partial<Record<TierId, React.ReactNode>>;
-  children?: never;
 }) {
   const { tier, setTier, currency } = useJourney();
   const reference = legs[0];
