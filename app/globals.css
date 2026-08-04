@@ -48,6 +48,12 @@ body {
   outline-color: var(--focus-on-field);
 }
 
+/* The ledger is a light card living inside the dark hero, so its controls
+   take the light-surface ring back. */
+.ledger :focus-visible {
+  outline-color: var(--focus);
+}
+
 /* clip-path eats the outline, so clipped controls ring themselves inward. */
 .is-clipped:focus-visible {
   outline: none;
