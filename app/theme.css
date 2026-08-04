@@ -1,0 +1,50 @@
+/* ============================================================
+   PALETTE ONE — Copper / Onyx
+   The five colours from the brand sheet, and nothing else.
+   ============================================================ */
+
+:root {
+  /* ---- The palette, verbatim ---- */
+  --onyx: #16171b; /* Nav, footer, vehicle imagery bg */
+  --graphite: #3a3d42; /* Cards, secondary panels */
+  --copper: #c17a4e; /* CTA, price tags, active states */
+  --ivory: #f3efe9; /* Page background */
+  --taupe: #8c857a; /* Body copy, captions */
+
+  /* ---- One derived value, for contrast ----
+     Taupe on Ivory measures 3.19:1, which fails AA for running text.
+     Ink is Onyx warmed with Taupe: same family, 12.4:1 on Ivory.
+     Taupe keeps its job on dark fields (4.91:1 on Onyx) and on captions. */
+  --ink: color-mix(in oklab, var(--onyx) 84%, var(--taupe));
+
+  /* ---- Semantic roles ---- */
+  --page: var(--ivory);
+  --surface: color-mix(in oklab, var(--ivory) 55%, #fff);
+  --field: var(--onyx);
+  --field-soft: var(--graphite);
+
+  --text: var(--ink);
+  --muted: color-mix(in oklab, var(--taupe) 82%, var(--ink));
+  --caption: var(--taupe);
+
+  --on-field: var(--ivory);
+  --on-field-muted: var(--taupe);
+
+  --accent: var(--copper);
+  /* Onyx on Copper is 5.25:1. White would be 3.41:1, so the label goes dark. */
+  --accent-ink: var(--onyx);
+  --accent-quiet: color-mix(in oklab, var(--copper) 16%, transparent);
+
+  /* Badges have no dedicated colour in this palette, so they borrow the
+     accent at low strength rather than introducing a sixth hue. */
+  --badge: var(--accent-quiet);
+  --badge-ink: var(--ink);
+  --badge-on-field: color-mix(in oklab, var(--copper) 88%, var(--ivory));
+
+  --line: color-mix(in oklab, var(--taupe) 34%, transparent);
+  --line-strong: color-mix(in oklab, var(--taupe) 60%, transparent);
+  --line-on-field: color-mix(in oklab, var(--ivory) 18%, transparent);
+
+  --focus: var(--copper);
+  --focus-on-field: var(--ivory);
+}

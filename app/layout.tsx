@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono, Jost } from "next/font/google";
 import "./globals.css";
 
 const siteUrl = new URL(
@@ -7,16 +7,32 @@ const siteUrl = new URL(
 );
 
 const siteDescription =
-  "Safe, comfortable travel in Saudi Arabia with airport transfers, Makkah and Madinah Ziyarat, inter-city trips, and 24/7 professional support.";
+  "Fixed-fare chauffeur transport for pilgrims arriving from the UK, the US and Pakistan. Jeddah and Madinah airport transfers, Makkah–Madinah intercity travel, and Ziyarat touring, priced per vehicle and held from quote to drop-off.";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/**
+ * Three faces, three fixed roles.
+ * Jost carries the display voice: light, wide, architectural — the same
+ * register as the wordmark in the logo. Archivo does all the reading.
+ * JetBrains Mono is the instrument: fares, route codes, distances, durations.
+ */
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -43,10 +59,6 @@ export const metadata: Metadata = {
     "Trust Track Travels",
   ],
   alternates: { canonical: "/" },
-  icons: {
-    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
-    shortcut: "/logo.svg",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -56,10 +68,10 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/logo.svg",
-        width: 200,
-        height: 200,
-        alt: "Trust Track Travels logo",
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Trust Track Travels",
       },
     ],
   },
@@ -67,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Trust Track Travels | Saudi Arabia Transfers & Ziyarat",
     description: siteDescription,
-    images: ["/logo.svg"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -87,7 +99,7 @@ const organizationSchema = {
   "@type": "TravelAgency",
   name: "Trust Track Travels",
   url: siteUrl.href,
-  logo: new URL("/logo.svg", siteUrl).href,
+  logo: new URL("/logo.png", siteUrl).href,
   description: siteDescription,
   areaServed: {
     "@type": "Country",
@@ -105,9 +117,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${jost.variable} ${archivo.variable} ${jetbrains.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body>
         {children}
         <script
           type="application/ld+json"

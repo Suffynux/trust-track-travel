@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust Track Travels | Premium Ground Transport for Hajj &amp; Umrah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Spectral+SC:wght@500;600&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #0B2419;
+    --green: #123A2A;
+    --green-soft: #1C4E39;
+    --brass: #B08D57;
+    --brass-light: #DEC08A;
+    --cream: #F7F2E7;
+    --paper: #FBF8F2;
+    --ink: #211D16;
+    --sage: #5E7A69;
+    --rule: #DCCFAE;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Work Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+  h1, h2, h3, h4 { font-family: 'Spectral', serif; font-weight: 600; margin: 0; color: var(--green-deep); }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass); display: block; margin-bottom: 10px; }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+  .skip-link { position: absolute; left: -999px; top: 0; background: var(--brass); color: var(--green-deep); padding: 10px 16px; z-index: 999; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  .skip-link:focus { left: 12px; top: 12px; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 14.5px; padding: 13px 22px; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; }
+  .btn-primary { background: var(--brass); color: var(--green-deep); }
+  .btn-primary:hover { background: var(--brass-light); }
+  .btn-outline { border-color: var(--cream); color: var(--cream); }
+  .btn-outline:hover { border-color: var(--brass-light); color: var(--brass-light); }
+  .btn-outline.on-light { border-color: var(--green-deep); color: var(--green-deep); }
+  .btn-outline.on-light:hover { border-color: var(--brass); color: var(--brass); }
+
+  /* Header */
+  header.site-header { position: sticky; top: 0; z-index: 100; background: var(--green-deep); border-bottom: 1px solid var(--green-soft); }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .nav-wordmark { font-family: 'Spectral SC', serif; font-weight: 600; letter-spacing: 0.1em; font-size: 16px; color: var(--cream); text-decoration: none; text-transform: uppercase; }
+  nav.nav-links { display: flex; gap: 30px; }
+  nav.nav-links a { font-size: 14px; color: #CBD6CE; text-decoration: none; }
+  nav.nav-links a:hover { color: var(--brass-light); }
+  .nav-actions { display: flex; align-items: center; gap: 16px; }
+  .nav-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 22px; cursor: pointer; }
+  @media (max-width: 860px) {
+    nav.nav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--green-deep); flex-direction: column; gap: 0; display: none; border-top: 1px solid var(--green-soft); }
+    nav.nav-links.open { display: flex; }
+    nav.nav-links a { padding: 14px 32px; border-bottom: 1px solid var(--green-soft); }
+    .nav-toggle { display: block; }
+    .nav-actions .btn-outline { display: none; }
+  }
+
+  /* Hero */
+  .hero { background: linear-gradient(180deg, var(--green-deep) 0%, var(--green) 100%); color: var(--cream); padding: 76px 0 58px; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .hero h1 { color: var(--cream); font-size: 44px; line-height: 1.16; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: italic; color: var(--brass-light); }
+  .hero p.sub { font-size: 17px; color: #D9E2DB; max-width: 480px; margin-top: 18px; }
+  .hero-ctas { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+  .stat-row { display: flex; gap: 28px; margin-top: 42px; flex-wrap: wrap; }
+  .stat { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--brass-light); letter-spacing: 0.05em; }
+  .hero-art { border: 1px solid var(--green-soft); background: var(--green-deep); padding: 30px 24px; position: relative; }
+  .route-svg { width: 100%; height: auto; display: block; }
+  .route-caption { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--sage); letter-spacing: 0.06em; text-align: center; margin-top: 12px; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 32px; } }
+
+  /* generic section */
+  section.block { padding: 62px 0; border-bottom: 1px solid var(--rule); }
+  section.block:last-of-type { border-bottom: none; }
+  .section-head { max-width: 640px; margin-bottom: 34px; }
+  .section-head h2 { font-size: 28px; }
+  .section-head p.intro { margin-top: 10px; color: var(--sage); font-size: 15px; }
+
+  /* Services */
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .service-card { background: var(--paper); border: 1px solid var(--rule); padding: 26px 24px; }
+  .service-card .icon { width: 34px; height: 34px; color: var(--brass); }
+  .service-card h3 { font-size: 19px; margin-top: 16px; }
+  .service-card p { font-size: 14px; color: #3B362B; margin-top: 8px; }
+  .service-card .price { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--green-deep); margin-top: 16px; font-weight: 700; }
+  .service-card a.link { display: inline-block; margin-top: 12px; font-size: 13.5px; color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass); }
+  @media (max-width: 860px) { .service-grid { grid-template-columns: 1fr; } }
+
+  /* Process */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+  .process-step { border-top: 3px solid var(--brass); padding-top: 16px; }
+  .process-step .step-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--brass); }
+  .process-step h4 { font-size: 16px; margin-top: 8px; font-family: 'Spectral', serif; }
+  .process-step p { font-size: 13.5px; color: var(--sage); margin-top: 6px; }
+  @media (max-width: 860px) { .process-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* Fleet */
+  .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tier-card { background: var(--paper); border: 1px solid var(--rule); padding: 20px 18px; }
+  .tier-card .tier-index { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--green-deep); background: var(--cream); border: 1px solid var(--rule); display: inline-block; padding: 2px 7px; letter-spacing: 0.06em; }
+  .tier-card h3 { font-size: 17px; margin-top: 10px; }
+  .tier-card .capacity { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--sage); margin-top: 5px; }
+  .tier-card .price { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--brass); font-weight: 700; margin-top: 12px; }
+  .tier-card .price span { font-size: 10.5px; color: var(--sage); font-weight: 400; display: block; margin-top: 2px; }
+  .fleet-footnote { margin-top: 18px; font-size: 13.5px; color: var(--sage); }
+  @media (max-width: 860px) { .tier-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* Ziyarat */
+  .ziyarat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ziyarat-card { background: var(--green-deep); color: var(--cream); padding: 28px 26px; }
+  .ziyarat-card h3 { color: var(--cream); font-size: 21px; }
+  .ziyarat-card .price { font-family: 'JetBrains Mono', monospace; color: var(--brass-light); font-size: 13px; margin-top: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--brass-light); border: 1px solid var(--green-soft); padding: 5px 10px; }
+  @media (max-width: 860px) { .ziyarat-grid { grid-template-columns: 1fr; } }
+
+  /* Pillars */
+  .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .pillar-card { padding: 4px 0 0; border-top: 1px solid var(--rule); padding-top: 16px; }
+  .pillar-card .num { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--brass); }
+  .pillar-card h3 { font-size: 17px; margin-top: 8px; }
+  .pillar-card p { font-size: 13.5px; color: #3B362B; margin-top: 8px; }
+  @media (max-width: 860px) { .pillar-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* compliance strip */
+  .strip { background: var(--cream); padding: 30px 0; }
+  .strip-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .strip-item { display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green-deep); letter-spacing: 0.02em; }
+  .strip-item svg { width: 20px; height: 20px; color: var(--brass); flex-shrink: 0; }
+
+  /* testimonials */
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .testi-card { border: 1.5px dashed var(--rule); padding: 24px; color: var(--sage); }
+  .testi-stars { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--rule); letter-spacing: 3px; }
+  .testi-card p { font-size: 13.5px; font-style: italic; margin-top: 12px; }
+  @media (max-width: 860px) { .testi-grid { grid-template-columns: 1fr; } }
+
+  /* CTA banner */
+  .cta-banner { background: linear-gradient(180deg, var(--green) 0%, var(--green-deep) 100%); color: var(--cream); padding: 56px 0; text-align: center; }
+  .cta-banner h2 { color: var(--cream); font-size: 30px; }
+  .cta-banner p { color: #D9E2DB; margin-top: 10px; font-size: 15.5px; }
+  .cta-banner .hero-ctas { justify-content: center; }
+
+  /* footer */
+  footer { background: var(--green-deep); color: #A9B7AC; padding: 46px 0 30px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; padding-bottom: 30px; border-bottom: 1px solid var(--green-soft); }
+  .footer-grid .wordmark { font-family: 'Spectral SC', serif; color: var(--brass-light); letter-spacing: 0.14em; font-size: 14px; text-transform: uppercase; }
+  .footer-grid p { margin-top: 12px; line-height: 1.7; max-width: 320px; }
+  .footer-col h5 { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; }
+  .footer-col a { display: block; color: #A9B7AC; text-decoration: none; padding: 4px 0; font-size: 13.5px; }
+  .footer-col a:hover { color: var(--brass-light); }
+  .placeholder-token { color: var(--brass-light); border-bottom: 1px dashed var(--brass); }
+  .footer-bottom { display: flex; justify-content: space-between; padding-top: 22px; flex-wrap: wrap; gap: 10px; font-size: 12px; }
+  @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap nav-row">
+    <a href="#main" class="nav-wordmark">Trust Track Travels</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#ziyarat">Ziyarat</a>
+      <a href="#why">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#contact" class="btn btn-outline">View Packages</a>
+      <a href="#contact" class="btn btn-primary">WhatsApp Us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" style="color:var(--brass-light);">Makkah &middot; Madinah &middot; Jeddah</span>
+        <h1>A chauffeur who knows the route. <em>A price that doesn't move.</em></h1>
+        <p class="sub">Airport transfers, intercity travel, and Ziyarat touring for pilgrims arriving from the UK, Europe, and Pakistan. Fixed pricing, every leg, no surge.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Get a fixed quote on WhatsApp</a>
+          <a href="#fleet" class="btn btn-outline">View fleet &amp; pricing</a>
+        </div>
+        <div class="stat-row">
+          <span class="stat">20+ VEHICLES</span>
+          <span class="stat">1 YEAR OPERATING</span>
+          <span class="stat">TGA &amp; NUSUK REGISTERED</span>
+          <span class="stat">FIXED PRICING, NO SURGE</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg class="route-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="80" x2="380" y2="80" stroke="#2C5642" stroke-width="1.5"/>
+          <line x1="20" y1="80" x2="380" y2="80" stroke="#B08D57" stroke-width="1.5" stroke-dasharray="4 340" >
+            <animate attributeName="stroke-dasharray" values="4 340;340 4" dur="4.5s" repeatCount="indefinite" />
+          </line>
+          <circle cx="20" cy="80" r="5" fill="#0B2419" stroke="#B08D57" stroke-width="2"/>
+          <circle cx="150" cy="80" r="5" fill="#0B2419" stroke="#B08D57" stroke-width="2"/>
+          <circle cx="280" cy="80" r="5" fill="#0B2419" stroke="#B08D57" stroke-width="2"/>
+          <circle cx="380" cy="80" r="5" fill="#0B2419" stroke="#B08D57" stroke-width="2"/>
+          <text x="20" y="104" font-family="JetBrains Mono, monospace" font-size="9" fill="#D9E2DB" text-anchor="middle">JED</text>
+          <text x="150" y="104" font-family="JetBrains Mono, monospace" font-size="9" fill="#D9E2DB" text-anchor="middle">MAKKAH</text>
+          <text x="280" y="104" font-family="JetBrains Mono, monospace" font-size="9" fill="#D9E2DB" text-anchor="middle">MADINAH</text>
+          <text x="380" y="104" font-family="JetBrains Mono, monospace" font-size="9" fill="#D9E2DB" text-anchor="middle">MED</text>
+          <circle cx="20" cy="80" r="3" fill="#DEC08A">
+            <animateMotion dur="4.5s" repeatCount="indefinite" path="M0,0 L360,0" />
+          </circle>
+        </svg>
+        <div class="route-caption">LIVE ROUTE, TRACKED FROM PICKUP TO DROP-OFF</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Services</span>
+        <h2>Three ways we move you</h2>
+        <p class="intro">Every route below is priced per vehicle and fixed before you travel. Full tier-by-tier pricing lives in the packages guide.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 16l2-7a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 7"/><rect x="2" y="16" width="20" height="4" rx="1"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+          <h3>Airport Transfers</h3>
+          <p>Jeddah and Madinah airports to your hotel. Meet-and-greet with name signage, flight tracking, luggage assistance.</p>
+          <div class="price">FROM SAR 260</div>
+          <a href="#fleet" class="link">See tiers &amp; pricing</a>
+        </div>
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 C12 2 6 9 6 14a6 6 0 0 0 12 0c0-5-6-12-6-12z"/><circle cx="12" cy="14" r="2"/></svg>
+          <h3>Intercity Travel</h3>
+          <p>Makkah to Madinah in comfort, with a complimentary Miqat stop at Dhul Hulaifah on the return leg.</p>
+          <div class="price">FROM SAR 1,150</div>
+          <a href="#fleet" class="link">See tiers &amp; pricing</a>
+        </div>
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <h3>Ziyarat Tours</h3>
+          <p>Half-day guided routes through the holy sites of Makkah and Madinah, driver waits at every stop.</p>
+          <div class="price">FROM SAR 380</div>
+          <a href="#ziyarat" class="link">See Ziyarat routes</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How It Works</span>
+        <h2>Four steps, no surprises</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step"><div class="step-num">01</div><h4>Message us</h4><p>Send your flight and hotel details on WhatsApp.</p></div>
+        <div class="process-step"><div class="step-num">02</div><h4>Get your quote</h4><p>A fixed price back in minutes, no negotiation.</p></div>
+        <div class="process-step"><div class="step-num">03</div><h4>Meet your chauffeur</h4><p>Waiting at arrivals with your name, not a search.</p></div>
+        <div class="process-step"><div class="step-num">04</div><h4>Travel on schedule</h4><p>Every leg priced and confirmed before you land.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="fleet">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Fleet</span>
+        <h2>Four tiers, one bespoke option</h2>
+        <p class="intro">Prices shown are the Jeddah Airport &rarr; Makkah transfer, as a common reference point. Full pricing across every route is in the packages guide.</p>
+      </div>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <span class="tier-index">TIER 01</span>
+          <h3>Signature Sedan</h3>
+          <div class="capacity">UP TO 3 GUESTS &middot; 3 BAGS</div>
+          <div class="price">SAR 550<span>Jeddah airport transfer</span></div>
+        </div>
+        <div class="tier-card">
+          <span class="tier-index">TIER 02</span>
+          <h3>Premium SUV</h3>
+          <div class="capacity">UP TO 5 GUESTS &middot; 5 BAGS</div>
+          <div class="price">SAR 700<span>Jeddah airport transfer</span></div>
+        </div>
+        <div class="tier-card">
+          <span class="tier-index">TIER 03</span>
+          <h3>Executive Van</h3>
+          <div class="capacity">UP TO 7 GUESTS &middot; 7 BAGS</div>
+          <div class="price">SAR 850<span>Jeddah airport transfer</span></div>
+        </div>
+        <div class="tier-card">
+          <span class="tier-index">TIER 04</span>
+          <h3>Group Coach</h3>
+          <div class="capacity">UP TO 14 GUESTS</div>
+          <div class="price">SAR 1,100<span>Jeddah airport transfer</span></div>
+        </div>
+      </div>
+      <p class="fleet-footnote">A bespoke Prestige tier (Mercedes S-Class or equivalent) is available by request and quoted individually.</p>
+    </div>
+  </section>
+
+  <section class="block" id="ziyarat">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ziyarat</span>
+        <h2>Guided routes through the holy sites</h2>
+      </div>
+      <div class="ziyarat-grid">
+        <div class="ziyarat-card">
+          <h3>Makkah, 3-Hour Route</h3>
+          <div class="price">FROM SAR 420 PER VEHICLE</div>
+          <div class="chips">
+            <span class="chip">Jabal al-Noor</span>
+            <span class="chip">Jabal Thawr</span>
+            <span class="chip">Mina</span>
+            <span class="chip">Muzdalifah</span>
+            <span class="chip">Jabal al-Rahmah</span>
+            <span class="chip">Jannat al-Mu'alla</span>
+          </div>
+        </div>
+        <div class="ziyarat-card">
+          <h3>Madinah, 3-Hour Route</h3>
+          <div class="price">FROM SAR 380 PER VEHICLE</div>
+          <div class="chips">
+            <span class="chip">Masjid Quba</span>
+            <span class="chip">Mount Uhud</span>
+            <span class="chip">Masjid al-Qiblatain</span>
+            <span class="chip">The Seven Mosques</span>
+            <span class="chip">Jannat al-Baqi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why Trust Track</span>
+        <h2>What the fixed price is actually buying</h2>
+      </div>
+      <div class="pillar-grid">
+        <div class="pillar-card"><div class="num">01</div><h3>Reverence</h3><p>We keep our footprint quiet. Your journey stays the focus, not our branding.</p></div>
+        <div class="pillar-card"><div class="num">02</div><h3>Precision</h3><p>Every fare is fixed before you land. No meter, no negotiation, no surprise at drop-off.</p></div>
+        <div class="pillar-card"><div class="num">03</div><h3>Discretion</h3><p>An unmarked, well-kept fleet. Comfort without a company logo following you around.</p></div>
+        <div class="pillar-card"><div class="num">04</div><h3>Continuity</h3><p>One WhatsApp thread for the whole trip, instead of a different driver's number at every leg.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap strip-row">
+      <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg> TGA REGISTERED</div>
+      <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg> NUSUK REGISTERED</div>
+      <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 24/7 WHATSAPP SUPPORT</div>
+      <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12l5 5L20 6"/></svg> FIXED PRICING, NO SURGE</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Guest Reviews</span>
+        <h2>This section ships empty, on purpose</h2>
+        <p class="intro">The previous site's testimonials were fabricated; that was one of the audit findings this rebuild fixes. These three slots are wired for real quotes, pull them from WhatsApp feedback or Google reviews once you have a few, and delete this note.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card"><div class="testi-stars">&#9734;&#9734;&#9734;&#9734;&#9734;</div><p>[Guest quote pending, add name, city, and month once collected]</p></div>
+        <div class="testi-card"><div class="testi-stars">&#9734;&#9734;&#9734;&#9734;&#9734;</div><p>[Guest quote pending, add name, city, and month once collected]</p></div>
+        <div class="testi-card"><div class="testi-stars">&#9734;&#9734;&#9734;&#9734;&#9734;</div><p>[Guest quote pending, add name, city, and month once collected]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" id="contact">
+    <div class="wrap">
+      <h2>Ready to book your transfer?</h2>
+      <p>Send your flight details on WhatsApp and get a fixed quote back in minutes.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary">Message us on WhatsApp</a>
+        <a href="#" class="btn btn-outline">Call <span class="placeholder-token">[ADD PHONE NUMBER]</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="wordmark">Trust Track Travels</div>
+        <p>Ground transport and Ziyarat touring for pilgrims traveling from the UK, Europe, and Pakistan to Makkah and Madinah.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <a href="#services">Services</a>
+        <a href="#fleet">Fleet &amp; Pricing</a>
+        <a href="#ziyarat">Ziyarat</a>
+        <a href="#why">About</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="#">WhatsApp: <span class="placeholder-token">[ADD NUMBER]</span></a>
+        <a href="#">Email: <span class="placeholder-token">[ADD EMAIL]</span></a>
+        <a href="#">Makkah &middot; Madinah &middot; Jeddah</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Trust Track Travels. TGA &amp; Nusuk-registered ground transport provider.</span>
+      <span>Phase 03 of 04: Website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+</body>
+</html>

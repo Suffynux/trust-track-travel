@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust Track Travels | Brand Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Spectral+SC:wght@500;600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #0B2419;
+    --green: #123A2A;
+    --green-soft: #1C4E39;
+    --brass: #B08D57;
+    --brass-light: #DEC08A;
+    --cream: #F7F2E7;
+    --paper: #FBF8F2;
+    --ink: #211D16;
+    --sage: #5E7A69;
+    --rule: #DCCFAE;
+    --fail: #8C4A3B;
+    --pass: #3E6B4F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Work Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+  h1, h2, h3, h4 { font-family: 'Spectral', serif; font-weight: 600; margin: 0; color: var(--green-deep); }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+
+  .hero { background: linear-gradient(180deg, var(--green-deep) 0%, var(--green) 100%); color: var(--cream); padding: 64px 0 52px; border-bottom: 3px solid var(--brass); }
+  .hero .wordmark { font-family: 'Spectral SC', serif; font-weight: 600; letter-spacing: 0.16em; font-size: 13px; color: var(--brass-light); text-transform: uppercase; margin-bottom: 22px; }
+  .hero h1 { color: var(--cream); font-size: 40px; line-height: 1.18; max-width: 640px; letter-spacing: -0.01em; }
+  .hero p.sub { font-size: 16.5px; color: #D9E2DB; max-width: 580px; margin-top: 16px; }
+  .hero .meta { margin-top: 30px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--brass-light); letter-spacing: 0.04em; display: flex; gap: 22px; flex-wrap: wrap; }
+
+  section.block { padding: 54px 0; border-bottom: 1px solid var(--rule); }
+  section.block:last-of-type { border-bottom: none; }
+  .section-head { margin-bottom: 30px; }
+  .section-head .eyebrow { margin-bottom: 8px; display: block; }
+  .section-head h2 { font-size: 27px; }
+  .section-head p.intro { margin-top: 10px; color: var(--sage); max-width: 640px; font-size: 15px; }
+
+  .callout { background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--brass); padding: 18px 22px; font-size: 14.5px; color: #3B362B; margin-top: 22px; }
+  .callout strong { color: var(--green-deep); }
+
+  /* Positioning statement */
+  .statement { font-family: 'Spectral', serif; font-size: 22px; line-height: 1.55; color: var(--green-deep); max-width: 760px; margin-top: 6px; }
+  .statement em { font-style: italic; color: var(--brass); }
+
+  /* Pillars */
+  .pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 26px; }
+  .pillar-card { background: var(--paper); border: 1px solid var(--rule); padding: 22px; }
+  .pillar-card .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--brass); letter-spacing: 0.08em; }
+  .pillar-card h3 { font-size: 19px; margin-top: 6px; }
+  .pillar-card p { font-size: 14px; margin-top: 8px; color: #3B362B; }
+
+  .is-isnot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 26px; border: 1px solid var(--rule); }
+  .is-isnot .col { padding: 20px 24px; }
+  .is-isnot .col.is { background: var(--green-deep); color: var(--cream); }
+  .is-isnot .col.isnot { background: var(--paper); }
+  .is-isnot .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+  .is-isnot .col.is .label { color: var(--brass-light); }
+  .is-isnot .col.isnot .label { color: var(--brass); }
+  .is-isnot ul { margin: 0; padding-left: 18px; font-size: 14.5px; }
+  .is-isnot li { margin-bottom: 6px; }
+
+  /* Logo */
+  .logo-diagram { border: 1px solid var(--rule); background: var(--paper); padding: 40px; margin-top: 24px; text-align: center; }
+  .logo-placeholder { display: inline-block; border: 1.5px dashed var(--brass); padding: 30px 46px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--sage); text-transform: uppercase; position: relative; }
+  .clearspace-note { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--sage); }
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; }
+  .dodont .box { padding: 18px 20px; border: 1px solid var(--rule); font-size: 14px; }
+  .dodont .box.do { border-left: 4px solid var(--pass); }
+  .dodont .box.dont { border-left: 4px solid var(--fail); }
+  .dodont .box .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .dodont .box.do .tag { color: var(--pass); }
+  .dodont .box.dont .tag { color: var(--fail); }
+  .dodont ul { margin: 10px 0 0; padding-left: 18px; }
+  .dodont li { margin-bottom: 5px; }
+
+  /* Color swatches */
+  .swatch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+  .swatch { border: 1px solid var(--rule); overflow: hidden; }
+  .swatch .fill { height: 84px; }
+  .swatch .info { padding: 12px 14px; background: var(--paper); }
+  .swatch .name { font-family: 'Spectral', serif; font-weight: 600; font-size: 14.5px; }
+  .swatch .hex { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--sage); margin-top: 4px; }
+  .swatch .role { font-size: 12px; color: #6B6250; margin-top: 4px; }
+
+  table.spec { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+  table.spec th { background: var(--green-deep); color: var(--cream); font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; text-align: left; padding: 10px 13px; }
+  table.spec td { padding: 10px 13px; border-bottom: 1px solid var(--rule); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  table.spec tr:nth-child(even) td { background: var(--cream); }
+  table.spec td.pass { color: var(--pass); font-weight: 700; }
+  table.spec td.fail { color: var(--fail); font-weight: 700; }
+
+  /* Typography specimens */
+  .type-block { border-top: 1px solid var(--rule); padding: 24px 0; }
+  .type-block:first-child { border-top: none; }
+  .type-role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--brass); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .type-spec-display { font-family: 'Spectral', serif; font-size: 34px; color: var(--green-deep); }
+  .type-spec-sc { font-family: 'Spectral SC', serif; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-deep); }
+  .type-spec-body { font-family: 'Work Sans', sans-serif; font-size: 17px; color: var(--ink); max-width: 560px; }
+  .type-spec-mono { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--ink); }
+  .type-meta { margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--sage); }
+
+  .scale-row { display: flex; align-items: baseline; gap: 18px; padding: 8px 0; border-bottom: 1px dashed var(--rule); }
+  .scale-row .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--sage); width: 90px; flex-shrink: 0; }
+  .scale-row .sample { font-family: 'Spectral', serif; color: var(--green-deep); }
+
+  /* Voice table */
+  .voice-table { margin-top: 22px; border: 1px solid var(--rule); }
+  .voice-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .voice-row + .voice-row { border-top: 1px solid var(--rule); }
+  .voice-cell { padding: 16px 20px; font-size: 14.5px; }
+  .voice-cell.bad { background: #FBF3F0; color: var(--fail); border-right: 1px solid var(--rule); text-decoration: line-through; text-decoration-color: #D9B3A9; }
+  .voice-cell.good { background: #F2F7F3; color: var(--pass); }
+  .voice-head { display: grid; grid-template-columns: 1fr 1fr; background: var(--green-deep); }
+  .voice-head span { color: var(--cream); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; }
+
+  .incl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 24px; margin-top: 18px; }
+  .incl-item { display: flex; gap: 10px; font-size: 14.5px; align-items: flex-start; }
+  .incl-item .mark { color: var(--brass); font-family: 'JetBrains Mono', monospace; font-weight: 700; margin-top: 1px; }
+
+  .policy-list { margin-top: 18px; }
+  .policy-item { display: grid; grid-template-columns: 150px 1fr; gap: 18px; padding: 14px 0; border-top: 1px solid var(--rule); font-size: 14.5px; }
+  .policy-item:first-child { border-top: none; }
+  .policy-item .label { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--brass); padding-top: 2px; }
+
+  footer { background: var(--green-deep); color: #C9D3CB; padding: 40px 0 46px; font-size: 13px; }
+  footer .wordmark { font-family: 'Spectral SC', serif; color: var(--brass-light); letter-spacing: 0.14em; font-size: 13px; text-transform: uppercase; }
+  footer p { max-width: 660px; margin-top: 12px; color: #A9B7AC; line-height: 1.7; }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    .hero h1 { font-size: 30px; }
+    .pillar-grid, .swatch-grid, .dodont, .is-isnot, .incl-grid { grid-template-columns: 1fr; }
+    .is-isnot .col.is { order: 1; }
+    .voice-row, .voice-head { grid-template-columns: 1fr; }
+    .voice-cell.bad { border-right: none; border-bottom: 1px solid var(--rule); }
+    .policy-item { grid-template-columns: 1fr; gap: 4px; }
+    .statement { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="wordmark">Trust Track Travels</div>
+    <h1>Brand Guidelines</h1>
+    <p class="sub">The identity system behind every touchpoint, website, social, vehicles, and print, so a pilgrim recognizes the same provider whether they met us on WhatsApp, at arrivals, or on a billboard.</p>
+    <div class="meta">
+      <span>PHASE 02 OF 04: BRAND GUIDELINES</span>
+      <span>v1.0</span>
+      <span>WCAG-CHECKED COLOR SYSTEM</span>
+    </div>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Positioning</span>
+      <h2>What this brand is for</h2>
+    </div>
+    <p class="statement">Trust Track Travels moves pilgrims between the milestones of Hajj and Umrah, airport to hotel, city to city, mosque to mosque, with the same composure the journey itself calls for. Where the market offers taxi apps and volume operators, we offer <em>one relationship</em>: a chauffeur who knows the route, a price that doesn't move, and a fleet built for guests who notice the difference.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="num">PILLAR 01</div>
+        <h3>Reverence</h3>
+        <p>The service exists to support a sacred journey, not to sell one. Tone, imagery, and vehicle presence should never compete for the guest's attention with what they're there to do.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="num">PILLAR 02</div>
+        <h3>Precision</h3>
+        <p>Fixed pricing, exact timing, licensed compliance. The case against ad hoc taxis and street drivers is operational discipline, stated plainly and delivered every time.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="num">PILLAR 03</div>
+        <h3>Discretion</h3>
+        <p>Understated luxury. The fleet should read as well-kept, not branded. A vehicle is a means to the journey, not a billboard for the company.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="num">PILLAR 04</div>
+        <h3>Continuity</h3>
+        <p>One provider across the whole ground journey, airport, city, Ziyarat, and in time visa and hotel, rather than a different vendor at every leg.</p>
+      </div>
+    </div>
+
+    <div class="is-isnot">
+      <div class="col is">
+        <span class="label">We are</span>
+        <ul>
+          <li>Composed, not flashy</li>
+          <li>Warm, not familiar</li>
+          <li>Exacting, not clinical</li>
+          <li>International, not generic</li>
+        </ul>
+      </div>
+      <div class="col isnot">
+        <span class="label">We are not</span>
+        <ul>
+          <li>A budget taxi app competing on lowest fare</li>
+          <li>A tourism brand selling excitement</li>
+          <li>A logo-wrapped fleet chasing visibility</li>
+          <li>A vendor the guest has to re-explain their trip to at every leg</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Logo</span>
+      <h2>Usage principles</h2>
+      <p class="intro">The existing mark is retained, not redesigned. These are the handling rules to apply around it. Exact clear-space and minimum-size figures below use a placeholder; share the source file (SVG or vector EPS) and I'll generate the real measurements and cut reversed, mono, and favicon-ready variants.</p>
+    </div>
+
+    <div class="logo-diagram">
+      <div class="logo-placeholder">
+        [ EXISTING LOGO ]
+      </div>
+      <div class="clearspace-note">CLEAR SPACE, MINIMUM ONE CAP-HEIGHT OF THE WORDMARK ON EVERY SIDE</div>
+    </div>
+
+    <div class="dodont">
+      <div class="box do">
+        <span class="tag">Do</span>
+        <ul>
+          <li>Place on Deep Green, Cream, or Paper backgrounds only</li>
+          <li>Keep proportions locked; scale uniformly</li>
+          <li>Use a simplified single-color version below 32px (favicons, app icons, vehicle badges)</li>
+          <li>Give it room; when in doubt, more clear space, not less</li>
+        </ul>
+      </div>
+      <div class="box dont">
+        <span class="tag">Don't</span>
+        <ul>
+          <li>Stretch, skew, rotate, or add drop shadows and bevels</li>
+          <li>Recolor it into brass, sage, or any off-palette color</li>
+          <li>Place it over busy photography without a solid or scrim background behind it</li>
+          <li>Pair it with a second logo (partner, hotel, DMC) at equal size, ever, without sign-off</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Color</span>
+      <h2>The palette</h2>
+      <p class="intro">Six colors, no more. Deep Green carries the brand; Brass is the accent, spent carefully; Cream and Paper are the two working backgrounds; Ink and Sage handle text.</p>
+    </div>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="fill" style="background:#0B2419;"></div>
+        <div class="info"><div class="name">Deep Green</div><div class="hex">#0B2419 &middot; RGB 11,36,25</div><div class="role">Primary. Headers, hero fields, footers.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#123A2A;"></div>
+        <div class="info"><div class="name">Green</div><div class="hex">#123A2A &middot; RGB 18,58,42</div><div class="role">Secondary fields, gradients from Deep Green.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#B08D57;"></div>
+        <div class="info"><div class="name">Brass</div><div class="hex">#B08D57 &middot; RGB 176,141,87</div><div class="role">Accent only. Rules, borders, icons, labels on dark.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#DEC08A;"></div>
+        <div class="info"><div class="name">Brass Light</div><div class="hex">#DEC08A &middot; RGB 222,192,138</div><div class="role">Eyebrow text and labels on Deep Green.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#F7F2E7; border-bottom:1px solid #DCCFAE;"></div>
+        <div class="info"><div class="name">Cream</div><div class="hex">#F7F2E7 &middot; RGB 247,242,231</div><div class="role">Section backgrounds, cards, table striping.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#FBF8F2; border-bottom:1px solid #DCCFAE;"></div>
+        <div class="info"><div class="name">Paper</div><div class="hex">#FBF8F2 &middot; RGB 251,248,242</div><div class="role">Page background, the default canvas.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#211D16;"></div>
+        <div class="info"><div class="name">Ink</div><div class="hex">#211D16 &middot; RGB 33,29,22</div><div class="role">Body text on light backgrounds.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#5E7A69;"></div>
+        <div class="info"><div class="name">Sage</div><div class="hex">#5E7A69 &middot; RGB 94,122,105</div><div class="role">Secondary and supporting text, large sizes only.</div></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#DCCFAE; border-bottom:1px solid #DCCFAE;"></div>
+        <div class="info"><div class="name">Rule</div><div class="hex">#DCCFAE &middot; RGB 220,207,174</div><div class="role">Hairlines, dividers, table borders only.</div></div>
+      </div>
+    </div>
+
+    <table class="spec">
+      <tr><th>Pairing</th><th>Contrast Ratio</th><th>AA Normal Text</th><th>AA Large Text</th></tr>
+      <tr><td>Cream on Deep Green</td><td>14.69:1</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+      <tr><td>Ink on Paper</td><td>15.82:1</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+      <tr><td>Ink on Cream</td><td>15.02:1</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+      <tr><td>Deep Green on Cream</td><td>14.69:1</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+      <tr><td>Brass Light on Deep Green</td><td>9.38:1</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+      <tr><td>Brass on Deep Green</td><td>5.30:1</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+      <tr><td>Sage on Paper</td><td>4.44:1</td><td class="fail">FAIL</td><td class="pass">PASS</td></tr>
+      <tr><td>Brass on Cream</td><td>2.77:1</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>The rule that falls out of this:</strong> Brass never carries text on Cream or Paper, it fails contrast outright (2.77:1). Reserve it for rules, borders, icons, and large graphic numerals on light backgrounds; on Deep Green it works fine as text (5.30:1) for eyebrows and labels. Sage text on light backgrounds should stay large or bold; at small sizes it sits just under AA, so it's fine for captions but wrong for body copy. One retroactive fix: the tier labels in the package guide currently set Brass on Cream for the "TIER 01" style eyebrows; move those to Deep Green or Ink, or move them onto a Deep Green chip, when that document is next touched.
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Typography</span>
+      <h2>Three faces, fixed roles</h2>
+      <p class="intro">No face is used outside its role. Mixing Work Sans into a headline or Spectral into a data table is the fastest way to make this system look accidental.</p>
+    </div>
+
+    <div class="type-block">
+      <div class="type-role">Spectral, Display</div>
+      <div class="type-spec-display">Ground Transport &amp; Ziyarat</div>
+      <div class="type-meta">Weights 400/500/600/700 &middot; headlines, pull quotes, section titles &middot; never smaller than 19px</div>
+    </div>
+    <div class="type-block">
+      <div class="type-role">Spectral SC, Small Caps</div>
+      <div class="type-spec-sc">Phase 02 of 04 &middot; Brand Guidelines</div>
+      <div class="type-meta">Weights 500/600 &middot; wordmark lockup, eyebrows where a serif label is warranted</div>
+    </div>
+    <div class="type-block">
+      <div class="type-role">Work Sans, Body</div>
+      <div class="type-spec-body">Fixed, all-inclusive pricing, no surge. The chauffeur waits for your flight, not the other way around.</div>
+      <div class="type-meta">Weights 400/500/600 &middot; body copy, UI text, buttons &middot; never smaller than 14px</div>
+    </div>
+    <div class="type-block">
+      <div class="type-role">JetBrains Mono, Utility</div>
+      <div class="type-spec-mono">SAR 550 &middot; JED &rarr; MKH &middot; 60&ndash;90 MIN</div>
+      <div class="type-meta">Weights 400/500/700 &middot; prices, route codes, timestamps, table data, eyebrow labels</div>
+    </div>
+
+    <div style="margin-top:30px;">
+      <div class="scale-row"><span class="tag">H1 / 40px</span><span class="sample" style="font-size:24px;">Section headline</span></div>
+      <div class="scale-row"><span class="tag">H2 / 27px</span><span class="sample" style="font-size:19px;">Block headline</span></div>
+      <div class="scale-row"><span class="tag">H3 / 19px</span><span class="sample" style="font-size:15px;">Card headline</span></div>
+      <div class="scale-row"><span class="tag">Body / 16px</span><span class="sample" style="font-family:'Work Sans',sans-serif; font-size:14px; color:var(--ink);">Running text</span></div>
+      <div class="scale-row"><span class="tag">Caption / 13px</span><span class="sample" style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--sage);">METADATA, LABELS</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Voice &amp; Tone</span>
+      <h2>How the brand talks</h2>
+      <p class="intro">State what happens, don't sell the feeling. The service is dignified because the delivery is exact, not because the copy says so.</p>
+    </div>
+
+    <div class="voice-head"><span>Avoid</span><span>Use instead</span></div>
+    <div class="voice-table">
+      <div class="voice-row">
+        <div class="voice-cell bad">Amazing deals on your dream Umrah trip!!</div>
+        <div class="voice-cell good">Fixed fares for every leg of your journey, published upfront.</div>
+      </div>
+      <div class="voice-row">
+        <div class="voice-cell bad">We're honoured to serve you, valued guest</div>
+        <div class="voice-cell good">Your chauffeur will be waiting at arrivals with your name.</div>
+      </div>
+      <div class="voice-row">
+        <div class="voice-cell bad">Book now before prices go up!</div>
+        <div class="voice-cell good">Prices are fixed year-round outside the published peak-season window.</div>
+      </div>
+      <div class="voice-row">
+        <div class="voice-cell bad">The ultimate luxury pilgrimage experience</div>
+        <div class="voice-cell good">A chauffeur who knows the route and a price that doesn't move.</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>Working rule:</strong> if a sentence would read the same on a beach-resort ad, rewrite it. Specificity is the tell that separates this brand from a generic travel operator, name the route, the timing, the vehicle, the policy, rather than the adjective.
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Imagery &amp; Motifs</span>
+      <h2>What the brand looks at</h2>
+    </div>
+    <div class="incl-grid">
+      <div class="incl-item"><span class="mark">&#10003;</span> Real vehicles, real drivers, real routes, not stock photography of generic travelers</div>
+      <div class="incl-item"><span class="mark">&#10003;</span> The Haramain Expressway, terminal exteriors, hotel forecourts, the texture of the actual journey</div>
+      <div class="incl-item"><span class="mark">&#10003;</span> Architecture and skyline over close-ups of worship, respectful distance from devotional moments</div>
+      <div class="incl-item"><span class="mark">&#10003;</span> The journey line and waypoint motif from the package guide as the recurring structural device</div>
+      <div class="incl-item"><span class="mark">&#10003;</span> Thin-line iconography in Ink or Brass, never filled or rounded-cartoon style</div>
+      <div class="incl-item"><span class="mark">&#10003;</span> Golden-hour and early-morning light, matching actual pickup times, not studio lighting</div>
+    </div>
+    <div class="callout" style="margin-top:22px;">
+      <strong>Avoid:</strong> stock imagery of anonymous "happy tourists," staged smiling-family clichés, and any commercial-feeling close-up of the Kaaba or the interior of Masjid al-Haram used as a marketing backdrop. Photograph the service, not the sacred site itself.
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Vehicle Livery</span>
+      <h2>The fleet is not a billboard</h2>
+      <p class="intro">Discretion, Pillar 03, applies most directly here. Guests booking a premium chauffeur service are choosing to be unremarkable on the road, not branded.</p>
+    </div>
+    <div class="policy-list">
+      <div class="policy-item">
+        <div class="label">Exterior</div>
+        <div>One discreet decal, rear door or lower trunk edge, wordmark only, Deep Green or brushed-metal finish. No full wraps, no roof signage, no window decals.</div>
+      </div>
+      <div class="policy-item">
+        <div class="label">Interior</div>
+        <div>A single seatback card (Cream stock, Ink text, Spectral headline) with WiFi details and the WhatsApp support number. No dashboard clutter, no hanging air fresheners with branding.</div>
+      </div>
+      <div class="policy-item">
+        <div class="label">Driver</div>
+        <div>A simple lapel pin or ID badge in Deep Green and Brass, name and language flags, rather than a branded uniform. Professional plainclothes over a company polo shirt.</div>
+      </div>
+      <div class="policy-item">
+        <div class="label">Welcome pack</div>
+        <div>Bottled water with a small Brass-on-Cream label, dates on request. The pack is the brand touchpoint the guest actually holds; it earns more design attention than the exterior does.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="wordmark">Trust Track Travels</div>
+    <p>This is Phase 2 of 4: Packages, Brand Guidelines, Website, Social &amp; Content Strategy. Next is the website rebuild, applying this palette, type scale, and voice to the actual site architecture and page layouts. Share the source logo file before that phase starts so the logo section above can move from placeholder to exact specification.</p>
+  </div>
+</footer>
+
+</body>
+</html>
