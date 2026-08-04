@@ -49,6 +49,9 @@
   --badge-solid: var(--copper);
   --badge-solid-ink: var(--onyx);
 
+  /* Onyx on Copper is already 5.25:1, so the accent needs no deepening to
+     carry a label here. */
+  --accent-strong: var(--copper);
   --accent-hover: color-mix(in oklab, var(--copper) 86%, var(--onyx));
 
   --line: color-mix(in oklab, var(--taupe) 34%, transparent);

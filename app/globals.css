@@ -35,7 +35,7 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -63,7 +63,7 @@ body {
   left: 0.75rem;
   top: -4rem;
   z-index: 100;
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
   padding: 0.75rem 1.25rem;
   font-weight: 600;
@@ -217,7 +217,7 @@ body {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -422,7 +422,7 @@ body {
 
 .currency-btn[aria-pressed="true"] {
   color: var(--accent-ink);
-  background: var(--accent);
+  background: var(--accent-strong);
 }
 
 .ledger-tier {
@@ -789,7 +789,7 @@ body {
 }
 
 .tier[aria-pressed="true"] {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -825,7 +825,7 @@ body {
 
 .tier[aria-pressed="true"] .tier-cap,
 .tier[aria-pressed="true"] .tier-anchor {
-  color: color-mix(in oklab, var(--accent-ink) 93%, transparent);
+  color: var(--accent-ink);
 }
 
 .tier-anchor {
@@ -855,7 +855,7 @@ body {
 }
 
 .tier[aria-pressed="true"] .tier-fare span {
-  color: color-mix(in oklab, var(--accent-ink) 93%, transparent);
+  color: var(--accent-ink);
 }
 
 .tier-state {
