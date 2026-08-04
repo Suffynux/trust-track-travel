@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { legs, quote, tiers, type LegId, type TierId } from "@/lib/fares";
+import type { ResolvedSlot } from "@/lib/media";
 import {
   currencies,
   formatFare,
@@ -239,7 +240,7 @@ export function Ledger() {
 
       <p className="ledger-foot">
         Fares are per vehicle, not per person, and hold from quote to drop-off.
-        Travelling a different route? <a href="#contact">Send it to us</a> and
+        Travelling a different route? <a href="/#contact">Send it to us</a> and
         we&apos;ll price it the same way.
       </p>
     </div>
@@ -250,7 +251,14 @@ export function Ledger() {
 /* Fleet — doubles as the ledger's tier selector                       */
 /* ------------------------------------------------------------------ */
 
-export function FleetTiers() {
+export function FleetTiers({
+  photos,
+  children,
+}: {
+  /** Vehicle photography per tier, resolved on the server. */
+  photos?: Partial<Record<TierId, React.ReactNode>>;
+  children?: never;
+}) {
   const { tier, setTier, currency } = useJourney();
   const reference = legs[0];
 
@@ -267,13 +275,21 @@ export function FleetTiers() {
           <span className="tier-state" aria-hidden="true">
             In ledger
           </span>
-          <span className="tier-index">Tier {t.index}</span>
-          <span className="tier-name">{t.name}</span>
-          <span className="tier-cap">{t.capacity}</span>
-          <span className="tier-anchor">{t.anchor}</span>
-          <span className="tier-fare">
-            {formatFare(reference.fares[t.id], currency)}
-            <span>Jeddah airport to Makkah</span>
+          <span className="tier-media">
+            {photos?.[t.id]}
+            <span className="numeral tier-numeral" aria-hidden="true">
+              {t.index}
+            </span>
+          </span>
+          <span className="tier-body">
+            <span className="tier-index">Tier {t.index}</span>
+            <span className="tier-name">{t.name}</span>
+            <span className="tier-cap">{t.capacity}</span>
+            <span className="tier-anchor">{t.anchor}</span>
+            <span className="tier-fare">
+              {formatFare(reference.fares[t.id], currency)}
+              <small>Jeddah airport to Makkah</small>
+            </span>
           </span>
         </button>
       ))}
@@ -292,7 +308,16 @@ export function FareBar() {
 
   useEffect(() => {
     const ledger = document.getElementById("ledger");
-    if (!ledger) return;
+
+    // Pages without the ledger still need a running total and a way out to
+    // WhatsApp, so the bar shows as soon as the reader is past the header.
+    if (!ledger) {
+      const onScroll = () => setShow(window.scrollY > 320);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => setShow(!entry.isIntersecting),
       { rootMargin: "-72px 0px 0px 0px" },
