@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono, Jost } from "next/font/google";
 import "./globals.css";
+import { FareBar, JourneyProvider } from "./components/journey";
+import { Footer, Masthead } from "./components/site-chrome";
+import { RevealObserver } from "./components/reveal";
 
 const siteUrl = new URL(
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trust-track-xi.vercel.app",
@@ -120,7 +123,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${jost.variable} ${archivo.variable} ${jetbrains.variable} antialiased`}
     >
       <body>
-        {children}
+        <RevealObserver />
+        <JourneyProvider>
+          <a className="skip-link" href="#main">
+            Skip to content
+          </a>
+          <Masthead />
+          <main id="main">{children}</main>
+          <Footer />
+          <FareBar />
+        </JourneyProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
