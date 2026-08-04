@@ -35,7 +35,7 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -46,6 +46,12 @@ body {
 
 .on-field :focus-visible {
   outline-color: var(--focus-on-field);
+}
+
+/* The ledger is a light card living inside the dark hero, so its controls
+   take the light-surface ring back. */
+.ledger :focus-visible {
+  outline-color: var(--focus);
 }
 
 /* clip-path eats the outline, so clipped controls ring themselves inward. */
@@ -63,7 +69,7 @@ body {
   left: 0.75rem;
   top: -4rem;
   z-index: 100;
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
   padding: 0.75rem 1.25rem;
   font-weight: 600;
@@ -217,12 +223,12 @@ body {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
 .btn-primary:hover {
-  background: color-mix(in oklab, var(--accent) 86%, var(--onyx));
+  background: var(--accent-hover);
 }
 
 .btn-outline {
@@ -232,7 +238,7 @@ body {
 }
 
 .btn-outline:hover {
-  background: color-mix(in oklab, var(--ivory) 10%, transparent);
+  background: color-mix(in oklab, var(--on-field) 10%, transparent);
 }
 
 .btn-sm {
@@ -422,7 +428,7 @@ body {
 
 .currency-btn[aria-pressed="true"] {
   color: var(--accent-ink);
-  background: var(--accent);
+  background: var(--accent-strong);
 }
 
 .ledger-tier {
@@ -518,7 +524,7 @@ body {
 }
 
 .leg-btn[aria-pressed="true"] .leg-code {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .leg-name {
@@ -550,7 +556,7 @@ body {
 }
 
 .sum-row-discount {
-  color: var(--accent-ink);
+  color: var(--badge-ink);
   background: var(--badge);
   padding: 0.4rem 0.5rem;
   margin-inline: -0.5rem;
@@ -719,11 +725,14 @@ body {
 }
 
 .service-code {
+  align-self: flex-start;
   font-family: var(--font-mono), monospace;
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: var(--accent);
+  color: var(--badge-solid-ink);
+  background: var(--badge-solid);
+  padding: 0.2rem 0.45rem;
 }
 
 .service-from {
@@ -786,7 +795,7 @@ body {
 }
 
 .tier[aria-pressed="true"] {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -795,7 +804,7 @@ body {
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: var(--badge-on-field);
+  color: var(--badge-on-panel);
 }
 
 .tier[aria-pressed="true"] .tier-index {
@@ -817,18 +826,18 @@ body {
   font-size: 0.625rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--on-field-muted);
+  color: var(--on-panel-muted);
 }
 
 .tier[aria-pressed="true"] .tier-cap,
 .tier[aria-pressed="true"] .tier-anchor {
-  color: color-mix(in oklab, var(--accent-ink) 84%, transparent);
+  color: var(--accent-ink);
 }
 
 .tier-anchor {
   font-size: 0.8125rem;
   line-height: 1.45;
-  color: var(--on-field-muted);
+  color: var(--on-panel-muted);
 }
 
 .tier-fare {
@@ -847,12 +856,12 @@ body {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--on-field-muted);
+  color: var(--on-panel-muted);
   margin-top: 0.2rem;
 }
 
 .tier[aria-pressed="true"] .tier-fare span {
-  color: color-mix(in oklab, var(--accent-ink) 84%, transparent);
+  color: var(--accent-ink);
 }
 
 .tier-state {
@@ -1014,8 +1023,8 @@ body {
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: var(--accent-ink);
-  background: var(--accent);
+  color: var(--badge-solid-ink);
+  background: var(--badge-solid);
   padding: 0.2rem 0.4rem;
 }
 
@@ -1118,8 +1127,8 @@ body {
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: var(--accent-ink);
-  background: var(--accent);
+  color: var(--badge-solid-ink);
+  background: var(--badge-solid);
   align-self: flex-start;
   padding: 0.25rem 0.5rem;
 }
