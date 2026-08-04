@@ -112,16 +112,17 @@ body {
   transform: none;
 }
 
+/* The wipe cannot hold its hidden state in clip-path: a fully inset element
+   reports an intersection ratio of 0, so the observer never fires and the
+   heading never appears. The base state is opacity alone, and the clip runs
+   as a keyframe once the element is marked shown. */
 [data-reveal="wipe"] {
   transform: none;
-  clip-path: inset(0 0 105% 0);
-  transition:
-    opacity 0.5s ease,
-    clip-path 0.9s cubic-bezier(0.16, 0.84, 0.44, 1);
+  transition: none;
 }
 
 [data-reveal="wipe"][data-shown] {
-  clip-path: inset(0 0 -12% 0);
+  animation: wipe-up 0.9s cubic-bezier(0.16, 0.84, 0.44, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -130,6 +131,7 @@ body {
     transform: none;
     clip-path: none;
     transition: none;
+    animation: none;
   }
   html {
     scroll-behavior: auto;
@@ -147,6 +149,10 @@ body {
   from {
     opacity: 0;
     clip-path: inset(0 0 105% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 -12% 0);
   }
 }
 
