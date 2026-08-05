@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trust Track Travels — Social Media Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================
+     Palette and type are lifted straight from the live site
+     (app/theme.css on main). Change them there first, then here.
+     ========================================================== */
+  :root {
+    --indigo: #1e2233;
+    --terracotta: #b5542c;
+    --cta: #a55030;
+    --camel: #d9b382;
+    --bone: #f5efe4;
+    --slate: #5b6270;
+
+    --page: var(--bone);
+    --surface: #faf7f1;
+    --text: #232838;
+    --line: rgba(91, 98, 112, 0.3);
+    --line-strong: rgba(91, 98, 112, 0.55);
+    --line-dark: rgba(217, 179, 130, 0.26);
+
+    --display: "Jost", system-ui, sans-serif;
+    --body: "Archivo", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --chamfer: 14px;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  img { max-width: 100%; display: block; }
+
+  .shell { max-width: 1080px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3rem); }
+  .band { padding-block: clamp(2.75rem, 6vw, 4.5rem); }
+  .band-dark { background: var(--indigo); color: var(--bone); }
+  .band-surface { background: var(--surface); }
+  .rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate);
+    margin: 0 0 0.6rem;
+  }
+  .band-dark .eyebrow { color: var(--camel); }
+
+  h1, h2, h3 { margin: 0 0 0.7rem; }
+  h1 {
+    font-family: var(--display); font-weight: 300; text-transform: uppercase;
+    font-size: clamp(2.2rem, 6vw, 3.9rem); line-height: 0.94; letter-spacing: -0.01em;
+  }
+  h1 em { font-style: normal; font-weight: 500; color: var(--camel); }
+  h2 {
+    font-family: var(--display); font-weight: 300; text-transform: uppercase;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1; letter-spacing: 0.01em;
+  }
+  h3 { font-family: var(--body); font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+  h4 { font-family: var(--body); font-weight: 600; font-size: 0.95rem; margin: 0 0 0.35rem; }
+  p { margin: 0 0 1rem; max-width: 68ch; }
+  .lede { font-size: 1.1rem; color: var(--slate); max-width: 46rem; }
+  .band-dark .lede, .band-dark p { color: rgba(245, 239, 228, 0.72); }
+  .small { font-size: 0.875rem; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  .toc { display: grid; gap: 0.4rem 2rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); padding: 0; margin: 1.5rem 0 0; list-style: none; }
+  .toc a { color: rgba(245, 239, 228, 0.72); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid var(--line-dark); padding-block: 0.45rem; display: block; }
+  .toc a:hover { color: var(--bone); }
+  .toc span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--camel); margin-right: 0.6rem; }
+
+  /* Colour */
+  .swatches { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .swatch { border: 1px solid var(--line); }
+  .swatch .chip { height: 110px; }
+  .swatch .meta { padding: 0.8rem 0.9rem 1rem; background: var(--surface); }
+  .swatch .name { font-weight: 600; font-size: 0.95rem; }
+  .swatch .hex { font-family: var(--mono); font-size: 0.8rem; color: var(--slate); }
+  .swatch .use { font-size: 0.8rem; color: var(--slate); line-height: 1.45; margin-top: 0.35rem; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  caption { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--slate); padding-bottom: 0.6rem; }
+  th, td { text-align: left; padding: 0.65rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); border-bottom-color: var(--line-strong); }
+  td:first-child, th:first-child { padding-left: 0; }
+  td:last-child, th:last-child { padding-right: 0; }
+  .band-dark th { color: var(--camel); border-bottom-color: var(--line-dark); }
+  .band-dark td { border-bottom-color: var(--line-dark); color: rgba(245, 239, 228, 0.82); }
+
+  .pass { font-family: var(--mono); font-size: 11px; font-weight: 700; color: #1f5c3d; }
+  .fail { font-family: var(--mono); font-size: 11px; font-weight: 700; color: #8f2f1c; }
+
+  /* Do / don't */
+  .split { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card { border: 1px solid var(--line); background: var(--surface); padding: 1.15rem 1.2rem 1.3rem; }
+  .card-do { border-left: 3px solid #2f6b4a; }
+  .card-dont { border-left: 3px solid var(--terracotta); }
+  .card ul { margin: 0; padding-left: 1.05rem; }
+  .card li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+
+  .badge {
+    display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    background: var(--camel); color: var(--indigo); padding: 0.2rem 0.45rem;
+  }
+
+  /* Post mockups */
+  .mocks { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: start; }
+  .mock-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.5rem; }
+  .post {
+    background: var(--indigo); color: var(--bone); padding: 1.4rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border: 1px solid var(--line);
+  }
+  .post-1x1 { aspect-ratio: 1 / 1; }
+  .post-4x5 { aspect-ratio: 4 / 5; }
+  .post-9x16 { aspect-ratio: 9 / 16; padding-block: 26%; }
+  .post-mark { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--camel); }
+  .post-head { font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: clamp(1.1rem, 3.4vw, 1.6rem); line-height: 1; letter-spacing: 0.01em; }
+  .post-fare { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: clamp(1.5rem, 5vw, 2.2rem); letter-spacing: -0.03em; line-height: 1; }
+  .post-sub { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245, 239, 228, 0.6); margin-top: 0.4rem; }
+  .post-cta {
+    display: inline-block; background: var(--cta); color: var(--bone);
+    font-weight: 600; font-size: 0.72rem; padding: 0.55rem 0.85rem; margin-top: 0.9rem;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+  /* The mockups live inside a dark band, so their text has to opt out of
+     the band's paragraph colour explicitly. */
+  .post p { color: inherit; max-width: none; }
+  .post-light { background: var(--bone); color: var(--text); }
+  .post-light .post-mark { color: var(--cta); }
+  .post-light .post-sub { color: var(--slate); }
+  .post-light p { color: var(--text); }
+  .post-rule { height: 1px; background: var(--line-dark); margin: 0.8rem 0; }
+  .post-light .post-rule { background: var(--line); }
+  .safe {
+    position: relative;
+  }
+  .safe::before, .safe::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 14%;
+    background: repeating-linear-gradient(45deg, rgba(217,179,130,.16) 0 6px, transparent 6px 12px);
+    pointer-events: none;
+  }
+  .safe::before { top: 0; }
+  .safe::after { bottom: 0; }
+
+  .caption-block {
+    background: var(--indigo); color: var(--bone); padding: 1.2rem 1.3rem;
+    font-family: var(--mono); font-size: 0.82rem; line-height: 1.65; white-space: pre-wrap;
+  }
+  .caption-block b { color: var(--camel); font-weight: 500; }
+
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li { padding: 0.6rem 0 0.6rem 1.7rem; border-bottom: 1px solid var(--line); position: relative; font-size: 0.95rem; }
+  .checklist li::before { content: "☐"; position: absolute; left: 0; color: var(--terracotta); font-size: 1.05rem; }
+
+  .grid-2 { display: grid; gap: 1.5rem clamp(1.5rem, 4vw, 3rem); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .note { font-size: 0.85rem; color: var(--slate); border-left: 2px solid var(--camel); padding-left: 0.9rem; margin-top: 1rem; }
+  .band-dark .note { color: rgba(245, 239, 228, 0.72); }
+
+  footer { background: var(--indigo); color: rgba(245, 239, 228, 0.72); font-size: 0.85rem; }
+
+  @media print {
+    body { background: #fff; }
+    .band { padding-block: 1.5rem; break-inside: avoid; }
+    .band-dark { background: #fff !important; color: #000 !important; }
+    .band-dark .eyebrow, .band-dark th { color: #000 !important; }
+    .toc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<header class="band band-dark">
+  <div class="shell">
+    <p class="eyebrow">Trust Track Travels · Social media</p>
+    <h1>How we <em>show up</em><br>on social</h1>
+    <p class="lede" style="margin-top:1.2rem">
+      Everything the social team needs to post as Trust Track Travels: the colours,
+      the type, what a post looks like, what to write under it, and the handful of
+      things we never publish. Matched to the live website.
+    </p>
+    <p class="mono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--camel);margin-top:1.5rem">
+      v1.0 · Palette: Terracotta / Dusk Indigo · Matches <code>main</code>
+    </p>
+
+    <ol class="toc">
+      <li><a href="#positioning"><span>01</span>Positioning</a></li>
+      <li><a href="#colour"><span>02</span>Colour</a></li>
+      <li><a href="#type"><span>03</span>Type</a></li>
+      <li><a href="#logo"><span>04</span>Logo &amp; profile</a></li>
+      <li><a href="#posts"><span>05</span>Post templates</a></li>
+      <li><a href="#pillars"><span>06</span>What to post</a></li>
+      <li><a href="#captions"><span>07</span>Captions &amp; CTA</a></li>
+      <li><a href="#voice"><span>08</span>Voice</a></li>
+      <li><a href="#imagery"><span>09</span>Photo &amp; video</a></li>
+      <li><a href="#never"><span>10</span>Never post</a></li>
+      <li><a href="#specs"><span>11</span>Sizes per platform</a></li>
+      <li><a href="#access"><span>12</span>Accessibility</a></li>
+      <li><a href="#checklist"><span>13</span>Pre-post checklist</a></li>
+    </ol>
+  </div>
+</header>
+
+<!-- ============ 01 POSITIONING ============ -->
+<section class="band" id="positioning">
+  <div class="shell">
+    <p class="eyebrow">01 · Positioning</p>
+    <h2>What we are selling</h2>
+    <p class="lede">
+      Chauffeur-grade ground transport for pilgrims travelling to Makkah and Madinah
+      from the UK, the US and Pakistan. One provider for the whole ground journey,
+      at a price that is fixed before you fly.
+    </p>
+
+    <div class="grid-2" style="margin-top:2rem">
+      <div>
+        <h3>The single claim</h3>
+        <p>
+          <strong>The fare is set before you land.</strong> Every competitor makes
+          you ask what it will cost. We publish it. Almost every post should ladder
+          back to that in some way — a price, a timing, a policy, a thing that does
+          not change.
+        </p>
+      </div>
+      <div>
+        <h3>Who is watching</h3>
+        <p>
+          Mostly an adult child booking on behalf of parents, on a phone, often at
+          night, weeks before travel. They are anxious about being overcharged at
+          the kerb and about their parents being stranded at arrivals. Post to that
+          person, not to a generic "traveller".
+        </p>
+      </div>
+    </div>
+
+    <table style="margin-top:2rem">
+      <caption>The four pillars, and what each one means for a post</caption>
+      <tr><th>Pillar</th><th>On social this means</th></tr>
+      <tr><td><strong>Reverence</strong></td><td>The journey is the subject, not us. No hype, no emoji-stacked captions, no competing with what the guest is there to do.</td></tr>
+      <tr><td><strong>Precision</strong></td><td>Name the route, the fare, the timing, the policy. Specifics are the whole personality.</td></tr>
+      <tr><td><strong>Discretion</strong></td><td>Understated. The fleet is unbranded in real life, so it should not look like a logo parade on the feed either.</td></tr>
+      <tr><td><strong>Continuity</strong></td><td>One provider, one thread, the whole trip. Say so when it is relevant.</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 02 COLOUR ============ -->
+<section class="band" id="colour">
+  <div class="shell">
+    <p class="eyebrow">02 · Colour</p>
+    <h2>Five colours, no more</h2>
+    <p class="lede">
+      These are the exact values on the website. Load them into Canva as a brand kit
+      so nobody eyedrops a near-miss.
+    </p>
+
+    <div class="swatches" style="margin-top:1.75rem">
+      <div class="swatch">
+        <div class="chip" style="background:#1e2233"></div>
+        <div class="meta">
+          <div class="name">Dusk Indigo</div>
+          <div class="hex">#1E2233</div>
+          <div class="use">The default background for posts. Also nav, footer, hero overlay on the site.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#b5542c"></div>
+        <div class="meta">
+          <div class="name">Terracotta</div>
+          <div class="hex">#B5542C</div>
+          <div class="use">The accent. Price tags, active states, one highlighted word. Never more than one element per post.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#a55030"></div>
+        <div class="meta">
+          <div class="name">Terracotta, deep</div>
+          <div class="hex">#A55030</div>
+          <div class="use">Buttons and any shape carrying white text. Slightly darker so the label stays readable.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#d9b382"></div>
+        <div class="meta">
+          <div class="name">Camel Sand</div>
+          <div class="hex">#D9B382</div>
+          <div class="use">Labels, badges and hairlines on dark. A fill on light — never small text on Bone.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#f5efe4;border-bottom:1px solid var(--line)"></div>
+        <div class="meta">
+          <div class="name">Bone White</div>
+          <div class="hex">#F5EFE4</div>
+          <div class="use">Light background, and the text colour on Indigo.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#5b6270"></div>
+        <div class="meta">
+          <div class="name">Slate</div>
+          <div class="hex">#5B6270</div>
+          <div class="use">Body copy and captions on light backgrounds.</div>
+        </div>
+      </div>
+    </div>
+
+    <table style="margin-top:2.25rem">
+      <caption>Combinations that are safe to use — checked, not guessed</caption>
+      <tr><th>Text on background</th><th>Ratio</th><th>Verdict</th></tr>
+      <tr><td>Bone on Dusk Indigo</td><td class="mono">13.8:1</td><td class="pass">Use freely</td></tr>
+      <tr><td>Camel Sand on Dusk Indigo</td><td class="mono">8.1:1</td><td class="pass">Use freely — labels, badges</td></tr>
+      <tr><td>Slate on Bone White</td><td class="mono">5.4:1</td><td class="pass">Use freely — body copy</td></tr>
+      <tr><td>Bone on deep Terracotta <span class="mono">#A55030</span></td><td class="mono">4.8:1</td><td class="pass">Use for buttons</td></tr>
+      <tr><td>Bone on Terracotta <span class="mono">#B5542C</span></td><td class="mono">4.3:1</td><td class="fail">Large text only</td></tr>
+      <tr><td>Terracotta on Bone White</td><td class="mono">4.3:1</td><td class="fail">Headlines only, never body</td></tr>
+      <tr><td>Camel Sand on Bone White</td><td class="mono">1.7:1</td><td class="fail">Never text. Fill only</td></tr>
+    </table>
+    <p class="note">
+      Rule of thumb: <strong>Camel is for dark backgrounds, Slate is for light ones.</strong>
+      If you find yourself putting Camel text on Bone, switch it to Slate or Indigo.
+    </p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 03 TYPE ============ -->
+<section class="band band-surface" id="type">
+  <div class="shell">
+    <p class="eyebrow">03 · Type</p>
+    <h2>Three faces, fixed roles</h2>
+    <p class="lede">
+      All three are free on Google Fonts and available in Canva. Mixing a face
+      outside its role is the fastest way to make a post look like it came from a
+      different company.
+    </p>
+
+    <div style="margin-top:1.75rem;border-top:1px solid var(--line-strong)">
+      <div style="padding:1.25rem 0;border-bottom:1px solid var(--line)">
+        <span class="badge">Display</span>
+        <p style="font-family:var(--display);font-weight:300;text-transform:uppercase;font-size:clamp(1.6rem,4.5vw,2.6rem);line-height:1;letter-spacing:.01em;margin:.8rem 0 .5rem">
+          Makkah to Madinah
+        </p>
+        <p class="small" style="color:var(--slate);margin:0">
+          <strong>Jost Light (300)</strong>, uppercase. Headlines and the big statement on a post.
+          It comes straight from the wordmark in our logo. Never below 18px on screen.
+        </p>
+      </div>
+
+      <div style="padding:1.25rem 0;border-bottom:1px solid var(--line)">
+        <span class="badge">Body</span>
+        <p style="font-size:1.15rem;line-height:1.55;margin:.8rem 0 .5rem">
+          Fixed fares for every leg of the journey, published upfront.
+        </p>
+        <p class="small" style="color:var(--slate);margin:0">
+          <strong>Archivo (400 / 500 / 600)</strong>. All running text, captions inside graphics,
+          button labels. Never below 14px.
+        </p>
+      </div>
+
+      <div style="padding:1.25rem 0;border-bottom:1px solid var(--line)">
+        <span class="badge">Numbers</span>
+        <p class="mono" style="font-weight:700;font-size:clamp(1.4rem,4vw,2rem);letter-spacing:-.02em;margin:.8rem 0 .5rem">
+          SAR 1,450 · MKH → MED · 4.5–5.5 HR
+        </p>
+        <p class="small" style="color:var(--slate);margin:0">
+          <strong>JetBrains Mono (400 / 500 / 700)</strong>. Every fare, route code, distance,
+          duration and timestamp. This is the instrument voice — it is what makes a
+          price look like a published figure rather than a claim.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:2rem">
+      <div>
+        <h3>Two habits that carry the brand</h3>
+        <p class="small">
+          <strong>Wide-tracked small caps.</strong> Labels are set in JetBrains Mono, uppercase,
+          with letter-spacing around 0.16–0.22em. Every eyebrow on the site does this.
+        </p>
+        <p class="small">
+          <strong>The chamfer.</strong> Buttons and cards have the top-right corner cut at 45°,
+          about 14px. Never a rounded corner — it comes from the bevel on the pillars
+          in the monogram.
+        </p>
+      </div>
+      <div>
+        <h3>Where to get them</h3>
+        <p class="small">
+          Search <span class="mono">Jost</span>, <span class="mono">Archivo</span> and
+          <span class="mono">JetBrains Mono</span> in Canva's font picker, or download from
+          fonts.google.com. All three are free for commercial use.
+        </p>
+        <p class="small">
+          If a platform will not let you embed them (some ad tools), fall back to
+          <span class="mono">Futura → Century Gothic</span> for display and
+          <span class="mono">Inter → Helvetica</span> for body. Never Times, never Papyrus,
+          never a script face.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 04 LOGO ============ -->
+<section class="band" id="logo">
+  <div class="shell">
+    <p class="eyebrow">04 · Logo &amp; profile</p>
+    <h2>The mark on social</h2>
+
+    <div class="grid-2" style="margin-top:1.5rem">
+      <div class="card card-do">
+        <h4>Do</h4>
+        <ul class="small">
+          <li>Use the <strong>monogram only</strong> for profile pictures — the three-pillar TTT. The full lockup is illegible at 40px.</li>
+          <li>Keep it white on Dusk Indigo. That is the only profile-picture treatment.</li>
+          <li>Give it clear space of at least one cap-height on every side.</li>
+          <li>On post graphics, place the wordmark small in a corner, one size, never centred as a hero.</li>
+        </ul>
+      </div>
+      <div class="card card-dont">
+        <h4>Don't</h4>
+        <ul class="small">
+          <li>Stretch, rotate, add a shadow, glow or outline.</li>
+          <li>Recolour it. It is white on dark, or Indigo on Bone. Nothing else.</li>
+          <li>Put it over busy photography without a solid panel behind it.</li>
+          <li>Pair it with a partner or hotel logo at equal size without sign-off.</li>
+          <li>Watermark every photo. Discretion is a brand pillar — one small mark per post is plenty.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top:2rem">
+      <caption>Profile set-up, same on every platform</caption>
+      <tr><th>Field</th><th>Use exactly this</th></tr>
+      <tr><td>Display name</td><td>Trust Track Travels</td></tr>
+      <tr><td>Handle</td><td>Keep one handle across all platforms. Do not vary it per network.</td></tr>
+      <tr><td>Profile picture</td><td>Monogram, white on <span class="mono">#1E2233</span>, 400 × 400 minimum</td></tr>
+      <tr><td>Bio</td><td>Fixed-fare chauffeur transport for Hajj &amp; Umrah.<br>Jeddah · Makkah · Madinah. Priced per vehicle, no surge.<br>TGA &amp; Nusuk registered.</td></tr>
+      <tr><td>Link</td><td>The website homepage. Swap to a route page when a campaign is running on that leg.</td></tr>
+      <tr><td>Contact button</td><td>WhatsApp. It is the only booking channel we advertise.</td></tr>
+    </table>
+    <p class="note">
+      The bio must not claim anything the website does not. If we say "TGA &amp; Nusuk
+      registered" on social, that has to stay true and current.
+    </p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 05 POST TEMPLATES ============ -->
+<section class="band band-dark" id="posts">
+  <div class="shell">
+    <p class="eyebrow">05 · Post templates</p>
+    <h2>What a post looks like</h2>
+    <p class="lede">
+      Three layouts cover almost everything. Build them once in Canva as templates and
+      swap the numbers. The structure is always the same: a label, one fact set large,
+      a supporting line, and the WhatsApp CTA.
+    </p>
+
+    <div class="mocks" style="margin-top:2rem">
+      <div>
+        <p class="mock-label">A · Fare card — 1:1 or 4:5</p>
+        <div class="post post-4x5">
+          <div>
+            <p class="post-mark" style="margin:0">Trust Track Travels</p>
+            <div class="post-rule"></div>
+            <p class="post-mark" style="margin:0;color:rgba(245,239,228,.6)">JED → MKH</p>
+          </div>
+          <div>
+            <p class="post-head" style="margin:0 0 .8rem">Jeddah airport<br>to Makkah</p>
+            <p class="post-fare" style="margin:0">SAR 550</p>
+            <p class="post-sub">Signature Sedan · up to 3 guests · fixed</p>
+          </div>
+          <div>
+            <p class="post-sub" style="margin:0 0 .2rem">~85 km · 60–90 min · meet &amp; greet</p>
+            <span class="post-cta">Get your fare on WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="mock-label">B · Practical tip — 1:1</p>
+        <div class="post post-1x1 post-light">
+          <div>
+            <p class="post-mark" style="margin:0">Before you fly</p>
+            <div class="post-rule"></div>
+          </div>
+          <div>
+            <p class="post-head" style="margin:0 0 .6rem">Your flight is<br>delayed. Now what?</p>
+            <p style="font-size:.8rem;line-height:1.5;margin:0;color:var(--slate)">
+              Nothing. We track the flight and your chauffeur arrives for the
+              actual landing time. No waiting charge, no rebooking fee.
+            </p>
+          </div>
+          <div>
+            <p class="post-sub" style="margin:0">Trust Track Travels · Fixed fares</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="mock-label">C · Story / Reel — 9:16</p>
+        <div class="post post-9x16 safe">
+          <div>
+            <p class="post-mark" style="margin:0">MKH → MED</p>
+          </div>
+          <div>
+            <p class="post-head" style="margin:0 0 .7rem">The long leg</p>
+            <p class="post-fare" style="margin:0">4.5 HR</p>
+            <p class="post-sub">Door to door · one rest break · Miqat stop</p>
+          </div>
+          <div>
+            <span class="post-cta" style="margin-top:0">Send your dates</span>
+          </div>
+        </div>
+        <p class="small" style="color:rgba(245,239,228,.6);margin-top:.6rem">
+          The hatched bands are the unsafe zones — platform UI sits there. Keep all
+          text and the CTA out of the top and bottom 14%.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:2.5rem">
+      <div>
+        <h3 style="color:var(--bone)">Rules that apply to all three</h3>
+        <ul class="small" style="padding-left:1.05rem;color:rgba(245,239,228,.82)">
+          <li>One idea per post. One fare, or one tip, or one route — never three.</li>
+          <li>The number is the hero. Set it in JetBrains Mono Bold, bigger than anything else.</li>
+          <li>Exactly one Terracotta element. Usually the CTA.</li>
+          <li>Generous margins. Nothing closer than ~6% to the edge.</li>
+          <li>Sentence case in body text, uppercase only for display and labels.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--bone)">Carousels</h3>
+        <p class="small" style="color:rgba(245,239,228,.82)">
+          Slide 1 is the hook — a single question or figure. Slides 2–4 answer it.
+          The last slide is always the CTA on Terracotta. Keep to five slides;
+          a fare breakdown that needs eight slides belongs on the website instead,
+          so link there.
+        </p>
+        <p class="small" style="color:rgba(245,239,228,.82)">
+          Never put the whole tariff on a carousel. Prices change; the site is the
+          single source of truth and the one place we update.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 06 CONTENT PILLARS ============ -->
+<section class="band" id="pillars">
+  <div class="shell">
+    <p class="eyebrow">06 · What to post</p>
+    <h2>Six things worth posting</h2>
+    <p class="lede">
+      Rotate through these. If a post idea does not fit one of the six, it probably
+      does not belong on this account.
+    </p>
+
+    <table style="margin-top:1.75rem">
+      <tr><th>Pillar</th><th>Why it works</th><th>Example</th></tr>
+      <tr>
+        <td><strong>The fixed fare</strong></td>
+        <td>The core claim, stated plainly. Highest-converting format.</td>
+        <td>"Jeddah airport → Makkah. SAR 550, Signature Sedan. That is the price whether you land at 2pm or 2am."</td>
+      </tr>
+      <tr>
+        <td><strong>What a leg involves</strong></td>
+        <td>Removes the unknown. People book what they can picture.</td>
+        <td>"Makkah to Madinah is ~450 km and 4.5–5.5 hours. One rest break, water in the cabin, Miqat stop on the way back."</td>
+      </tr>
+      <tr>
+        <td><strong>Practical guidance</strong></td>
+        <td>Gets saved and shared. Builds the account between bookings.</td>
+        <td>"How early to leave your hotel for a Madinah departure: 3.5 hours international, 2 hours domestic."</td>
+      </tr>
+      <tr>
+        <td><strong>The fleet</strong></td>
+        <td>Answers "will we all fit with the bags?" — the real question.</td>
+        <td>"Executive Van: 7 guests, 7 bags. One vehicle, one fare, no second car."</td>
+      </tr>
+      <tr>
+        <td><strong>Ziyarat sites</strong></td>
+        <td>Educational and respectful. Broadest reach.</td>
+        <td>"Masjid Quba, the first mosque built in Islam, and the first stop on the Madinah route."</td>
+      </tr>
+      <tr>
+        <td><strong>The service, quietly</strong></td>
+        <td>Proof without boasting. Real, never staged.</td>
+        <td>A name board at arrivals. The welcome pack. The expressway at first light.</td>
+      </tr>
+    </table>
+
+    <p class="note">
+      A rough mix that works: half practical and route content, a quarter fares,
+      a quarter Ziyarat and service. Three to four feed posts a week is plenty —
+      consistency beats volume, and a quiet, exact account suits this brand far
+      better than a busy one.
+    </p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 07 CAPTIONS ============ -->
+<section class="band band-surface" id="captions">
+  <div class="shell">
+    <p class="eyebrow">07 · Captions &amp; CTA</p>
+    <h2>How to write the caption</h2>
+
+    <div class="grid-2" style="margin-top:1.5rem">
+      <div>
+        <h3>The formula</h3>
+        <p class="small"><strong>Line 1 — the specific fact.</strong> A route, a fare, a timing. No throat-clearing, no "Did you know?"</p>
+        <p class="small"><strong>Line 2–3 — what it means for them.</strong> Why that fact removes a worry.</p>
+        <p class="small"><strong>Line 4 — the ask.</strong> Always WhatsApp, always the same wording.</p>
+        <p class="small"><strong>Then hashtags</strong>, below a line break, 8–12 of them. Never 30.</p>
+      </div>
+      <div>
+        <h3>Worked example</h3>
+        <div class="caption-block">Jeddah airport to your Makkah hotel is SAR 550 in a Signature Sedan. Per vehicle, not per person.
+
+Your chauffeur is inside arrivals with your name, tracks the flight, and waits an hour at no charge if you are late through immigration.
+
+Send us your flight number on WhatsApp and we will send the fare back fixed.
+
+<b>#UmrahTransport #JeddahAirportTransfer #MakkahTransfer #UmrahUK #UmrahFromLondon #HajjTransport #ZiyaratTour #TrustTrackTravels</b></div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:2rem">
+      <div>
+        <h3>The CTA, word for word</h3>
+        <p class="small">
+          Use one of these. Do not invent new ones — the button on the website says
+          the same thing, and matching wording is how people learn their way around.
+        </p>
+        <ul class="small" style="padding-left:1.05rem">
+          <li>Send your flight details on WhatsApp.</li>
+          <li>Get a fixed quote on WhatsApp.</li>
+          <li>Message us with your dates.</li>
+        </ul>
+        <p class="small" style="color:var(--slate)">
+          Never "DM for price". We publish prices; asking people to DM for one
+          contradicts the entire brand.
+        </p>
+      </div>
+      <div>
+        <h3>Hashtags</h3>
+        <p class="small">Pick 8–12 from these three groups, mixed:</p>
+        <p class="small"><strong>Service:</strong> #UmrahTransport #HajjTransport #MakkahToMadinah #JeddahAirportTransfer #ZiyaratTour #UmrahTaxi</p>
+        <p class="small"><strong>Audience:</strong> #UmrahUK #UmrahUSA #UmrahPakistan #UmrahFromLondon #HajjPreparation</p>
+        <p class="small"><strong>Brand:</strong> #TrustTrackTravels</p>
+        <p class="small" style="color:var(--slate)">
+          Keep them at the bottom, after a line break. Never inside the sentence.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 08 VOICE ============ -->
+<section class="band" id="voice">
+  <div class="shell">
+    <p class="eyebrow">08 · Voice</p>
+    <h2>How the brand talks</h2>
+    <p class="lede">
+      State what happens; do not sell the feeling. The service reads as dignified
+      because the delivery is exact, not because the caption says so.
+    </p>
+
+    <table style="margin-top:1.75rem">
+      <tr><th>Never write</th><th>Write instead</th></tr>
+      <tr><td>Amazing deals on your dream Umrah trip!!</td><td>Fixed fares for every leg of your journey, published upfront.</td></tr>
+      <tr><td>We're honoured to serve you, valued guest 🙏✨</td><td>Your chauffeur will be waiting at arrivals with your name.</td></tr>
+      <tr><td>Book now before prices go up!</td><td>Prices are fixed year-round outside the published peak-season window.</td></tr>
+      <tr><td>The ultimate luxury pilgrimage experience</td><td>A chauffeur who knows the route and a price that doesn't move.</td></tr>
+      <tr><td>DM for price 💬</td><td>SAR 550, Jeddah airport to Makkah. Message us to book.</td></tr>
+    </table>
+
+    <div class="split" style="margin-top:2rem">
+      <div class="card card-do">
+        <h4>We are</h4>
+        <ul class="small">
+          <li>Composed, not flashy</li>
+          <li>Warm, not familiar</li>
+          <li>Exacting, not clinical</li>
+          <li>International, not generic</li>
+        </ul>
+      </div>
+      <div class="card card-dont">
+        <h4>We are not</h4>
+        <ul class="small">
+          <li>A budget taxi app competing on lowest fare</li>
+          <li>A tourism brand selling excitement</li>
+          <li>A logo-wrapped fleet chasing visibility</li>
+          <li>A vendor you re-explain your trip to at every leg</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="note">
+      <strong>The working test:</strong> if a sentence would read the same on a
+      beach-resort ad, rewrite it. Name the route, the timing, the vehicle or the
+      policy — the specifics are what separate us from a generic travel operator.
+    </p>
+
+    <p class="note">
+      <strong>Emoji:</strong> sparingly, and never in a religious context. A 📍 or → in
+      a route line is fine. Praying-hands, sparkles and fire emoji are not.
+    </p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 09 IMAGERY ============ -->
+<section class="band band-dark" id="imagery">
+  <div class="shell">
+    <p class="eyebrow">09 · Photo &amp; video</p>
+    <h2>What we point the camera at</h2>
+
+    <div class="split" style="margin-top:1.5rem">
+      <div class="card card-do" style="background:rgba(245,239,228,.06);border-color:var(--line-dark)">
+        <h4 style="color:var(--bone)">Shoot</h4>
+        <ul class="small" style="color:rgba(245,239,228,.82)">
+          <li>Real vehicles, real drivers, real routes</li>
+          <li>The Haramain Expressway, terminal exteriors, hotel forecourts</li>
+          <li>Architecture and skyline at a respectful distance</li>
+          <li>The name board at arrivals, the welcome pack, the cabin</li>
+          <li>Golden hour and early morning — the actual pickup times</li>
+          <li>Thin-line icons in Bone or Camel, never filled cartoon style</li>
+        </ul>
+      </div>
+      <div class="card card-dont" style="background:rgba(245,239,228,.06);border-color:var(--line-dark)">
+        <h4 style="color:var(--bone)">Do not shoot or source</h4>
+        <ul class="small" style="color:rgba(245,239,228,.82)">
+          <li>Close-ups of the Kaaba or the interior of Masjid al-Haram as a marketing backdrop</li>
+          <li>People at prayer, or any devotional moment used to sell</li>
+          <li>Stock photos of anonymous "happy tourists"</li>
+          <li>Staged smiling-family clichés</li>
+          <li>Heavy filters, HDR, or a colour grade that fights the palette</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:2rem">
+      <div>
+        <h3 style="color:var(--bone)">Licensing — read this before sourcing</h3>
+        <p class="small" style="color:rgba(245,239,228,.82)">
+          Use footage we own, or stock under a licence that permits commercial use.
+          <strong>Pexels, Coverr and Unsplash</strong> are free and safe for this.
+          Re-uploading clips or photos found on Pinterest, Instagram or TikTok is a
+          copyright risk on a business account and can cost us the page.
+        </p>
+        <p class="small" style="color:rgba(245,239,228,.82)">
+          Keep a record of where every asset came from. If you cannot name the source
+          and the licence, do not post it.
+        </p>
+      </div>
+      <div>
+        <h3 style="color:var(--bone)">Video</h3>
+        <p class="small" style="color:rgba(245,239,228,.82)">
+          Calm and continuous beats fast cuts. Most people watch muted, so anything
+          that matters must be on screen as text. Keep Reels and Shorts under 30
+          seconds unless there is a real reason. No trending audio that clashes with
+          the subject — a viral sound under Ziyarat footage reads badly.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 10 NEVER ============ -->
+<section class="band" id="never">
+  <div class="shell">
+    <p class="eyebrow">10 · Never post</p>
+    <h2>The hard lines</h2>
+    <p class="lede">
+      These are not style preferences. Each one either misleads a customer, risks the
+      account, or damages the brand in a way that is hard to undo.
+    </p>
+
+    <div class="card card-dont" style="margin-top:1.5rem">
+      <ul style="font-size:.95rem">
+        <li><strong>No invented reviews or testimonials.</strong> The previous website carried fabricated guest quotes and they were removed. Post a review only when a real guest gave it, and keep the WhatsApp message or Google review as proof.</li>
+        <li><strong>No price that contradicts the website.</strong> The published tariff is the single source of truth. If a post quotes a fare, it must match the site that day.</li>
+        <li><strong>No false urgency.</strong> "Only 2 seats left", "prices rise tomorrow", countdown stickers. Our whole claim is that the price does not move.</li>
+        <li><strong>No hidden peak pricing.</strong> If a post mentions fares during Hajj or the last ten days of Ramadan, say that the published 25% surcharge applies. Never let someone discover it later.</li>
+        <li><strong>No religious authority.</strong> We move people between sites. We do not issue rulings, advise on rituals, or imply a spiritual outcome from booking with us.</li>
+        <li><strong>No naming competitors</strong>, and no screenshots of their pricing.</li>
+        <li><strong>No guest faces without written permission</strong>, and never children.</li>
+        <li><strong>No engagement bait.</strong> "Tag someone who needs this", follow-to-win, comment-for-price. It cheapens a premium service.</li>
+      </ul>
+    </div>
+
+    <p class="note">
+      <strong>During Hajj and the last ten nights of Ramadan</strong>, drop the
+      promotional tone entirely. Operational and practical posts only. It is the
+      busiest and most sensitive period of the year, and a sales post lands badly.
+    </p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 11 SPECS ============ -->
+<section class="band band-surface" id="specs">
+  <div class="shell">
+    <p class="eyebrow">11 · Sizes</p>
+    <h2>Export sizes per platform</h2>
+    <p class="lede">Export at these pixel dimensions. JPG at quality 80–90, or PNG when the graphic is mostly flat colour and type.</p>
+
+    <table style="margin-top:1.5rem">
+      <tr><th>Platform</th><th>Format</th><th>Pixels</th><th>Notes</th></tr>
+      <tr><td rowspan="3">Instagram</td><td>Feed, portrait</td><td class="mono">1080 × 1350</td><td>Default. Takes the most screen space.</td></tr>
+      <tr><td>Feed, square</td><td class="mono">1080 × 1080</td><td>For fare cards and grid consistency.</td></tr>
+      <tr><td>Reels &amp; Stories</td><td class="mono">1080 × 1920</td><td>Keep text out of the top and bottom 14%.</td></tr>
+      <tr><td>TikTok</td><td>Video</td><td class="mono">1080 × 1920</td><td>Same safe zones as Reels.</td></tr>
+      <tr><td rowspan="2">Facebook</td><td>Feed</td><td class="mono">1080 × 1350</td><td>Portrait performs best.</td></tr>
+      <tr><td>Page cover</td><td class="mono">1640 × 856</td><td>Keep the mark and text centred.</td></tr>
+      <tr><td rowspan="2">YouTube</td><td>Shorts</td><td class="mono">1080 × 1920</td><td></td></tr>
+      <tr><td>Thumbnail</td><td class="mono">1280 × 720</td><td>Display type must be readable at 210px wide.</td></tr>
+      <tr><td>X</td><td>Post image</td><td class="mono">1600 × 900</td><td></td></tr>
+      <tr><td>LinkedIn</td><td>Post image</td><td class="mono">1200 × 1500</td><td>For trade and agency audiences.</td></tr>
+      <tr><td>Pinterest</td><td>Pin</td><td class="mono">1000 × 1500</td><td>Strong for Ziyarat and route content.</td></tr>
+      <tr><td>All</td><td>Profile picture</td><td class="mono">400 × 400</td><td>Monogram only, white on Indigo.</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 12 ACCESSIBILITY ============ -->
+<section class="band" id="access">
+  <div class="shell">
+    <p class="eyebrow">12 · Accessibility</p>
+    <h2>Reaching everyone</h2>
+    <div class="grid-2" style="margin-top:1.5rem">
+      <div>
+        <h3>Every post</h3>
+        <p class="small">
+          <strong>Alt text on every image.</strong> Describe what is in it, not the file name.
+          "A white GMC Yukon at the Jeddah airport forecourt at sunrise" — not
+          "Trust Track vehicle photo 3".
+        </p>
+        <p class="small">
+          <strong>Burned-in captions on every video.</strong> Most people watch muted, and
+          auto-captions mishandle Arabic place names. Check that Miqat, Ziyarat,
+          Dhul Hulaifah and Jannat al-Baqi are spelled correctly.
+        </p>
+      </div>
+      <div>
+        <h3>Readability</h3>
+        <p class="small">
+          Body text never below 14px at export size. Display type never below 18px.
+        </p>
+        <p class="small">
+          Use the checked colour pairs from section 02. If you are unsure about a
+          combination you invented, do not ship it — pick one from the table.
+        </p>
+        <p class="small">
+          Do not put essential information in an emoji or in colour alone.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 13 CHECKLIST ============ -->
+<section class="band band-dark" id="checklist">
+  <div class="shell">
+    <p class="eyebrow">13 · Before you hit post</p>
+    <h2>Pre-post checklist</h2>
+    <ul class="checklist" style="margin-top:1.5rem;max-width:44rem">
+      <li>One idea, one fare, one CTA.</li>
+      <li>Any price shown matches the website today.</li>
+      <li>If peak season is mentioned, the 25% surcharge is stated.</li>
+      <li>Only the three brand fonts, in their correct roles.</li>
+      <li>Exactly one Terracotta element.</li>
+      <li>Colour pair is on the checked list in section 02.</li>
+      <li>Text is clear of the top and bottom 14% on 9:16.</li>
+      <li>Alt text written.</li>
+      <li>Video has burned-in captions, place names spelled correctly.</li>
+      <li>No invented review, no urgency, no engagement bait.</li>
+      <li>Every asset's source and licence is recorded.</li>
+      <li>CTA points to WhatsApp, worded as in section 07.</li>
+    </ul>
+
+    <p class="note" style="margin-top:2rem">
+      Questions on anything here, or something that does not fit a template —
+      ask before publishing rather than after. A post is easy to delete; a
+      screenshot of it is not.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="shell" style="padding-block:2rem;border-top:1px solid var(--line-dark)">
+    <p class="mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0">
+      Trust Track Travels · Social media guidelines v1.0 · Palette: Terracotta / Dusk Indigo
+    </p>
+    <p class="small" style="margin:.6rem 0 0">
+      Colour and type values are taken from the live website. If the site changes,
+      this document is updated from it — not the other way round.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
