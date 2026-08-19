@@ -2,11 +2,23 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { bookingFare, bookingRoutes, bookingVehicles, formatBookingFare, type BookingRouteId, type BookingVehicleId } from "@/lib/booking";
-import { whatsappLink } from "@/lib/site";
+import { formatFare, whatsappLink, type CurrencyCode } from "@/lib/site";
 
 type Place = { id: number; label: string; lat: number; lon: number };
 
+const origins = [
+  { id: "", label: "Select your country", currency: "SAR" },
+  { id: "sa", label: "Saudi Arabia", currency: "SAR" },
+  { id: "gb", label: "United Kingdom", currency: "GBP" },
+  { id: "us", label: "United States", currency: "USD" },
+  { id: "pk", label: "Pakistan", currency: "PKR" },
+  { id: "other", label: "Another country", currency: "SAR" },
+] as const satisfies readonly { id: string; label: string; currency: CurrencyCode }[];
+
 export function HeroBooking() {
+  const [origin, setOrigin] = useState("");
+  const [homeCity, setHomeCity] = useState("");
+  const [currency, setCurrency] = useState<CurrencyCode>("SAR");
   const [vehicle, setVehicle] = useState<BookingVehicleId>("sedan");
   const [route, setRoute] = useState<BookingRouteId>("jed-mak");
   const [hotel, setHotel] = useState("");
@@ -16,6 +28,12 @@ export function HeroBooking() {
   const fare = bookingFare(route, vehicle);
   const selectedVehicle = bookingVehicles.find((item) => item.id === vehicle)!;
   const selectedRoute = bookingRoutes.find((item) => item.id === route)!;
+  const originName = origins.find((item) => item.id === origin)?.label ?? "Not selected";
+  const convertedFare = fare === undefined
+    ? "Quote required"
+    : typeof fare === "number"
+      ? formatFare(fare, currency)
+      : `${formatFare(fare[0], currency)}–${formatFare(fare[1], currency).replace(/^[^\d]+/, "")}`;
 
   useEffect(() => {
     if (hotel.trim().length < 3 || hotel === place?.label) {
@@ -39,19 +57,45 @@ export function HeroBooking() {
     const location = place ? `${place.label}\nMap: https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lon}#map=17/${place.lat}/${place.lon}` : hotel || "Not selected";
     return [
       "Booking request — Trust Track Travels", "",
+      `Traveller country: ${originName}`,
+      `Traveller city: ${homeCity || "Not provided"}`,
       `Vehicle: ${selectedVehicle.name} (${selectedVehicle.capacity})`,
       `Route: ${selectedRoute.name}`,
       `Fare: ${formatBookingFare(fare)} per vehicle`, "",
       `Hotel / pickup location: ${location}`, "",
       "Travel date and time:", "Flight number (if applicable):", "Number of guests:",
     ].join("\n");
-  }, [fare, hotel, place, selectedRoute, selectedVehicle]);
+  }, [fare, homeCity, hotel, originName, place, selectedRoute, selectedVehicle]);
 
   return (
     <form className="ledger booking-form chamfer" id="ledger" onSubmit={(event) => event.preventDefault()}>
       <div className="ledger-top">
         <h2 className="ledger-title">Book your transfer</h2>
-        <span className="booking-step">Fixed SAR fare</span>
+        <span className="booking-step">01 · Your details</span>
+      </div>
+
+      <div className="booking-origin-grid">
+        <div>
+          <label className="booking-label" htmlFor="booking-country">Your country</label>
+          <select className="booking-select" id="booking-country" value={origin} required onChange={(event) => {
+            const nextOrigin = event.target.value;
+            setOrigin(nextOrigin);
+            setCurrency(origins.find((item) => item.id === nextOrigin)?.currency ?? "SAR");
+          }}>
+            {origins.map((item) => <option key={item.id} value={item.id} disabled={!item.id}>{item.label}</option>)}
+          </select>
+        </div>
+        <div>
+          <label className="booking-label" htmlFor="booking-city">Your city</label>
+          <input className="booking-input" id="booking-city" value={homeCity} onChange={(event) => setHomeCity(event.target.value)} placeholder="e.g. London" />
+        </div>
+      </div>
+
+      <div className="currency-suggestion">
+        <span>Suggested currency</span>
+        <div role="group" aria-label="Choose display currency">
+          {(["SAR", "USD", "GBP", "PKR"] as CurrencyCode[]).map((code) => <button type="button" key={code} aria-pressed={currency === code} onClick={() => setCurrency(code)}>{code}</button>)}
+        </div>
       </div>
 
       <label className="booking-label" htmlFor="booking-vehicle">Vehicle</label>
@@ -80,7 +124,7 @@ export function HeroBooking() {
 
       {place && <iframe className="booking-map" title={`Map of ${place.label}`} loading="lazy" src={`https://www.openstreetmap.org/export/embed.html?bbox=${place.lon - 0.008}%2C${place.lat - 0.005}%2C${place.lon + 0.008}%2C${place.lat + 0.005}&layer=mapnik&marker=${place.lat}%2C${place.lon}`} />}
 
-      <div className="booking-total"><span>Fixed fare</span><strong>{formatBookingFare(fare)}</strong></div>
+      <div className="booking-total"><span>Fixed fare<small>Charged as {formatBookingFare(fare)}</small></span><strong>{convertedFare}</strong></div>
       <a className={`btn btn-primary btn-block chamfer is-clipped${fare === undefined ? " is-disabled" : ""}`} href={fare === undefined ? undefined : whatsappLink(message)} target="_blank" rel="noopener" aria-disabled={fare === undefined}>Send booking on WhatsApp</a>
       <p className="ledger-foot">The selected vehicle, route, fare, and hotel map link are included automatically in your message.</p>
     </form>

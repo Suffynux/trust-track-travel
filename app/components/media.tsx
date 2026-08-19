@@ -44,6 +44,7 @@ export function Media({
     <div className={`media ${className}`} style={style}>
       <Image
         src={`/${slot.src}`}
+        unoptimized
         alt={slot.alt}
         width={slot.width}
         height={slot.height}
@@ -95,6 +96,7 @@ export function HeroBackdrop({
       <div className="backdrop">
         <Image
           src={`/${poster.src}`}
+          unoptimized
           alt=""
           fill
           priority

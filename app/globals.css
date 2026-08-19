@@ -348,8 +348,11 @@ body {
 }
 
 .lede {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 400;
   font-size: var(--step-1);
-  line-height: 1.6;
+  line-height: 1.52;
+  letter-spacing: 0.012em;
   color: var(--muted);
   max-width: 38rem;
   text-wrap: pretty;
@@ -1105,6 +1108,14 @@ body {
   font: inherit;
   font-size: var(--step--1);
 }
+.booking-origin-grid { display: grid; gap: 0 0.65rem; }
+@media (min-width: 34rem) { .booking-origin-grid { grid-template-columns: 1fr 1fr; } }
+.currency-suggestion { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 0.7rem; color: var(--caption); font-family: var(--font-mono), monospace; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.currency-suggestion div { display: flex; gap: 0.15rem; }
+.currency-suggestion button { border: 0; background: transparent; padding: 0.3rem 0.38rem; color: var(--caption); font: inherit; cursor: pointer; }
+.currency-suggestion button[aria-pressed="true"] { background: var(--accent-strong); color: var(--accent-ink); }
+.booking-total span { display: flex; flex-direction: column; }
+.booking-total small { margin-top: 0.2rem; color: var(--caption); font-size: 0.6rem; font-weight: 400; }
 .booking-location { position: relative; }
 .booking-search-status { display: block; margin-top: 0.3rem; }
 .place-results {

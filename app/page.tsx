@@ -121,9 +121,9 @@ export default function Home() {
                 The fare is <em>set</em> before you land
               </h1>
               <p className="lede">
-                Airport transfers, intercity travel and Ziyarat touring for
-                pilgrims arriving from the UK, the US and Pakistan. Priced per
-                vehicle, held from quote to drop-off.
+                Private, door-to-door journeys for Umrah and Ziyarat—planned
+                around your flight, your hotel and the people travelling with
+                you. One clear vehicle price, agreed before you arrive.
               </p>
               <div className="hero-marks">
                 {marks.map((m) => (
