@@ -1047,6 +1047,77 @@ body {
   text-underline-offset: 2px;
 }
 
+.booking-form { overflow: visible; }
+.booking-step,
+.booking-search-status {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--caption);
+}
+.booking-label {
+  display: block;
+  margin-top: 0.85rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.booking-select,
+.booking-input {
+  width: 100%;
+  margin-top: 0.35rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: var(--page);
+  color: var(--text);
+  padding: 0.68rem 0.7rem;
+  font: inherit;
+  font-size: var(--step--1);
+}
+.booking-location { position: relative; }
+.booking-search-status { display: block; margin-top: 0.3rem; }
+.place-results {
+  position: absolute;
+  z-index: 5;
+  inset-inline: 0;
+  top: calc(100% - 0.1rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 16px 35px rgb(0 0 0 / 0.18);
+}
+.place-results li + li { border-top: 1px solid var(--line); }
+.place-results button {
+  width: 100%;
+  padding: 0.65rem 0.7rem;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  cursor: pointer;
+}
+.place-results button:hover { background: var(--page); }
+.booking-map { width: 100%; height: 8rem; margin-top: 0.8rem; border: 1px solid var(--line-strong); }
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-block: 1rem;
+  padding-top: 0.85rem;
+  border-top: 2px solid var(--text);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+}
+.booking-total strong { font-size: 1.35rem; }
+.is-disabled { opacity: 0.45; pointer-events: none; }
+
 @media (prefers-reduced-motion: no-preference) {
   .ledger-leg {
     animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;

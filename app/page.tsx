@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FleetTiers, Ledger, WhatsAppButton } from "./components/journey";
+import { FleetTiers, WhatsAppButton } from "./components/journey";
+import { HeroBooking } from "./components/hero-booking";
 import { HeroBackdrop, Media } from "./components/media";
 import { Arrow, Check } from "./components/icons";
 import { media, resolve } from "@/lib/media";
@@ -133,7 +134,7 @@ export default function Home() {
               </div>
             </div>
             <div className="hero-ledger">
-              <Ledger />
+              <HeroBooking />
             </div>
           </div>
         </div>
