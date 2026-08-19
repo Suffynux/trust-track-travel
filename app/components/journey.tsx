@@ -60,7 +60,14 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ tier, setTier, selected, toggleLeg, currency, setCurrency }),
+    () => ({
+      tier,
+      setTier,
+      selected,
+      toggleLeg,
+      currency,
+      setCurrency,
+    }),
     [tier, selected, currency, toggleLeg],
   );
 

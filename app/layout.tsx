@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono, Jost } from "next/font/google";
+import { Archivo, Fraunces, JetBrains_Mono, Jost } from "next/font/google";
 import "./globals.css";
 import { FareBar, JourneyProvider } from "./components/journey";
 import { Footer, Masthead } from "./components/site-chrome";
@@ -13,11 +13,23 @@ const siteDescription =
   "Fixed-fare chauffeur transport for pilgrims arriving from the UK, the US and Pakistan. Jeddah and Madinah airport transfers, Makkah–Madinah intercity travel, and Ziyarat touring, priced per vehicle and held from quote to drop-off.";
 
 /**
- * Three faces, three fixed roles.
- * Jost carries the display voice: light, wide, architectural — the same
- * register as the wordmark in the logo. Archivo does all the reading.
- * JetBrains Mono is the instrument: fares, route codes, distances, durations.
+ * Four faces, four fixed roles.
+ * Jost is the display voice: light, wide, architectural — the same register as
+ * the wordmark in the logo. Fraunces is the secondary voice, carrying the lede
+ * under every headline; a warm variable serif, so the sentence that has to
+ * persuade no longer looks like the sentence that merely informs. Archivo does
+ * the plain running text. JetBrains Mono is the instrument: fares, route codes,
+ * distances, durations.
  */
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  // Variable font: `axes` requires the weight axis stay variable too.
+  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
+  display: "swap",
+});
+
 const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
@@ -120,7 +132,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${jost.variable} ${archivo.variable} ${jetbrains.variable} antialiased`}
+      className={`${jost.variable} ${fraunces.variable} ${archivo.variable} ${jetbrains.variable} antialiased`}
     >
       <body>
         <RevealObserver />

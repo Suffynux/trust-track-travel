@@ -2,7 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { bookingFare, bookingRoutes, bookingVehicles, formatBookingFare, type BookingRouteId, type BookingVehicleId } from "@/lib/booking";
-import { formatFare, whatsappLink, type CurrencyCode } from "@/lib/site";
+import {
+  detectCurrency,
+  detectOriginId,
+  formatFare,
+  whatsappLink,
+  type CurrencyCode,
+} from "@/lib/site";
 
 type Place = { id: number; label: string; lat: number; lon: number };
 
@@ -25,6 +31,21 @@ export function HeroBooking() {
   const [place, setPlace] = useState<Place | null>(null);
   const [results, setResults] = useState<Place[]>([]);
   const [searching, setSearching] = useState(false);
+
+  // The visitor's country and currency can only be known in the browser, so
+  // the server renders the neutral default and this fills it in after mount.
+  // Detection is deliberately a post-hydration effect: initialising the state
+  // lazily instead would make the client's first render disagree with the
+  // server's HTML and trip a hydration error.
+  useEffect(() => {
+    const guessed = detectOriginId();
+    if (!guessed) return;
+    /* eslint-disable react-hooks/set-state-in-effect -- client-only signal */
+    setOrigin((current) => (current ? current : guessed));
+    setCurrency((current) => (current === "SAR" ? detectCurrency() : current));
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
+
   const fare = bookingFare(route, vehicle);
   const selectedVehicle = bookingVehicles.find((item) => item.id === vehicle)!;
   const selectedRoute = bookingRoutes.find((item) => item.id === route)!;

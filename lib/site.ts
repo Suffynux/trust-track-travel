@@ -32,6 +32,103 @@ export const currencies = [
   { code: "PKR", symbol: "₨", perSar: 74.1, fixed: false },
 ] as const;
 
+/**
+ * Which currency to open in, worked out from the visitor's own browser
+ * settings — no IP lookup, no consent banner, no extra request, and every
+ * page stays statically generated.
+ *
+ * The IANA time zone is checked first: it is the more reliable signal for
+ * someone running an en-US browser while actually living in Karachi. Locale
+ * region is the fallback.
+ *
+ * SAR is the floor for Saudi Arabia and anywhere unrecognised, because SAR is
+ * what we actually charge — the rest are indicative conversions.
+ */
+const zoneToCurrency: Record<string, CurrencyCode> = {
+  "Asia/Karachi": "PKR",
+  "Europe/London": "GBP",
+  "America/New_York": "USD",
+  "America/Chicago": "USD",
+  "America/Denver": "USD",
+  "America/Los_Angeles": "USD",
+  "America/Phoenix": "USD",
+  "America/Anchorage": "USD",
+  "America/Detroit": "USD",
+  "Asia/Riyadh": "SAR",
+};
+
+const regionToCurrency: Record<string, CurrencyCode> = {
+  PK: "PKR",
+  GB: "GBP",
+  US: "USD",
+  SA: "SAR",
+};
+
+/** Region code -> the origin option id used by the hero booking form. */
+const regionToOrigin: Record<string, string> = {
+  PK: "pk",
+  GB: "gb",
+  US: "us",
+  SA: "sa",
+};
+
+/**
+ * The visitor's country as one of the hero form's origin ids, or "" when we
+ * cannot tell — in which case the form stays on "Select your country" rather
+ * than guessing wrong.
+ */
+export function detectOriginId(): string {
+  return regionToOrigin[detectRegion() ?? ""] ?? "";
+}
+
+/** Best guess at the visitor's ISO region, from time zone then locale. */
+function detectRegion(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (zone && zoneToRegion[zone]) return zoneToRegion[zone];
+    for (const tag of navigator.languages ?? [navigator.language]) {
+      const region = new Intl.Locale(tag).maximize().region;
+      if (region) return region;
+    }
+  } catch {
+    // Intl.Locale is missing on some older browsers.
+  }
+  return null;
+}
+
+const zoneToRegion: Record<string, string> = {
+  "Asia/Karachi": "PK",
+  "Europe/London": "GB",
+  "America/New_York": "US",
+  "America/Chicago": "US",
+  "America/Denver": "US",
+  "America/Los_Angeles": "US",
+  "America/Phoenix": "US",
+  "America/Anchorage": "US",
+  "America/Detroit": "US",
+  "Asia/Riyadh": "SA",
+};
+
+export function detectCurrency(): CurrencyCode {
+  if (typeof window === "undefined") return "SAR";
+
+  try {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (zone && zoneToCurrency[zone]) return zoneToCurrency[zone];
+
+    // `en-GB` -> GB, `ur-PK` -> PK, `en` -> US once maximised.
+    for (const tag of navigator.languages ?? [navigator.language]) {
+      const region = new Intl.Locale(tag).maximize().region;
+      if (region && regionToCurrency[region]) return regionToCurrency[region];
+    }
+  } catch {
+    // Intl.Locale is missing on some older browsers; SAR is a safe floor.
+  }
+
+  return "SAR";
+}
+
 export type CurrencyCode = (typeof currencies)[number]["code"];
 
 export function formatFare(sar: number, code: CurrencyCode): string {

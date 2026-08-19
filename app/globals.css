@@ -3,6 +3,7 @@
 
 @theme inline {
   --font-display: var(--font-jost);
+  --font-serif: var(--font-fraunces);
   --font-body: var(--font-archivo);
   --font-mono: var(--font-jetbrains);
 }
@@ -347,14 +348,17 @@ body {
   line-height: 1.35;
 }
 
+/* The secondary voice. Fraunces at optical size 32 with a little softness and
+   wonk, so it reads warm next to Jost's geometry rather than like a default. */
 .lede {
-  font-family: var(--font-display), system-ui, sans-serif;
+  font-family: var(--font-serif), Georgia, serif;
+  font-variation-settings: "opsz" 32, "SOFT" 28, "WONK" 1;
   font-weight: 400;
   font-size: var(--step-1);
-  line-height: 1.52;
-  letter-spacing: 0.012em;
+  line-height: 1.55;
+  letter-spacing: 0.002em;
   color: var(--muted);
-  max-width: 38rem;
+  max-width: 40rem;
   text-wrap: pretty;
 }
 
@@ -507,26 +511,33 @@ body {
 
 /* The scrim holds the field solid under the headline, then releases so the
    footage shows. Text never sits on anything below 92% field. */
+/* Built when there was no photography, this used to paint the field solid
+   across the left third and smother the picture. Now that real images are in
+   place it only needs to darken enough for the headline to hold AA — the
+   photograph should be the thing you notice. */
 .backdrop-scrim {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
       100deg,
-      var(--field) 0%,
-      var(--field) 34%,
-      color-mix(in oklab, var(--field) 92%, transparent) 52%,
-      color-mix(in oklab, var(--field) 55%, transparent) 100%
+      color-mix(in oklab, var(--field) 90%, transparent) 0%,
+      color-mix(in oklab, var(--field) 74%, transparent) 42%,
+      color-mix(in oklab, var(--field) 40%, transparent) 72%,
+      color-mix(in oklab, var(--field) 22%, transparent) 100%
     ),
-    linear-gradient(to top, var(--field) 0%, transparent 42%);
+    linear-gradient(to top, var(--field) 0%, transparent 55%);
 }
 
 @media (max-width: 63.99rem) {
+  /* On a narrow screen the text sits over the middle of the frame, so the
+     scrim stays heavier there — but the top of the picture still shows. */
   .backdrop-scrim {
     background: linear-gradient(
       to bottom,
-      color-mix(in oklab, var(--field) 74%, transparent) 0%,
-      var(--field) 44%
+      color-mix(in oklab, var(--field) 34%, transparent) 0%,
+      color-mix(in oklab, var(--field) 78%, transparent) 38%,
+      var(--field) 72%
     );
   }
 }
