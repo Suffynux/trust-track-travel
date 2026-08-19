@@ -44,7 +44,7 @@ export const media = {
     src: "media/hero.mp4",
     alt: "",
     brief:
-      "8–15 second silent loop, no cuts. Expressway at golden hour, terminal forecourt, or the car pulling up. Keep the left two thirds calm — the headline sits there. Export at 1920×1080, under 4 MB, H.264. A WebM at media/hero.webm is used first if present.",
+      "8–15 second silent loop, no cuts. Expressway at golden hour, terminal forecourt, or the car pulling up. Keep the left two thirds calm because the headline sits there. Export at 1920×1080, under 4 MB, H.264. A WebM at media/hero.webm is used first if present.",
     ...wide,
   },
   heroVideoWebm: {

@@ -40,7 +40,10 @@ export function RevealObserver() {
           observer.unobserve(entry.target);
         }
       },
-      { rootMargin: "200px 0px -8% 0px", threshold: 0 },
+      // No negative bottom margin: elements that arrive at the edge of the
+      // viewport while earlier siblings are still animating would otherwise
+      // sit just outside the trigger area and stay hidden.
+      { rootMargin: "300px 0px 0px 0px", threshold: 0 },
     );
 
     const observeAll = () => {
@@ -53,7 +56,7 @@ export function RevealObserver() {
     mutations.observe(document.body, { childList: true, subtree: true });
 
     // Last resort: never leave content hidden because of a missed callback.
-    const watchdog = window.setTimeout(() => pending().forEach(show), 3000);
+    const watchdog = window.setTimeout(() => pending().forEach(show), 2000);
 
     return () => {
       observer.disconnect();

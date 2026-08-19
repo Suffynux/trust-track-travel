@@ -21,7 +21,7 @@ const photoFor = {
 } as const;
 
 const sizingMessage = [
-  "Hello Trust Track Travels — please help me pick a vehicle.",
+  "Hello Trust Track Travels. Please help me pick a vehicle.",
   "",
   "Number of travellers:",
   "Number of bags:",
@@ -83,7 +83,7 @@ export default function FleetPage() {
         <div className="shell">
           <div className="band-head-split">
             <div><p className="eyebrow">Larger parties</p><h2 className="h2" id="group-fleet-title">Hiace to full coach</h2></div>
-            <p className="lede">Dedicated group vehicles for families, organisers and 47-seat movements—with luggage space confirmed before booking.</p>
+            <p className="lede">Dedicated group vehicles for families, organisers and 47-seat movements, with luggage space confirmed before booking.</p>
           </div>
           <div className="vehicle-gallery">
             <figure><Media slot={resolve(media.fleet.hiace)} sizes="(min-width: 48rem) 50vw, 100vw" /><figcaption><b>Toyota Hiace</b><span>Up to 11 guests</span></figcaption></figure>

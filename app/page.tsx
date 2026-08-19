@@ -121,7 +121,7 @@ export default function Home() {
                 The fare is <em>set</em> before you land
               </h1>
               <p className="lede">
-                Private, door-to-door journeys for Umrah and Ziyarat—planned
+                Private, door-to-door journeys for Umrah and Ziyarat, planned
                 around your flight, your hotel and the people travelling with
                 you. One clear vehicle price, agreed before you arrive.
               </p>

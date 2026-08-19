@@ -22,7 +22,7 @@ export async function generateMetadata({
 
   return {
     title: route.title,
-    description: `${route.title} by private chauffeur — ${route.distance}, ${route.duration}. Fixed fare per vehicle from SAR ${route.fares.sedan}, meet-and-greet, flight tracking, no surge.`,
+    description: `${route.title} by private chauffeur. ${route.distance}, ${route.duration}. Fixed fare per vehicle from SAR ${route.fares.sedan}, meet-and-greet, flight tracking, no surge.`,
     alternates: { canonical: `/routes/${route.slug}` },
     openGraph: {
       title: `${route.title} | ${site.name}`,
@@ -42,7 +42,7 @@ export default async function RoutePage({
 
   const others = routes.filter((r) => r.slug !== route.slug);
   const message = [
-    `Hello ${site.name} — I'd like a fixed fare for ${route.title}.`,
+    `Hello ${site.name}. I'd like a fixed fare for ${route.title}.`,
     "",
     "Travel date:",
     "Number of guests:",

@@ -29,7 +29,7 @@ const stopSlots: Record<string, keyof typeof media.stops> = {
 };
 
 const ziyaratMessage = [
-  "Hello Trust Track Travels — I'd like to book a Ziyarat tour.",
+  "Hello Trust Track Travels. I'd like to book a Ziyarat tour.",
   "",
   "City (Makkah / Madinah / both):",
   "Date:",
@@ -199,7 +199,7 @@ export default function ZiyaratPage() {
                           {t.rows[tier.id].toLocaleString("en-US")}
                         </td>
                         <td className="cell-num">
-                          {"extra" in t ? `+${t.extra[tier.id]}` : "—"}
+                          {"extra" in t ? `+${t.extra[tier.id]}` : "Not available"}
                         </td>
                       </tr>
                     ))}

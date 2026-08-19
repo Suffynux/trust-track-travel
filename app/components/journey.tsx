@@ -99,12 +99,12 @@ function buildMessage(tier: TierId, selected: LegId[]) {
   const q = quote(selected, tier);
 
   const lines = [
-    "Fixed fare request — Trust Track Travels",
+    "Fixed fare request from Trust Track Travels",
     "",
     `Vehicle: ${t.name} (${t.capacity.toLowerCase()})`,
     "",
     "Journey:",
-    ...q.lines.map((l) => `- ${l.short} — SAR ${l.fare.toLocaleString("en-US")}`),
+    ...q.lines.map((l) => `- ${l.short}: SAR ${l.fare.toLocaleString("en-US")}`),
     "",
     `Subtotal: SAR ${q.subtotal.toLocaleString("en-US")}`,
   ];
@@ -380,7 +380,7 @@ export function WhatsAppButton({
         .join(" ")}
       href={whatsappLink(
         message ??
-          `Hello ${site.name} — I'd like a fixed quote for ground transport.\n\nRoute:\nTravel dates:\nNumber of guests:`,
+          `Hello ${site.name}. I'd like a fixed quote for ground transport.\n\nRoute:\nTravel dates:\nNumber of guests:`,
       )}
       target="_blank"
       rel="noopener"

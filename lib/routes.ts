@@ -111,7 +111,7 @@ export const routes: Route[] = [
       },
       {
         q: "Can we leave at night?",
-        a: "Yes. Overnight departures are common on this leg and are charged at the same fixed fare — there is no night surcharge.",
+        a: "Yes. Overnight departures are common on this leg and are charged at the same fixed fare. There is no night surcharge.",
       },
       {
         q: "Is the train not cheaper?",
@@ -157,7 +157,7 @@ export const routes: Route[] = [
       },
       {
         q: "Can we book the arrival and departure together?",
-        a: "Yes, and you should — the same tier both ways in one reservation takes 10% off the combined total.",
+        a: "Yes. The same tier both ways in one reservation takes 10% off the combined total.",
       },
       {
         q: "How close to Masjid an-Nabawi can you drop us?",

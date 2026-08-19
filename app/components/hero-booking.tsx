@@ -77,7 +77,7 @@ export function HeroBooking() {
   const message = useMemo(() => {
     const location = place ? `${place.label}\nMap: https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lon}#map=17/${place.lat}/${place.lon}` : hotel || "Not selected";
     return [
-      "Booking request — Trust Track Travels", "",
+      "Booking request for Trust Track Travels", "",
       `Traveller country: ${originName}`,
       `Traveller city: ${homeCity || "Not provided"}`,
       `Vehicle: ${selectedVehicle.name} (${selectedVehicle.capacity})`,
