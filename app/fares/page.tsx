@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WhatsAppButton } from "../components/journey";
+import { Media } from "../components/media";
 import { Arrow, Check } from "../components/icons";
 import { fareTables, included, policies, tiers } from "@/lib/fares";
 import { routes } from "@/lib/routes";
+import { media, resolve } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Fares",
@@ -57,6 +59,8 @@ export default function FaresPage() {
   return (
     <>
       <section className="pagehead">
+        <div className="backdrop"><Media slot={resolve(media.meetAndGreet)} sizes="100vw" priority /></div>
+        <div className="backdrop-scrim" />
         <div className="shell pagehead-inner">
           <nav className="crumbs" aria-label="Breadcrumb">
             <Link href="/">Home</Link>
@@ -72,6 +76,12 @@ export default function FaresPage() {
             and no fare that appears only at drop-off.
           </p>
         </div>
+      </section>
+
+      <section className="image-stories" aria-label="Airport, hotel and intercity service">
+        <figure className="image-story"><Media slot={resolve(media.meetAndGreet)} sizes="33vw" /><figcaption>Meet-and-greet included</figcaption></figure>
+        <figure className="image-story"><Media slot={resolve(media.hotelArrival)} sizes="33vw" /><figcaption>Door-to-door arrival</figcaption></figure>
+        <figure className="image-story"><Media slot={resolve(media.expressway)} sizes="33vw" /><figcaption>Fixed intercity fares</figcaption></figure>
       </section>
 
       <section className="band" aria-labelledby="tables-title">

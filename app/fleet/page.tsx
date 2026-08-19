@@ -79,6 +79,19 @@ export default function FleetPage() {
         </div>
       </section>
 
+      <section className="band band-field on-field" aria-labelledby="group-fleet-title">
+        <div className="shell">
+          <div className="band-head-split">
+            <div><p className="eyebrow">Larger parties</p><h2 className="h2" id="group-fleet-title">Hiace to full coach</h2></div>
+            <p className="lede">Dedicated group vehicles for families, organisers and 47-seat movements—with luggage space confirmed before booking.</p>
+          </div>
+          <div className="vehicle-gallery">
+            <figure><Media slot={resolve(media.fleet.hiace)} sizes="(min-width: 48rem) 50vw, 100vw" /><figcaption><b>Toyota Hiace</b><span>Up to 11 guests</span></figcaption></figure>
+            <figure><Media slot={resolve(media.fleet.bus)} sizes="(min-width: 48rem) 50vw, 100vw" /><figcaption><b>Full coach</b><span>47 seats</span></figcaption></figure>
+          </div>
+        </div>
+      </section>
+
       <section className="band band-surface" aria-labelledby="cabin-title">
         <div className="shell">
           <div className="feature feature-flip">

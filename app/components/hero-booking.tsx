@@ -22,6 +22,7 @@ export function HeroBooking() {
       return;
     }
     const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 6500);
     const timer = window.setTimeout(async () => {
       setSearching(true);
       try {
@@ -29,11 +30,9 @@ export function HeroBooking() {
         setResults(response.ok ? await response.json() : []);
       } catch (error) {
         if ((error as Error).name !== "AbortError") setResults([]);
-      } finally {
-        setSearching(false);
-      }
+      } finally { window.clearTimeout(timeout); setSearching(false); }
     }, 350);
-    return () => { window.clearTimeout(timer); controller.abort(); };
+    return () => { window.clearTimeout(timer); window.clearTimeout(timeout); controller.abort(); };
   }, [hotel, place?.label]);
 
   const message = useMemo(() => {

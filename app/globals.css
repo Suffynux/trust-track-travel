@@ -138,6 +138,35 @@ body {
   }
 }
 
+/* Full-bleed photographic pauses used between dense tariff sections. */
+.image-stories {
+  display: grid;
+  background: var(--field);
+}
+
+@media (min-width: 48rem) {
+  .image-stories { grid-template-columns: repeat(3, 1fr); }
+}
+
+.image-story {
+  position: relative;
+  min-height: clamp(15rem, 28vw, 26rem);
+  overflow: hidden;
+}
+
+.image-story .media { position: absolute; inset: 0; }
+.image-story .media img { width: 100%; height: 100%; transition: transform 0.6s ease; }
+.image-story:hover .media img { transform: scale(1.025); }
+.image-story::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgb(0 0 0 / 0.72)); }
+.image-story figcaption { position: absolute; z-index: 1; inset: auto 1.2rem 1rem; color: white; font-family: var(--font-mono), monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; }
+
+.vehicle-gallery { display: grid; gap: 1px; background: var(--line-on-field); }
+@media (min-width: 48rem) { .vehicle-gallery { grid-template-columns: repeat(2, 1fr); } }
+.vehicle-gallery figure { background: var(--field); }
+.vehicle-gallery .media { aspect-ratio: 16 / 9; }
+.vehicle-gallery figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem; font-size: var(--step--1); }
+.vehicle-gallery figcaption span { color: var(--on-field-muted); font-family: var(--font-mono), monospace; font-size: 0.7rem; text-transform: uppercase; }
+
 @keyframes rise {
   from {
     opacity: 0;

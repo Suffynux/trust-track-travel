@@ -67,6 +67,18 @@ export const media = {
       "Rear cabin, clean and empty. Water bottles, legroom. Shot from the door.",
     ...wide,
   },
+  meetAndGreet: {
+    src: "media/meet-and-greet.jpg",
+    alt: "A chauffeur meeting guests at Jeddah airport arrivals",
+    brief: "Airport arrivals meet-and-greet with a discreet vehicle and luggage.",
+    ...wide,
+  },
+  hotelArrival: {
+    src: "media/hotel-arrival.jpg",
+    alt: "A family arriving at their hotel by private chauffeur",
+    brief: "Vehicle arriving beneath a hotel porte-cochère with luggage assistance.",
+    ...wide,
+  },
   fleet: {
     sedan: {
       src: "media/fleet/sedan.jpg",
@@ -90,6 +102,18 @@ export const media = {
       src: "media/fleet/coach.jpg",
       alt: "The Group Coach",
       brief: "Three-quarter front, full vehicle in frame.",
+      ...wide,
+    },
+    hiace: {
+      src: "media/fleet/hiace.jpg",
+      alt: "The Toyota Hiace passenger van",
+      brief: "Three-quarter front, full passenger van in frame.",
+      ...wide,
+    },
+    bus: {
+      src: "media/fleet/bus.jpg",
+      alt: "The 47-seat coach bus",
+      brief: "Three-quarter front, full-size coach in frame.",
       ...wide,
     },
     prestige: {
@@ -193,6 +217,12 @@ export const media = {
       src: "media/routes/madinah-airport-transfer.jpg",
       alt: "Madinah airport",
       brief: "Terminal exterior or the short hotel approach.",
+      ...wide,
+    },
+    "madinah-to-badr": {
+      src: "media/routes/madinah-to-badr.jpg",
+      alt: "The mountain road from Madinah toward Badr",
+      brief: "Wide Hijaz mountain road with a passenger vehicle in the distance.",
       ...wide,
     },
   },

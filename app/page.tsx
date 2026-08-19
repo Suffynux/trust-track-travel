@@ -180,6 +180,12 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="image-stories" aria-label="The Trust Track journey">
+        <figure className="image-story"><Media slot={resolve(media.meetAndGreet)} sizes="(min-width: 48rem) 33vw, 100vw" /><figcaption>Meet at arrivals</figcaption></figure>
+        <figure className="image-story"><Media slot={resolve(media.hotelArrival)} sizes="(min-width: 48rem) 33vw, 100vw" /><figcaption>Hotel-door service</figcaption></figure>
+        <figure className="image-story"><Media slot={resolve(media.routes["madinah-to-badr"])} sizes="(min-width: 48rem) 33vw, 100vw" /><figcaption>Across the Hijaz</figcaption></figure>
+      </section>
+
       {/* ---------- Fleet ---------- */}
       <section
         className="band band-field on-field"
