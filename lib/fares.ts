@@ -3,38 +3,68 @@
  * Figures come from the Standard Package Guide (Phase 01).
  */
 
+/**
+ * The real fleet, in seat order. These ids and prices are the same ones the
+ * booking form quotes from (lib/booking.ts) — the site previously carried a
+ * separate set of invented tiers priced 2-3x higher, so the Fares page and the
+ * booking form disagreed about the cost of the same journey.
+ */
 export const tiers = [
   {
     id: "sedan",
     index: "01",
-    name: "Signature Sedan",
+    name: "Sedan",
     capacity: "Up to 3 guests · 3 bags",
     anchor: "Toyota Camry Grande or equivalent executive sedan",
     suits: "Solo travellers and couples wanting quiet, unhurried comfort.",
   },
   {
-    id: "suv",
+    id: "staria",
     index: "02",
-    name: "Premium SUV",
-    capacity: "Up to 5 guests · 5 bags",
-    anchor: "GMC Yukon XL, Suburban, or Land Cruiser",
-    suits: "Small families and travellers with heavier luggage.",
-  },
-  {
-    id: "van",
-    index: "03",
-    name: "Executive Van",
+    name: "Hyundai Staria",
     capacity: "Up to 7 guests · 7 bags",
-    anchor: "Hyundai Staria VIP or Mercedes V-Class",
+    anchor: "Hyundai Staria",
     suits: "Families and small groups travelling as one party.",
   },
   {
-    id: "coach",
+    id: "stariavip",
+    index: "03",
+    name: "Staria VIP",
+    capacity: "7 to 9 guests · group luggage",
+    anchor: "Hyundai Staria VIP, higher-spec interior",
+    suits: "Guests who want the extra space and finish on a longer leg.",
+  },
+  {
+    id: "hiace",
     index: "04",
-    name: "Group Coach",
-    capacity: "Up to 14 guests · group luggage",
+    name: "Toyota Hiace",
+    capacity: "Up to 11 guests · group luggage",
+    anchor: "Toyota Hiace",
+    suits: "Larger families travelling together with full luggage.",
+  },
+  {
+    id: "gmc",
+    index: "05",
+    name: "GMC",
+    capacity: "Premium SUV · up to 6 guests",
+    anchor: "GMC Yukon XL, Suburban, or Land Cruiser",
+    suits: "Travellers wanting an SUV rather than a van.",
+  },
+  {
+    id: "coaster",
+    index: "06",
+    name: "Coaster",
+    capacity: "Up to 22 guests · group luggage",
     anchor: "Toyota Coaster or equivalent minibus",
-    suits: "Extended family Hajj and Umrah parties, and tour groups.",
+    suits: "Extended family Hajj and Umrah parties.",
+  },
+  {
+    id: "bus",
+    index: "07",
+    name: "Bus",
+    capacity: "47 seats",
+    anchor: "Full-size coach",
+    suits: "Tour groups and large Hajj parties moving as one.",
   },
 ] as const;
 
@@ -52,140 +82,63 @@ export const prestige = {
 type FareRow = Record<TierId, number>;
 
 /** The five bookable legs of one pilgrim journey, in travel order. */
-export const legs = [
-  {
-    id: "arrival",
-    code: "JED",
-    name: "Jeddah airport to your Makkah hotel",
-    short: "Jeddah airport → Makkah",
-    detail: "~85 km · 60–90 min",
-    kind: "transfer",
-    fares: { sedan: 550, suv: 700, van: 850, coach: 1100 } as FareRow,
-  },
-  {
-    id: "ziyarat-makkah",
-    code: "ZYR",
-    name: "Makkah Ziyarat, 3-hour route",
-    short: "Makkah Ziyarat, 3 hours",
-    detail: "6 stops · driver waits",
-    kind: "ziyarat",
-    fares: { sedan: 420, suv: 560, van: 700, coach: 950 } as FareRow,
-  },
-  {
-    id: "intercity",
-    code: "INT",
-    name: "Makkah to Madinah",
-    short: "Makkah → Madinah",
-    detail: "~450 km · 4.5–5.5 hr · Miqat stop",
-    kind: "transfer",
-    fares: { sedan: 1150, suv: 1450, van: 1750, coach: 2300 } as FareRow,
-  },
-  {
-    id: "ziyarat-madinah",
-    code: "ZYR",
-    name: "Madinah Ziyarat, 3-hour route",
-    short: "Madinah Ziyarat, 3 hours",
-    detail: "5 stops · driver waits",
-    kind: "ziyarat",
-    fares: { sedan: 380, suv: 500, van: 640, coach: 880 } as FareRow,
-  },
-  {
-    id: "departure",
-    code: "MED",
-    name: "Madinah hotel to Madinah airport",
-    short: "Madinah → airport",
-    detail: "~18 km · 20–30 min",
-    kind: "transfer",
-    fares: { sedan: 260, suv: 360, van: 460, coach: 620 } as FareRow,
-  },
-] as const;
-
-export type LegId = (typeof legs)[number]["id"];
-
-/**
- * Bundle discounts apply automatically when the qualifying legs are booked
- * together on one tier. Most specific match wins.
- */
-export const bundles = [
-  {
-    id: "complete",
-    name: "Complete Pilgrimage Transfer",
-    rate: 0.15,
-    requires: [
-      "arrival",
-      "ziyarat-makkah",
-      "intercity",
-      "ziyarat-madinah",
-      "departure",
-    ] as LegId[],
-    blurb:
-      "The full itinerary in one booking: airport arrival, Makkah Ziyarat, intercity, Madinah Ziyarat, and airport departure.",
-  },
-  {
-    id: "twin-ziyarat",
-    name: "Twin Ziyarat",
-    rate: 0.08,
-    requires: ["ziyarat-makkah", "ziyarat-madinah"] as LegId[],
-    blurb: "Makkah Ziyarat and Madinah Ziyarat, booked as one reservation.",
-  },
-] as const;
-
-export function activeBundle(selected: LegId[]) {
-  return bundles.find((b) => b.requires.every((r) => selected.includes(r)));
-}
-
-export function quote(selected: LegId[], tier: TierId) {
-  const lines = legs
-    .filter((l) => selected.includes(l.id))
-    .map((l) => ({ ...l, fare: l.fares[tier] }));
-  const subtotal = lines.reduce((sum, l) => sum + l.fare, 0);
-  const bundle = activeBundle(selected);
-  const discount = bundle ? Math.round(subtotal * bundle.rate) : 0;
-  return { lines, subtotal, bundle, discount, total: subtotal - discount };
-}
-
 /** Full tier-by-tier tables, as published in the package guide. */
+/**
+ * The published tariff. Every figure here matches lib/booking.ts, which is
+ * what the booking form quotes from — the two must never disagree, because a
+ * customer comparing this page to the form is comparing the same journey.
+ *
+ * GMC is quoted as a band in the tariff (it depends on the specific vehicle);
+ * the tables show the lower figure and the note says the range.
+ */
 export const fareTables = [
   {
     id: "jed",
     code: "JED",
     title: "Jeddah airport ↔ Makkah hotels",
     detail: "~85 km · 60–90 min · one-way, per vehicle",
-    rows: { sedan: 550, suv: 700, van: 850, coach: 1100 } as FareRow,
-    note: "Round trip on the same tier, booked together: 10% off the combined total.",
+    rows: { sedan: 200, staria: 250, stariavip: 400, hiace: 330, gmc: 400, coaster: 550, bus: 850 } as FareRow,
+    note: "GMC is SAR 400–450 depending on the vehicle. Makkah to Jeddah is priced the same, except the Hiace at SAR 300 and the bus at SAR 650.",
   },
   {
     id: "med",
     code: "MED",
     title: "Madinah airport ↔ Madinah hotels",
     detail: "~18 km · 20–30 min · one-way, per vehicle",
-    rows: { sedan: 260, suv: 360, van: 460, coach: 620 } as FareRow,
-    note: "Round trip on the same tier, booked together: 10% off the combined total.",
+    rows: { sedan: 130, staria: 150, stariavip: 250, hiace: 200, gmc: 250, coaster: 350, bus: 450 } as FareRow,
+    note: "GMC is SAR 250–300 depending on the vehicle. Priced the same in both directions.",
   },
   {
     id: "int",
     code: "INT",
     title: "Makkah ↔ Madinah intercity",
     detail: "~450 km · 4.5–5.5 hr · one-way, per vehicle",
-    rows: { sedan: 1150, suv: 1450, van: 1750, coach: 2300 } as FareRow,
-    note: "Includes a complimentary Dhul Hulaifah Miqat stop travelling Madinah to Makkah, one rest break, and bottled water.",
+    rows: { sedan: 350, staria: 450, stariavip: 750, hiace: 550, gmc: 750, coaster: 850, bus: 950 } as FareRow,
+    note: "Includes a complimentary Dhul Hulaifah Miqat stop travelling Madinah to Makkah, one rest break, and bottled water. GMC is SAR 750–850.",
   },
   {
     id: "zyr-mkh",
     code: "ZYR",
     title: "Makkah Ziyarat, 3-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
-    rows: { sedan: 200, suv: 250, van: 300, coach: 450 } as FareRow,
-    extra: { sedan: 70, suv: 90, van: 110, coach: 150 } as FareRow,
-    note: "An optional detour to Masjid Aisha (Ta'neem) is available for guests renewing Ihram for a second Umrah.",
+    rows: { sedan: 200, staria: 250, stariavip: 350, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
+    note: "An optional detour to Masjid Aisha (Ta'neem) is available for guests renewing Ihram for a second Umrah. GMC is SAR 350–450.",
   },
   {
     id: "zyr-med",
     code: "ZYR",
     title: "Madinah Ziyarat, 3-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
-    rows: { sedan: 200, suv: 250, van: 300, coach: 450 } as FareRow,
-    extra: { sedan: 70, suv: 90, van: 110, coach: 150 } as FareRow,
+    rows: { sedan: 200, staria: 250, stariavip: 350, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
+    note: "GMC is SAR 350–450 depending on the vehicle.",
+  },
+  {
+    id: "badr",
+    code: "BAD",
+    title: "Madinah ↔ Badr",
+    detail: "~150 km · one-way, per vehicle",
+    rows: { sedan: 350, staria: 450, stariavip: 750, hiace: 550, gmc: 750, coaster: 850 } as FareRow,
+    note: "Priced the same in both directions. Not available in the 47-seat bus.",
   },
 ] as const;
 
