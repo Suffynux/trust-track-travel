@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { WhatsAppButton } from "./journey";
+import { CurrencySelect, WhatsAppButton } from "./journey";
 import { MobileNav } from "./mobile-nav";
 import { routes } from "@/lib/routes";
 import { site } from "@/lib/site";
@@ -118,6 +118,7 @@ export function Footer() {
                 <span>{site.cities}</span>
               </li>
             </ul>
+            <CurrencySelect className="footer-currency-select" />
           </div>
         </div>
         <div className="footer-base">

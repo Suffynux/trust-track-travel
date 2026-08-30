@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { CurrencySelect, useDisplayCurrency } from "./journey";
 import {
   bookingFare,
   bookingRoutes,
@@ -10,58 +11,20 @@ import {
   type BookingVehicleId,
 } from "@/lib/booking";
 import {
-  currencies,
-  detectCurrency,
   formatFare,
   whatsappLink,
-  type CurrencyCode,
 } from "@/lib/site";
 
 type Place = { id: number; label: string; lat: number; lon: number };
 
 export function HeroBooking() {
-  const [currency, setCurrency] = useState<CurrencyCode>("SAR");
+  const { currency } = useDisplayCurrency();
   const [vehicle, setVehicle] = useState<BookingVehicleId>("sedan");
   const [route, setRoute] = useState<BookingRouteId>("jed-mak");
   const [hotel, setHotel] = useState("");
   const [place, setPlace] = useState<Place | null>(null);
   const [results, setResults] = useState<Place[]>([]);
   const [searching, setSearching] = useState(false);
-  const [pickedCurrency, setPickedCurrency] = useState(false);
-
-  /**
-   * Currency comes from the visitor's IP country, resolved by the platform at
-   * the edge. The browser locale is used first so the number is right on the
-   * very first paint, then the IP answer refines it — a Pakistani traveller on
-   * an en-US phone gets PKR either way.
-   *
-   * Runs after mount so the server HTML stays static and identical for every
-   * visitor. An explicit choice always wins.
-   */
-  useEffect(() => {
-    let cancelled = false;
-
-    /* eslint-disable-next-line react-hooks/set-state-in-effect -- client-only signal */
-    setCurrency((current) => (current === "SAR" ? detectCurrency() : current));
-
-    fetch("/api/geo")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data: { currency?: CurrencyCode | null } | null) => {
-        // A null currency means the platform could not resolve the country;
-        // the locale guess already in state is the better answer, so keep it.
-        if (cancelled || !data?.currency) return;
-        const fromIp = data.currency;
-        setCurrency((current) => (pickedCurrency ? current : fromIp));
-      })
-      .catch(() => {
-        // Locale detection already ran; nothing more to do.
-      });
-
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- detect once on mount
-  }, []);
 
   const fare = bookingFare(route, vehicle);
   const selectedVehicle = bookingVehicles.find((item) => item.id === vehicle)!;
@@ -220,22 +183,8 @@ export function HeroBooking() {
       </div>
 
       <div className="currency-suggestion">
-        <span>Shown in</span>
-        <div role="group" aria-label="Choose display currency">
-          {currencies.map(({ code }) => (
-            <button
-              type="button"
-              key={code}
-              aria-pressed={currency === code}
-              onClick={() => {
-                setPickedCurrency(true);
-                setCurrency(code);
-              }}
-            >
-              {code}
-            </button>
-          ))}
-        </div>
+        <span>Prices follow your location</span>
+        <CurrencySelect className="booking-currency-select" />
       </div>
 
       <a

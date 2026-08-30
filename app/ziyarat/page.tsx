@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { WhatsAppButton } from "../components/journey";
+import { DisplayFare, WhatsAppButton } from "../components/journey";
 import { Media } from "../components/media";
 import { Arrow } from "../components/icons";
 import { media, resolve, type Slot } from "@/lib/media";
@@ -58,8 +58,7 @@ export default function ZiyaratPage() {
           <p className="lede">
             Both routes run three hours from hotel pickup to drop-off, in the
             order below, with the driver waiting at every stop. You decide how
-            long to stay; extra hours are charged at the published rate for your
-            tier.
+            long to stay; extra hours are quoted on request.
           </p>
         </div>
       </section>
@@ -83,7 +82,7 @@ export default function ZiyaratPage() {
                 <div className="route-head">
                   <h3 className="route-city">{r.city}</h3>
                   <p className="route-from">
-                    From <b>SAR {r.from}</b>
+                    From <b><DisplayFare sar={r.from} /></b>
                   </p>
                 </div>
                 <ol className="stops">
@@ -187,7 +186,6 @@ export default function ZiyaratPage() {
                     <tr>
                       <th scope="col">Tier</th>
                       <th scope="col">3-hour tour</th>
-                      <th scope="col">Extra hour</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -195,10 +193,7 @@ export default function ZiyaratPage() {
                       <tr key={tier.id}>
                         <th scope="row">{tier.name}</th>
                         <td className="cell-num">
-                          {t.rows[tier.id].toLocaleString("en-US")}
-                        </td>
-                        <td className="cell-num">
-                          {"extra" in t ? `+${t.extra[tier.id]}` : "Not available"}
+                          {t.rows[tier.id] === undefined ? "On request" : <DisplayFare sar={t.rows[tier.id]} />}
                         </td>
                       </tr>
                     ))}

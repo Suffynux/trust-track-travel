@@ -22,20 +22,31 @@ export const site = {
  * labelled as such wherever it appears.
  *
  * USD is fixed: the riyal is pegged at 1 USD = 3.75 SAR.
- * GBP and PKR float — update these two when they drift.
+ * Non-USD currencies float — update them when they drift.
  * Last checked: August 2026.
  */
 export const currencies = [
   { code: "SAR", symbol: "SAR ", perSar: 1, fixed: true },
   { code: "USD", symbol: "$", perSar: 1 / 3.75, fixed: true },
   { code: "GBP", symbol: "£", perSar: 0.212, fixed: false },
+  { code: "EUR", symbol: "€", perSar: 0.228, fixed: false },
   { code: "PKR", symbol: "₨", perSar: 74.1, fixed: false },
+  { code: "INR", symbol: "₹", perSar: 24.25, fixed: false },
+  { code: "BDT", symbol: "৳", perSar: 32.6, fixed: false },
+  { code: "IDR", symbol: "Rp ", perSar: 4_390, fixed: false },
+  { code: "MYR", symbol: "RM ", perSar: 1.13, fixed: false },
+  { code: "AED", symbol: "AED ", perSar: 0.979, fixed: false },
+  { code: "CAD", symbol: "C$", perSar: 0.365, fixed: false },
+  { code: "AUD", symbol: "A$", perSar: 0.408, fixed: false },
+  { code: "TRY", symbol: "₺", perSar: 11.7, fixed: false },
+  { code: "NGN", symbol: "₦", perSar: 410, fixed: false },
+  { code: "ZAR", symbol: "R", perSar: 4.72, fixed: false },
 ] as const;
 
 /**
- * Which currency to open in, worked out from the visitor's own browser
- * settings — no IP lookup, no consent banner, no extra request, and every
- * page stays statically generated.
+ * Browser fallback for choosing the opening currency when the edge platform
+ * cannot resolve the visitor's IP country. This keeps every page statically
+ * generated while still providing a useful result in local development.
  *
  * The IANA time zone is checked first: it is the more reliable signal for
  * someone running an en-US browser while actually living in Karachi. Locale
@@ -46,7 +57,19 @@ export const currencies = [
  */
 const zoneToCurrency: Record<string, CurrencyCode> = {
   "Asia/Karachi": "PKR",
+  "Asia/Kolkata": "INR",
+  "Asia/Dhaka": "BDT",
+  "Asia/Jakarta": "IDR",
+  "Asia/Kuala_Lumpur": "MYR",
+  "Asia/Dubai": "AED",
+  "Europe/Istanbul": "TRY",
+  "Africa/Lagos": "NGN",
+  "Africa/Johannesburg": "ZAR",
   "Europe/London": "GBP",
+  "Europe/Paris": "EUR",
+  "Europe/Berlin": "EUR",
+  "Europe/Rome": "EUR",
+  "Europe/Madrid": "EUR",
   "America/New_York": "USD",
   "America/Chicago": "USD",
   "America/Denver": "USD",
@@ -55,12 +78,38 @@ const zoneToCurrency: Record<string, CurrencyCode> = {
   "America/Anchorage": "USD",
   "America/Detroit": "USD",
   "Asia/Riyadh": "SAR",
+  "America/Toronto": "CAD",
+  "America/Vancouver": "CAD",
+  "Australia/Sydney": "AUD",
+  "Australia/Melbourne": "AUD",
 };
 
 const regionToCurrency: Record<string, CurrencyCode> = {
   PK: "PKR",
+  IN: "INR",
+  BD: "BDT",
+  ID: "IDR",
+  MY: "MYR",
+  AE: "AED",
+  TR: "TRY",
+  NG: "NGN",
+  ZA: "ZAR",
   GB: "GBP",
+  IE: "EUR",
+  FR: "EUR",
+  DE: "EUR",
+  IT: "EUR",
+  ES: "EUR",
+  NL: "EUR",
+  BE: "EUR",
+  AT: "EUR",
+  PT: "EUR",
+  FI: "EUR",
+  GR: "EUR",
   US: "USD",
+  CA: "CAD",
+  AU: "AUD",
+  NZ: "AUD",
   SA: "SAR",
 };
 
@@ -107,7 +156,19 @@ function detectRegion(): string | null {
 
 const zoneToRegion: Record<string, string> = {
   "Asia/Karachi": "PK",
+  "Asia/Kolkata": "IN",
+  "Asia/Dhaka": "BD",
+  "Asia/Jakarta": "ID",
+  "Asia/Kuala_Lumpur": "MY",
+  "Asia/Dubai": "AE",
+  "Europe/Istanbul": "TR",
+  "Africa/Lagos": "NG",
+  "Africa/Johannesburg": "ZA",
   "Europe/London": "GB",
+  "Europe/Paris": "FR",
+  "Europe/Berlin": "DE",
+  "Europe/Rome": "IT",
+  "Europe/Madrid": "ES",
   "America/New_York": "US",
   "America/Chicago": "US",
   "America/Denver": "US",
@@ -116,6 +177,10 @@ const zoneToRegion: Record<string, string> = {
   "America/Anchorage": "US",
   "America/Detroit": "US",
   "Asia/Riyadh": "SA",
+  "America/Toronto": "CA",
+  "America/Vancouver": "CA",
+  "Australia/Sydney": "AU",
+  "Australia/Melbourne": "AU",
 };
 
 export function detectCurrency(): CurrencyCode {
@@ -143,7 +208,11 @@ export function formatFare(sar: number, code: CurrencyCode): string {
   const currency = currencies.find((c) => c.code === code) ?? currencies[0];
   const value = sar * currency.perSar;
   const rounded =
-    code === "PKR" ? Math.round(value / 100) * 100 : Math.round(value);
+    code === "IDR"
+      ? Math.round(value / 1_000) * 1_000
+      : code === "PKR" || code === "NGN"
+        ? Math.round(value / 100) * 100
+        : Math.round(value);
   return currency.symbol + rounded.toLocaleString("en-US");
 }
 

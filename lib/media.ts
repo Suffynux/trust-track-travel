@@ -82,25 +82,25 @@ export const media = {
   fleet: {
     sedan: {
       src: "media/fleet/sedan.jpg",
-      alt: "The Signature Sedan",
+      alt: "The Sedan",
       brief: "Three-quarter front, vehicle clean, plain background.",
       ...wide,
     },
     suv: {
       src: "media/fleet/suv.jpg",
-      alt: "The Premium SUV",
+      alt: "The Hyundai Staria",
       brief: "Three-quarter front, matching angle and light to the others.",
       ...wide,
     },
     van: {
       src: "media/fleet/van.jpg",
-      alt: "The Executive Van",
+      alt: "The Toyota Hiace",
       brief: "Three-quarter front, side door closed.",
       ...wide,
     },
     coach: {
       src: "media/fleet/coach.jpg",
-      alt: "The Group Coach",
+      alt: "The Coaster",
       brief: "Three-quarter front, full vehicle in frame.",
       ...wide,
     },

@@ -1172,26 +1172,43 @@ body {
   letter-spacing: 0.08em;
 }
 
-.currency-suggestion div {
+.booking-currency-select,
+.footer-currency-select {
   display: flex;
-  gap: 0.15rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.currency-suggestion button {
-  border: 0;
-  background: transparent;
-  /* A 44px target: these were 24px tall and hard to hit on a phone. */
-  min-width: 2.75rem;
+.booking-currency-select > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.booking-currency-select select,
+.footer-currency-select select {
   min-height: 2.75rem;
-  padding: 0.3rem 0.4rem;
-  color: var(--caption);
+  padding: 0.35rem 1.8rem 0.35rem 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
   font: inherit;
   cursor: pointer;
 }
 
-.currency-suggestion button[aria-pressed="true"] {
-  background: var(--accent-strong);
-  color: var(--accent-ink);
+/* Lives on the Indigo footer, so it takes the dark-field muted colour.
+   --caption is the light-page value and measured 2.57:1 here. */
+.footer-currency-select {
+  margin-top: 1.25rem;
+  color: var(--on-field-muted);
+  flex-wrap: wrap;
 }
 
 .booking-location {

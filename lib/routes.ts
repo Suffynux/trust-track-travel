@@ -40,7 +40,7 @@ export const routes: Route[] = [
       "The first leg of most Umrah trips, and the one where a fixed fare matters most: you land tired, in a queue, with a driver quoting whatever the hour allows.",
     intro:
       "Your chauffeur waits inside arrivals with your name on a board, tracks your flight so an early or late landing costs nothing, and drives straight to your hotel door in Makkah. The fare is agreed before you fly and does not move.",
-    fares: { sedan: 550, suv: 700, van: 850, coach: 1100 },
+    fares: { sedan: 200, staria: 250, stariavip: 400, hiace: 330, gmc: 400, coaster: 550, bus: 850 },
     facts: [
       { label: "Distance", value: "~85 km" },
       { label: "Journey time", value: "60–90 min" },
@@ -69,7 +69,7 @@ export const routes: Route[] = [
       },
       {
         q: "Is the fare per person or per vehicle?",
-        a: "Per vehicle. Four people in a Premium SUV pay the same SAR 700 as one person does.",
+        a: "Per vehicle. Four people in a Hyundai Staria pay the same SAR 250 as one person does.",
       },
     ],
   },
@@ -86,7 +86,7 @@ export const routes: Route[] = [
       "The long leg. Four and a half hours of expressway, which is either a comfortable stretch of the trip or the worst part of it, depending on the vehicle and the driver.",
     intro:
       "We run this leg door to door along the Haramain Expressway with one rest break, water in the cabin, and a complimentary stop at the Dhul Hulaifah Miqat for guests travelling in the other direction. No shared vans, no waiting for a full load.",
-    fares: { sedan: 1150, suv: 1450, van: 1750, coach: 2300 },
+    fares: { sedan: 350, staria: 450, stariavip: 750, hiace: 550, gmc: 750, coaster: 850, bus: 950 },
     facts: [
       { label: "Distance", value: "~450 km" },
       { label: "Journey time", value: "4.5–5.5 hr" },
@@ -132,7 +132,7 @@ export const routes: Route[] = [
       "The short one. Twenty minutes, which is exactly why it gets overcharged at the kerb on the way out.",
     intro:
       "Arrivals or departures, both directions, at the same fixed fare. On departures we work backwards from your flight time so you leave the hotel with room to spare, and your chauffeur helps with bags at the terminal door.",
-    fares: { sedan: 260, suv: 360, van: 460, coach: 620 },
+    fares: { sedan: 130, staria: 150, stariavip: 250, hiace: 200, gmc: 250, coaster: 350, bus: 450 },
     facts: [
       { label: "Distance", value: "~18 km" },
       { label: "Journey time", value: "20–30 min" },

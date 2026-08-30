@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FleetTiers, WhatsAppButton } from "./components/journey";
+import { DisplayFare, FleetTiers, WhatsAppButton } from "./components/journey";
 import { HeroBooking } from "./components/hero-booking";
 import { HeroBackdrop, Media } from "./components/media";
 import { Arrow, Check } from "./components/icons";
@@ -44,10 +44,10 @@ const bundleExamples = [
     blurb:
       "Arrival and departure in the same city, on the same tier, booked together.",
     lines: [
-      ["2 × Jeddah–Makkah transfer", "1,100"],
-      ["Bundle discount", "−110"],
+      ["2 × Jeddah–Makkah transfer", "400"],
+      ["Bundle discount", "−40"],
     ],
-    total: "990",
+    total: "360",
   },
   {
     id: "twin",
@@ -55,10 +55,10 @@ const bundleExamples = [
     rate: "8% off",
     blurb: "Makkah Ziyarat and Madinah Ziyarat, booked as one reservation.",
     lines: [
-      ["Makkah + Madinah Ziyarat", "800"],
-      ["Bundle discount", "−64"],
+      ["Makkah + Madinah Ziyarat", "400"],
+      ["Bundle discount", "−32"],
     ],
-    total: "736",
+    total: "368",
   },
   {
     id: "complete",
@@ -67,14 +67,15 @@ const bundleExamples = [
     blurb:
       "Arrival, Makkah Ziyarat, intercity, Madinah Ziyarat and departure, in one booking.",
     lines: [
-      ["Five legs, Signature Sedan", "2,760"],
-      ["Bundle discount", "−414"],
+      ["Five legs, Sedan", "1,080"],
+      ["Bundle discount", "−162"],
     ],
-    total: "2,346",
+    total: "918",
   },
 ];
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
+const sarAmount = (value: string) => Number(value.replace(/[^\d]/g, ""));
 
 export default function Home() {
   const fleetPhotos = {
@@ -171,7 +172,7 @@ export default function Home() {
                 <h3 className="stack-title">{s.name}</h3>
                 <p className="prose small">{s.body}</p>
                 <p className="stack-fare fig">
-                  SAR {s.from.toLocaleString("en-US")}
+                  <DisplayFare sar={s.from} />
                   <small>From, per vehicle</small>
                 </p>
               </article>
@@ -272,7 +273,7 @@ export default function Home() {
                     <span>
                       {r.distance} · {r.duration}
                     </span>
-                    <b>SAR {r.fares.sedan.toLocaleString("en-US")}</b>
+                    <b><DisplayFare sar={r.fares.sedan} /></b>
                   </span>
                 </span>
               </Link>
@@ -359,7 +360,7 @@ export default function Home() {
                       <tr key={tier.id}>
                         <th scope="row">{tier.name}</th>
                         <td className="cell-num">
-                          {t.rows[tier.id].toLocaleString("en-US")}
+                          <DisplayFare sar={t.rows[tier.id]} />
                         </td>
                       </tr>
                     ))}
@@ -385,12 +386,12 @@ export default function Home() {
                   {b.lines.map(([label, value]) => (
                     <div key={label} className="bundle-line">
                       <span>{label}</span>
-                      <span>{value}</span>
+                      <span><DisplayFare sar={sarAmount(value)} prefix={value.startsWith("−") ? "−" : ""} /></span>
                     </div>
                   ))}
                   <div className="bundle-line bundle-line-total">
-                    <span>Total, SAR</span>
-                    <span>{b.total}</span>
+                    <span>Total</span>
+                    <span><DisplayFare sar={sarAmount(b.total)} /></span>
                   </div>
                 </div>
               </article>

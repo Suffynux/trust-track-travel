@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FleetTiers, WhatsAppButton } from "../components/journey";
+import { DisplayFare, FleetTiers, WhatsAppButton } from "../components/journey";
 import { Media } from "../components/media";
 import { Arrow, Check } from "../components/icons";
 import { media, resolve } from "@/lib/media";
@@ -9,7 +9,7 @@ import { fareTables, included, prestige, tiers } from "@/lib/fares";
 export const metadata: Metadata = {
   title: "Fleet",
   description:
-    "Four fixed tiers and one bespoke: Signature Sedan, Premium SUV, Executive Van, Group Coach, and the Prestige tier by request. Capacity, luggage and fares per vehicle.",
+    "The full fleet: Sedan, Hyundai Staria, Staria VIP, Toyota Hiace, GMC, Coaster and 47-seat bus. Capacity, luggage and fares per vehicle.",
   alternates: { canonical: "/fleet" },
 };
 
@@ -51,7 +51,7 @@ export default function FleetPage() {
           </h1>
           <p className="lede">
             Every fare on this site is per vehicle, not per person. A family of
-            four in a Premium SUV pays what one person would. Pick the tier that
+            four in a Staria pays what one person would. Pick the vehicle that
             fits your party and your luggage, and the ledger reprices the whole
             journey.
           </p>
@@ -197,7 +197,7 @@ export default function FleetPage() {
                           {tier.capacity.replace("Up to ", "").replace(" guests", "")}
                         </td>
                         <td className="cell-num">
-                          {t.rows[tier.id].toLocaleString("en-US")}
+                          <DisplayFare sar={t.rows[tier.id]} />
                         </td>
                       </tr>
                     ))}

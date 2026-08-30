@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { WhatsAppButton } from "../components/journey";
+import { DisplayFare, WhatsAppButton } from "../components/journey";
 import { Media } from "../components/media";
 import { Arrow, Check } from "../components/icons";
 import { fareTables, included, policies, tiers } from "@/lib/fares";
@@ -22,10 +22,10 @@ const bundleExamples = [
     blurb:
       "Arrival and departure in the same city, on the same tier, booked together in one reservation.",
     lines: [
-      ["2 × Jeddah–Makkah transfer", "1,100"],
-      ["Bundle discount", "−110"],
+      ["2 × Jeddah–Makkah transfer", "400"],
+      ["Bundle discount", "−40"],
     ],
-    total: "990",
+    total: "360",
   },
   {
     id: "twin",
@@ -34,10 +34,10 @@ const bundleExamples = [
     blurb:
       "The Makkah route and the Madinah route, booked as one reservation on one tier.",
     lines: [
-      ["Makkah + Madinah Ziyarat", "800"],
-      ["Bundle discount", "−64"],
+      ["Makkah + Madinah Ziyarat", "400"],
+      ["Bundle discount", "−32"],
     ],
-    total: "736",
+    total: "368",
   },
   {
     id: "complete",
@@ -46,14 +46,15 @@ const bundleExamples = [
     blurb:
       "The full itinerary in one booking: arrival, Makkah Ziyarat, intercity, Madinah Ziyarat, departure.",
     lines: [
-      ["Five legs, Signature Sedan", "2,760"],
-      ["Bundle discount", "−414"],
+      ["Five legs, Sedan", "1,080"],
+      ["Bundle discount", "−162"],
     ],
-    total: "2,346",
+    total: "918",
   },
 ];
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
+const sarAmount = (value: string) => Number(value.replace(/[^\d]/g, ""));
 
 export default function FaresPage() {
   return (
@@ -95,7 +96,6 @@ export default function FaresPage() {
 
           <div className="tables">
             {fareTables.map((t, i) => {
-              const hasExtra = "extra" in t;
               return (
                 <div
                   key={t.id}
@@ -113,9 +113,8 @@ export default function FaresPage() {
                       <tr>
                         <th scope="col">Tier</th>
                         <th scope="col">
-                          {hasExtra ? "3-hour tour" : "One-way"}
+                          {t.code === "ZYR" ? "3-hour tour" : "One-way"}
                         </th>
-                        {hasExtra && <th scope="col">Extra hour</th>}
                       </tr>
                     </thead>
                     <tbody>
@@ -123,11 +122,8 @@ export default function FaresPage() {
                         <tr key={tier.id}>
                           <th scope="row">{tier.name}</th>
                           <td className="cell-num">
-                            {t.rows[tier.id].toLocaleString("en-US")}
+                            {t.rows[tier.id] === undefined ? "On request" : <DisplayFare sar={t.rows[tier.id]} />}
                           </td>
-                          {hasExtra && (
-                            <td className="cell-num">+{t.extra[tier.id]}</td>
-                          )}
                         </tr>
                       ))}
                     </tbody>
@@ -153,7 +149,7 @@ export default function FaresPage() {
             </div>
             <p className="lede" data-reveal>
               Discounts apply on their own when the qualifying legs are booked
-              together on one tier. Examples use the Signature Sedan; the
+              together on one tier. Examples use the Sedan; the
               percentage is the same at every tier.
             </p>
           </div>
@@ -173,12 +169,12 @@ export default function FaresPage() {
                   {b.lines.map(([label, value]) => (
                     <div key={label} className="bundle-line">
                       <span>{label}</span>
-                      <span>{value}</span>
+                      <span><DisplayFare sar={sarAmount(value)} prefix={value.startsWith("−") ? "−" : ""} /></span>
                     </div>
                   ))}
                   <div className="bundle-line bundle-line-total">
-                    <span>Total, SAR</span>
-                    <span>{b.total}</span>
+                    <span>Total</span>
+                    <span><DisplayFare sar={sarAmount(b.total)} /></span>
                   </div>
                 </div>
               </article>

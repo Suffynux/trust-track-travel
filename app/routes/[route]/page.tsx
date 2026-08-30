@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { WhatsAppButton } from "../../components/journey";
+import { DisplayFare, WhatsAppButton } from "../../components/journey";
 import { Media } from "../../components/media";
 import { Arrow, Check } from "../../components/icons";
 import { media, resolve } from "@/lib/media";
@@ -139,7 +139,7 @@ export default async function RoutePage({
                           {t.capacity.replace("Up to ", "").split(" ")[0]}
                         </td>
                         <td className="cell-num">
-                          {route.fares[t.id].toLocaleString("en-US")}
+                          <DisplayFare sar={route.fares[t.id]} />
                         </td>
                       </tr>
                     ))}
@@ -241,7 +241,7 @@ export default async function RoutePage({
                   <span className="route-card-title">{r.title}</span>
                   <span className="route-card-meta fig">
                     <span>{r.duration}</span>
-                    <b>SAR {r.fares.sedan.toLocaleString("en-US")}</b>
+                    <b><DisplayFare sar={r.fares.sedan} /></b>
                   </span>
                 </span>
               </Link>
