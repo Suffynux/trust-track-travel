@@ -193,12 +193,6 @@ export const media = {
       brief: "Exterior, daylight.",
       ...square,
     },
-    "jannat-al-baqi": {
-      src: "media/ziyarat/stops/jannat-al-baqi.jpg",
-      alt: "Jannat al-Baqi",
-      brief: "Exterior, respectful distance.",
-      ...square,
-    },
   },
   routes: {
     "jeddah-airport-to-makkah": {

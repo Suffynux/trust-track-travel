@@ -77,6 +77,14 @@ const regionToOrigin: Record<string, string> = {
  * cannot tell — in which case the form stays on "Select your country" rather
  * than guessing wrong.
  */
+/**
+ * Country code -> display currency. Used by the /api/geo route to turn the
+ * platform's resolved IP country into a currency, and as the client fallback.
+ */
+export function currencyForRegion(region: string): CurrencyCode {
+  return regionToCurrency[region.toUpperCase()] ?? "SAR";
+}
+
 export function detectOriginId(): string {
   return regionToOrigin[detectRegion() ?? ""] ?? "";
 }

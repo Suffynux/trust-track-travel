@@ -12,15 +12,25 @@ export const bookingVehicles = [
 export type BookingVehicleId = (typeof bookingVehicles)[number]["id"];
 type BookingFareRow = Partial<Record<BookingVehicleId, BookingFare>>;
 
-/** Customer-supplied tariff with SAR 50 already added to every quoted fare. */
+/**
+ * Customer-supplied tariff with SAR 50 already added to every quoted fare.
+ *
+ * Every transfer is listed in both directions: someone who books an arrival
+ * almost always needs the return, and a one-way-only list forced them into
+ * "other" or a manual WhatsApp message. Return legs are priced the same as
+ * the outbound unless the tariff says otherwise.
+ */
 export const bookingRoutes = [
   { id: "jed-mak", code: "JED", name: "Jeddah airport → Makkah", fares: { sedan: 200, staria: 250, hiace: 330, gmc: [400, 450], coaster: 550, bus: 850 } },
   { id: "mak-jed", code: "JED", name: "Makkah → Jeddah airport", fares: { sedan: 200, staria: 250, hiace: 300, gmc: [300, 400], coaster: 550, bus: 650 } },
   { id: "mak-med", code: "INT", name: "Makkah → Madinah", fares: { sedan: 350, staria: 450, hiace: 550, gmc: [750, 850], coaster: 850, bus: 950 } },
   { id: "med-mak", code: "INT", name: "Madinah → Makkah", fares: { sedan: 350, staria: 450, hiace: 550, gmc: [750, 850], coaster: 850, bus: 950 } },
+  { id: "mak-ziyarat", code: "ZYR", name: "Makkah Ziyarat", fares: { sedan: 200, staria: 250, hiace: 300, gmc: [350, 450], coaster: 450, bus: 550 } },
   { id: "med-ziyarat", code: "ZYR", name: "Madinah Ziyarat", fares: { sedan: 200, staria: 250, hiace: 300, gmc: [350, 450], coaster: 450, bus: 550 } },
   { id: "med-airport", code: "MED", name: "Madinah hotel → Madinah airport", fares: { sedan: 130, staria: 150, hiace: 200, gmc: [250, 300], coaster: 350, bus: 450 } },
+  { id: "airport-med", code: "MED", name: "Madinah airport → Madinah hotel", fares: { sedan: 130, staria: 150, hiace: 200, gmc: [250, 300], coaster: 350, bus: 450 } },
   { id: "med-badr", code: "BAD", name: "Madinah → Badr", fares: { sedan: 350, staria: 450, hiace: 550, gmc: 750, coaster: 850 } },
+  { id: "badr-med", code: "BAD", name: "Badr → Madinah", fares: { sedan: 350, staria: 450, hiace: 550, gmc: 750, coaster: 850 } },
 ] as const satisfies readonly { id: string; code: string; name: string; fares: BookingFareRow }[];
 
 export type BookingRouteId = (typeof bookingRoutes)[number]["id"];

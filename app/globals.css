@@ -1090,7 +1090,13 @@ body {
   text-underline-offset: 2px;
 }
 
-.booking-form { overflow: visible; }
+.booking-form {
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
 .booking-step,
 .booking-search-status {
   font-family: var(--font-mono), monospace;
@@ -1098,37 +1104,104 @@ body {
   letter-spacing: 0.08em;
   color: var(--caption);
 }
+
+.booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
 .booking-label {
-  display: block;
-  margin-top: 0.85rem;
   font-family: var(--font-mono), monospace;
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+
+/* 16px is the threshold below which iOS Safari zooms the whole page in on
+   focus, which then leaves the form scrolled off-screen. Controls stay at
+   16px on small viewports and only tighten once there is room. */
 .booking-select,
 .booking-input {
   width: 100%;
-  margin-top: 0.35rem;
+  min-height: 3rem;
   border: 1px solid var(--line-strong);
   border-radius: 0;
   background: var(--page);
   color: var(--text);
-  padding: 0.68rem 0.7rem;
-  font: inherit;
-  font-size: var(--step--1);
+  padding: 0.7rem 0.75rem;
+  font-family: inherit;
+  font-size: 16px;
 }
-.booking-origin-grid { display: grid; gap: 0 0.65rem; }
-@media (min-width: 34rem) { .booking-origin-grid { grid-template-columns: 1fr 1fr; } }
-.currency-suggestion { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 0.7rem; color: var(--caption); font-family: var(--font-mono), monospace; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.currency-suggestion div { display: flex; gap: 0.15rem; }
-.currency-suggestion button { border: 0; background: transparent; padding: 0.3rem 0.38rem; color: var(--caption); font: inherit; cursor: pointer; }
-.currency-suggestion button[aria-pressed="true"] { background: var(--accent-strong); color: var(--accent-ink); }
-.booking-total span { display: flex; flex-direction: column; }
-.booking-total small { margin-top: 0.2rem; color: var(--caption); font-size: 0.6rem; font-weight: 400; }
-.booking-location { position: relative; }
-.booking-search-status { display: block; margin-top: 0.3rem; }
+
+.booking-select {
+  /* Native arrow varies wildly across mobile browsers; draw our own. */
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.05rem) calc(50% + 1px),
+    calc(100% - 0.75rem) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.1rem;
+}
+
+/* Only tighten the type where there is a mouse. iOS zooms the page in on any
+   touch device — iPad included — when a focused control is under 16px, so
+   touch screens keep the larger size regardless of how wide they are. */
+@media (min-width: 30rem) and (pointer: fine) {
+  .booking-select,
+  .booking-input {
+    font-size: var(--step--1);
+    min-height: 2.75rem;
+  }
+}
+
+.currency-suggestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  color: var(--caption);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.currency-suggestion div {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.currency-suggestion button {
+  border: 0;
+  background: transparent;
+  /* A 44px target: these were 24px tall and hard to hit on a phone. */
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.4rem;
+  color: var(--caption);
+  font: inherit;
+  cursor: pointer;
+}
+
+.currency-suggestion button[aria-pressed="true"] {
+  background: var(--accent-strong);
+  color: var(--accent-ink);
+}
+
+.booking-location {
+  position: relative;
+}
+
+.booking-search-status {
+  display: block;
+}
+
 .place-results {
   position: absolute;
   z-index: 5;
@@ -1137,36 +1210,68 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
+  max-height: 14rem;
+  overflow-y: auto;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   box-shadow: 0 16px 35px rgb(0 0 0 / 0.18);
 }
-.place-results li + li { border-top: 1px solid var(--line); }
+
+.place-results li + li {
+  border-top: 1px solid var(--line);
+}
+
 .place-results button {
   width: 100%;
-  padding: 0.65rem 0.7rem;
+  min-height: 2.75rem;
+  padding: 0.7rem;
   border: 0;
   background: transparent;
   color: var(--text);
   text-align: left;
   font: inherit;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.35;
   cursor: pointer;
 }
-.place-results button:hover { background: var(--page); }
-.booking-map { width: 100%; height: 8rem; margin-top: 0.8rem; border: 1px solid var(--line-strong); }
+
+.place-results button:hover,
+.place-results button:focus-visible {
+  background: var(--page);
+}
+
 .booking-total {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-block: 1rem;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin-top: 0.35rem;
   padding-top: 0.85rem;
   border-top: 2px solid var(--text);
   font-family: var(--font-mono), monospace;
   font-size: var(--step--1);
 }
-.booking-total strong { font-size: 1.35rem; }
+
+.booking-total-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-total small {
+  margin-top: 0.2rem;
+  color: var(--caption);
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+/* Long converted amounts (₨14,800) must shrink rather than overflow the card. */
+.booking-total-value {
+  font-size: clamp(1.25rem, 6vw, 1.6rem);
+  letter-spacing: -0.02em;
+  margin-left: auto;
+}
+
 .is-disabled { opacity: 0.45; pointer-events: none; }
 
 @media (prefers-reduced-motion: no-preference) {

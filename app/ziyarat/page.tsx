@@ -25,7 +25,6 @@ const stopSlots: Record<string, keyof typeof media.stops> = {
   "Mount Uhud & Shuhada Uhud": "mount-uhud",
   "Masjid al-Qiblatain": "masjid-al-qiblatain",
   "The Seven Mosques": "seven-mosques",
-  "Jannat al-Baqi": "jannat-al-baqi",
 };
 
 const ziyaratMessage = [

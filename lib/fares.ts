@@ -175,8 +175,8 @@ export const fareTables = [
     code: "ZYR",
     title: "Makkah Ziyarat, 3-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
-    rows: { sedan: 420, suv: 560, van: 700, coach: 950 } as FareRow,
-    extra: { sedan: 120, suv: 160, van: 200, coach: 260 } as FareRow,
+    rows: { sedan: 200, suv: 250, van: 300, coach: 450 } as FareRow,
+    extra: { sedan: 70, suv: 90, van: 110, coach: 150 } as FareRow,
     note: "An optional detour to Masjid Aisha (Ta'neem) is available for guests renewing Ihram for a second Umrah.",
   },
   {
@@ -184,8 +184,8 @@ export const fareTables = [
     code: "ZYR",
     title: "Madinah Ziyarat, 3-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
-    rows: { sedan: 380, suv: 500, van: 640, coach: 880 } as FareRow,
-    extra: { sedan: 110, suv: 150, van: 190, coach: 240 } as FareRow,
+    rows: { sedan: 200, suv: 250, van: 300, coach: 450 } as FareRow,
+    extra: { sedan: 70, suv: 90, van: 110, coach: 150 } as FareRow,
   },
 ] as const;
 
@@ -193,7 +193,7 @@ export const ziyaratRoutes = [
   {
     city: "Makkah",
     duration: "3-hour route",
-    from: 420,
+    from: 200,
     stops: [
       "Jabal al-Noor",
       "Jabal Thawr",
@@ -207,13 +207,12 @@ export const ziyaratRoutes = [
   {
     city: "Madinah",
     duration: "3-hour route",
-    from: 380,
+    from: 200,
     stops: [
       "Masjid Quba",
       "Mount Uhud & Shuhada Uhud",
       "Masjid al-Qiblatain",
       "The Seven Mosques",
-      "Jannat al-Baqi",
     ],
     note: "Hotel pickup and drop-off, with the driver waiting at every stop.",
   },
