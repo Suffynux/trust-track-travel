@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DisplayFare, FleetTiers, WhatsAppButton } from "./components/journey";
 import { HeroBooking } from "./components/hero-booking";
+import { HotelEnquiry } from "./components/hotel-enquiry";
 import { HeroBackdrop, Media } from "./components/media";
 import { Arrow, Check } from "./components/icons";
 import { media, resolve } from "@/lib/media";
@@ -229,6 +230,38 @@ export default function Home() {
               See the fleet in full <Arrow />
             </Link>
           </p>
+        </div>
+      </section>
+
+      {/* ---------- Hotels ---------- */}
+      <section className="band" id="hotels" aria-labelledby="hotels-title">
+        <p className="rail" aria-hidden="true">
+          Hotels
+        </p>
+        <div className="shell">
+          <div className="feature">
+            <div className="feature-body" data-reveal>
+              <p className="eyebrow">Hotels</p>
+              <h2 className="h2" id="hotels-title">
+                Need a room as well?
+              </h2>
+              <p className="prose">
+                We book hotels in Makkah and Madinah alongside the transport, so
+                the whole ground trip sits with one provider on one thread. Tell
+                us roughly what you are after and we come back with what is
+                actually available on your dates.
+              </p>
+              <ul className="hotel-points">
+                <li>Walking distance to the Haram, or further out with a shuttle.</li>
+                <li>Three star through to five, and serviced apartments.</li>
+                <li>Rates confirmed before you commit to anything.</li>
+              </ul>
+            </div>
+
+            <div data-reveal style={delay(90)}>
+              <HotelEnquiry />
+            </div>
+          </div>
         </div>
       </section>
 

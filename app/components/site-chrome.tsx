@@ -8,6 +8,7 @@ import { site } from "@/lib/site";
 export const navLinks = [
   { href: "/fleet", label: "Fleet" },
   { href: "/ziyarat", label: "Ziyarat" },
+  { href: "/#hotels", label: "Hotels" },
   { href: "/fares", label: "Fares" },
 ] as const;
 
@@ -15,6 +16,7 @@ const mobileItems = [
   { href: "/", label: "Home", note: "Fare ledger" },
   { href: "/fleet", label: "Fleet", note: "Four tiers" },
   { href: "/ziyarat", label: "Ziyarat", note: "Two routes" },
+  { href: "/#hotels", label: "Hotels", note: "Makkah & Madinah" },
   { href: "/fares", label: "Fares", note: "Full tariff" },
   ...routes.map((r) => ({
     href: `/routes/${r.slug}`,

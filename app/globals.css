@@ -2371,3 +2371,31 @@ body {
 .band-flush-top {
   padding-top: 0;
 }
+
+/* Supporting points beside the hotel enquiry form. */
+.hotel-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.hotel-points li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.hotel-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--accent);
+}
