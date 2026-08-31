@@ -2399,3 +2399,57 @@ body {
   height: 0.5rem;
   background: var(--accent);
 }
+
+/* Paired fields — dates, guests and rooms. Stays single-column on the
+   narrowest phones, where two date inputs side by side would cramp. */
+.booking-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+/* minmax(0, 1fr) rather than 1fr: a date input has an intrinsic minimum width
+   that a plain 1fr track will not shrink below, which pushed the whole card
+   past the viewport on every phone. */
+@media (min-width: 22rem) {
+  .booking-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Date and number inputs size themselves from their content; without this
+   they refuse to shrink inside the grid track. */
+.booking-grid .booking-input {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Safari renders date and number inputs with its own metrics; these keep them
+   the same height and alignment as the selects beside them. */
+.booking-input[type="date"],
+.booking-input[type="number"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+}
+
+.booking-input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+  margin: 0;
+}
+
+.booking-input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+/* The narrowest phones still in use (320px) cannot fit the masthead's logo,
+   menu and full-padding CTA on one line. */
+@media (max-width: 22.5rem) {
+  .masthead .btn-sm {
+    padding-inline: 0.7rem;
+    font-size: 0.75rem;
+  }
+  .masthead-inner {
+    gap: 0.6rem;
+  }
+}
