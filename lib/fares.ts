@@ -27,16 +27,8 @@ export const tiers = [
     suits: "Families and small groups travelling as one party.",
   },
   {
-    id: "stariavip",
-    index: "03",
-    name: "Staria VIP",
-    capacity: "7 to 9 guests · group luggage",
-    anchor: "Hyundai Staria VIP, higher-spec interior",
-    suits: "Guests who want the extra space and finish on a longer leg.",
-  },
-  {
     id: "hiace",
-    index: "04",
+    index: "03",
     name: "Toyota Hiace",
     capacity: "Up to 11 guests · group luggage",
     anchor: "Toyota Hiace",
@@ -44,7 +36,7 @@ export const tiers = [
   },
   {
     id: "gmc",
-    index: "05",
+    index: "04",
     name: "GMC",
     capacity: "Premium SUV · up to 6 guests",
     anchor: "GMC Yukon XL, Suburban, or Land Cruiser",
@@ -52,7 +44,7 @@ export const tiers = [
   },
   {
     id: "coaster",
-    index: "06",
+    index: "05",
     name: "Coaster",
     capacity: "Up to 22 guests · group luggage",
     anchor: "Toyota Coaster or equivalent minibus",
@@ -60,7 +52,7 @@ export const tiers = [
   },
   {
     id: "bus",
-    index: "07",
+    index: "06",
     name: "Bus",
     capacity: "47 seats",
     anchor: "Full-size coach",
@@ -97,7 +89,7 @@ export const fareTables = [
     code: "JED",
     title: "Jeddah airport ↔ Makkah hotels",
     detail: "~85 km · 60–90 min · one-way, per vehicle",
-    rows: { sedan: 200, staria: 250, stariavip: 400, hiace: 330, gmc: 400, coaster: 550, bus: 850 } as FareRow,
+    rows: { sedan: 200, staria: 250, hiace: 330, gmc: 400, coaster: 550, bus: 850 } as FareRow,
     note: "GMC is SAR 400–450 depending on the vehicle. Makkah to Jeddah is priced the same, except the Hiace at SAR 300 and the bus at SAR 650.",
   },
   {
@@ -105,7 +97,7 @@ export const fareTables = [
     code: "MED",
     title: "Madinah airport ↔ Madinah hotels",
     detail: "~18 km · 20–30 min · one-way, per vehicle",
-    rows: { sedan: 130, staria: 150, stariavip: 250, hiace: 200, gmc: 250, coaster: 350, bus: 450 } as FareRow,
+    rows: { sedan: 130, staria: 150, hiace: 200, gmc: 250, coaster: 350, bus: 450 } as FareRow,
     note: "GMC is SAR 250–300 depending on the vehicle. Priced the same in both directions.",
   },
   {
@@ -113,7 +105,7 @@ export const fareTables = [
     code: "INT",
     title: "Makkah ↔ Madinah intercity",
     detail: "~450 km · 4.5–5.5 hr · one-way, per vehicle",
-    rows: { sedan: 350, staria: 450, stariavip: 750, hiace: 550, gmc: 750, coaster: 850, bus: 950 } as FareRow,
+    rows: { sedan: 350, staria: 450, hiace: 550, gmc: 750, coaster: 850, bus: 950 } as FareRow,
     note: "Includes a complimentary Dhul Hulaifah Miqat stop travelling Madinah to Makkah, one rest break, and bottled water. GMC is SAR 750–850.",
   },
   {
@@ -121,7 +113,7 @@ export const fareTables = [
     code: "ZYR",
     title: "Makkah Ziyarat, 3-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
-    rows: { sedan: 200, staria: 250, stariavip: 350, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
+    rows: { sedan: 200, staria: 250, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
     note: "An optional detour to Masjid Aisha (Ta'neem) is available for guests renewing Ihram for a second Umrah. GMC is SAR 350–450.",
   },
   {
@@ -129,7 +121,7 @@ export const fareTables = [
     code: "ZYR",
     title: "Madinah Ziyarat, 3-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
-    rows: { sedan: 200, staria: 250, stariavip: 350, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
+    rows: { sedan: 200, staria: 250, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
     note: "GMC is SAR 350–450 depending on the vehicle.",
   },
   {
@@ -137,7 +129,7 @@ export const fareTables = [
     code: "BAD",
     title: "Madinah ↔ Badr",
     detail: "~150 km · one-way, per vehicle",
-    rows: { sedan: 350, staria: 450, stariavip: 750, hiace: 550, gmc: 750, coaster: 850 } as FareRow,
+    rows: { sedan: 350, staria: 450, hiace: 550, gmc: 750, coaster: 850 } as FareRow,
     note: "Priced the same in both directions. Not available in the 47-seat bus.",
   },
 ] as const;
@@ -153,7 +145,6 @@ export const ziyaratRoutes = [
       "Mina",
       "Muzdalifah",
       "Jabal al-Rahmah, Arafat",
-      "Jannat al-Mu'alla",
     ],
     note: "Optional detour to Masjid Aisha (Ta'neem) for guests renewing Ihram.",
   },
@@ -166,6 +157,8 @@ export const ziyaratRoutes = [
       "Mount Uhud & Shuhada Uhud",
       "Masjid al-Qiblatain",
       "The Seven Mosques",
+      "Ghars Well",
+      "Salman Al Farsi Farm",
     ],
     note: "Hotel pickup and drop-off, with the driver waiting at every stop.",
   },

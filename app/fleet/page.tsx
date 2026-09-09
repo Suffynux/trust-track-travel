@@ -4,21 +4,28 @@ import { DisplayFare, FleetTiers, WhatsAppButton } from "../components/journey";
 import { Media } from "../components/media";
 import { Arrow, Check } from "../components/icons";
 import { media, resolve } from "@/lib/media";
-import { fareTables, included, prestige, tiers } from "@/lib/fares";
+import { fareTables, included, prestige, tiers, type TierId } from "@/lib/fares";
 
 export const metadata: Metadata = {
   title: "Fleet",
   description:
-    "The full fleet: Sedan, Hyundai Staria, Staria VIP, Toyota Hiace, GMC, Coaster and 47-seat bus. Capacity, luggage and fares per vehicle.",
+    "The full fleet: Sedan, Hyundai Staria, Toyota Hiace, GMC, Coaster and 47-seat bus. Capacity, luggage and fares per vehicle.",
   alternates: { canonical: "/fleet" },
 };
 
-const photoFor = {
-  sedan: media.fleet.sedan,
-  suv: media.fleet.suv,
-  van: media.fleet.van,
-  coach: media.fleet.coach,
-} as const;
+/** One photo per tier, keyed off lib/fares so the two cannot drift apart. */
+function fleetPhotos() {
+  return Object.fromEntries(
+    tiers.map((tier) => [
+      tier.id,
+      <Media
+        key={tier.id}
+        slot={resolve(media.fleet[tier.id as keyof typeof media.fleet])}
+        sizes="(min-width: 72rem) 25vw, 50vw"
+      />,
+    ]),
+  ) as Partial<Record<TierId, React.ReactNode>>;
+}
 
 const sizingMessage = [
   "Hello Trust Track Travels. Please help me pick a vehicle.",
@@ -30,12 +37,7 @@ const sizingMessage = [
 ].join("\n");
 
 export default function FleetPage() {
-  const photos = {
-    sedan: <Media slot={resolve(photoFor.sedan)} sizes="(min-width: 72rem) 25vw, 50vw" />,
-    suv: <Media slot={resolve(photoFor.suv)} sizes="(min-width: 72rem) 25vw, 50vw" />,
-    van: <Media slot={resolve(photoFor.van)} sizes="(min-width: 72rem) 25vw, 50vw" />,
-    coach: <Media slot={resolve(photoFor.coach)} sizes="(min-width: 72rem) 25vw, 50vw" />,
-  };
+  const photos = fleetPhotos();
 
   return (
     <>

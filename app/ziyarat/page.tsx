@@ -20,11 +20,12 @@ const stopSlots: Record<string, keyof typeof media.stops> = {
   Mina: "mina",
   Muzdalifah: "muzdalifah",
   "Jabal al-Rahmah, Arafat": "jabal-al-rahmah",
-  "Jannat al-Mu'alla": "jannat-al-mualla",
   "Masjid Quba": "masjid-quba",
   "Mount Uhud & Shuhada Uhud": "mount-uhud",
   "Masjid al-Qiblatain": "masjid-al-qiblatain",
   "The Seven Mosques": "seven-mosques",
+  "Ghars Well": "ghars-well",
+  "Salman Al Farsi Farm": "salman-al-farsi-farm",
 };
 
 const ziyaratMessage = [

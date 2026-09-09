@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/fares", priority: 0.9 },
     { path: "/fleet", priority: 0.8 },
     { path: "/ziyarat", priority: 0.8 },
+    { path: "/hotels", priority: 0.8 },
   ];
 
   return [

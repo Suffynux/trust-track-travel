@@ -6,7 +6,9 @@ import {
   hotelBudgets,
   hotelCategories,
   hotelCities,
+  hotelsFor,
   type HotelCityId,
+  type HotelStars,
 } from "@/lib/hotels";
 import { site, whatsappLink } from "@/lib/site";
 
@@ -15,71 +17,42 @@ import { site, whatsappLink } from "@/lib/site";
  * read as one system, and hands the request to the same WhatsApp thread.
  *
  * Nothing here is priced: rates move with the season, so quoting a figure on
- * the page would be a number we could not hold. The form gathers enough to
- * check availability, and the reply carries the actual rate.
+ * the page would be a number we could not hold. The reply carries the rate.
  */
-
-/** Today in the visitor's own timezone, as YYYY-MM-DD for the date inputs. */
-function todayISO() {
-  const now = new Date();
-  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-  return local.toISOString().slice(0, 10);
-}
-
-/**
- * Date arithmetic on the calendar date itself.
- *
- * The obvious version — parse local, setDate, toISOString — silently returns
- * the same date east of UTC, because toISOString converts back to UTC and
- * lands on the previous day, cancelling the increment. Working in UTC
- * throughout keeps a calendar date a calendar date.
- */
-function addDays(iso: string, days: number) {
-  const date = new Date(`${iso}T00:00:00Z`);
-  date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
-}
-
-/** Nights between two ISO dates, or null when the range is not usable. */
-function nightsBetween(from: string, to: string) {
-  if (!from || !to) return null;
-  const ms =
-    new Date(`${to}T00:00:00Z`).getTime() - new Date(`${from}T00:00:00Z`).getTime();
-  const nights = Math.round(ms / 86400000);
-  return nights > 0 ? nights : null;
-}
-
-/** Written out so the operator can read the dates without decoding them. */
-function readable(iso: string) {
-  if (!iso) return "Not given";
-  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
-
-export function HotelEnquiry() {
-  const [city, setCity] = useState<HotelCityId>("makkah");
+export function HotelEnquiry({
+  initialCity = "makkah",
+  initialStars = "",
+  initialHotel = "",
+}: {
+  initialCity?: HotelCityId;
+  initialStars?: string;
+  initialHotel?: string;
+}) {
+  const [city, setCity] = useState<HotelCityId>(initialCity);
+  const [category, setCategory] = useState(initialStars);
+  const [hotel, setHotel] = useState(initialHotel);
   const [area, setArea] = useState("");
-  const [category, setCategory] = useState("");
   const [budget, setBudget] = useState("");
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("2");
   const [rooms, setRooms] = useState("1");
 
   const selectedCity = hotelCities.find((c) => c.id === city)!;
-  const minCheckIn = todayISO();
 
-  // Check-out must be after check-in. Derived during render rather than
-  // corrected in the change handler, so there is no window in which state
-  // holds an impossible range.
-  const minCheckOut = checkIn ? addDays(checkIn, 1) : minCheckIn;
-  const effectiveCheckOut =
-    checkIn && checkOut && checkOut <= checkIn ? minCheckOut : checkOut;
-  const nights = nightsBetween(checkIn, effectiveCheckOut);
+  // Hotels narrow to the chosen city and star band. Changing either can strand
+  // a selection that no longer matches, so the effective value falls back to
+  // "no preference" rather than pointing at a hotel no longer in the list.
+  const matches = useMemo(
+    () =>
+      hotelsFor(
+        city,
+        category === "apartment" || category === ""
+          ? undefined
+          : (category as HotelStars),
+      ),
+    [city, category],
+  );
+  const selectedHotel = matches.find((h) => h.id === hotel);
+  const effectiveHotel = selectedHotel ? hotel : "";
 
   const labelFor = (
     list: readonly { id: string; label: string }[],
@@ -92,17 +65,17 @@ export function HotelEnquiry() {
         `Hotel enquiry for ${site.name}`,
         "",
         `City: ${selectedCity.label}`,
+        selectedHotel
+          ? `Hotel: ${selectedHotel.name} (${selectedHotel.stars} star, ${selectedHotel.distance})`
+          : `Category: ${labelFor(hotelCategories, category)}`,
         `Area: ${labelFor(hotelAreas, area)}`,
-        `Category: ${labelFor(hotelCategories, category)}`,
         `Budget: ${labelFor(hotelBudgets, budget)}`,
-        "",
-        `Check-in: ${readable(checkIn)}`,
-        `Check-out: ${readable(effectiveCheckOut)}`,
-        nights ? `Nights: ${nights}` : "Nights: Not given",
         `Guests: ${guests || "Not given"}`,
         `Rooms: ${rooms || "Not given"}`,
+        "",
+        "Travel dates:",
       ].join("\n"),
-    [area, budget, category, checkIn, effectiveCheckOut, guests, nights, rooms, selectedCity.label],
+    [area, budget, category, guests, rooms, selectedCity.label, selectedHotel],
   );
 
   return (
@@ -123,7 +96,10 @@ export function HotelEnquiry() {
           className="booking-select"
           id="hotel-city"
           value={city}
-          onChange={(event) => setCity(event.target.value as HotelCityId)}
+          onChange={(event) => {
+            setCity(event.target.value as HotelCityId);
+            setHotel("");
+          }}
         >
           {hotelCities.map((item) => (
             <option key={item.id} value={item.id}>
@@ -133,33 +109,48 @@ export function HotelEnquiry() {
         </select>
       </div>
 
-      <div className="booking-grid">
-        <div className="booking-field">
-          <label className="booking-label" htmlFor="hotel-checkin">
-            Check-in
-          </label>
-          <input
-            className="booking-input"
-            id="hotel-checkin"
-            type="date"
-            min={minCheckIn}
-            value={checkIn}
-            onChange={(event) => setCheckIn(event.target.value)}
-          />
-        </div>
-        <div className="booking-field">
-          <label className="booking-label" htmlFor="hotel-checkout">
-            Check-out
-          </label>
-          <input
-            className="booking-input"
-            id="hotel-checkout"
-            type="date"
-            min={minCheckOut}
-            value={effectiveCheckOut}
-            onChange={(event) => setCheckOut(event.target.value)}
-          />
-        </div>
+      <div className="booking-field">
+        <label className="booking-label" htmlFor="hotel-category">
+          Hotel category
+        </label>
+        <select
+          className="booking-select"
+          id="hotel-category"
+          value={category}
+          onChange={(event) => {
+            setCategory(event.target.value);
+            setHotel("");
+          }}
+        >
+          {hotelCategories.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="booking-field">
+        <label className="booking-label" htmlFor="hotel-name">
+          Hotel
+        </label>
+        <select
+          className="booking-select"
+          id="hotel-name"
+          value={effectiveHotel}
+          onChange={(event) => setHotel(event.target.value)}
+        >
+          <option value="">
+            {matches.length
+              ? `No preference · ${matches.length} available`
+              : "No hotels in this band"}
+          </option>
+          {matches.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name} · {item.stars}★ · {item.distance}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="booking-grid">
@@ -214,24 +205,6 @@ export function HotelEnquiry() {
       </div>
 
       <div className="booking-field">
-        <label className="booking-label" htmlFor="hotel-category">
-          Hotel category
-        </label>
-        <select
-          className="booking-select"
-          id="hotel-category"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-        >
-          {hotelCategories.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="booking-field">
         <label className="booking-label" htmlFor="hotel-budget">
           Budget, per room per night
         </label>
@@ -251,15 +224,17 @@ export function HotelEnquiry() {
 
       <div className="booking-total">
         <span className="booking-total-label">
-          Your stay
+          {selectedHotel ? "Selected hotel" : "Your enquiry"}
           <small>
-            {nights
-              ? `${selectedCity.label} · ${guests || "?"} ${Number(guests) === 1 ? "guest" : "guests"}`
-              : "Add your dates for a faster reply"}
+            {selectedHotel
+              ? `${selectedHotel.stars} star · ${selectedHotel.distance}`
+              : `${selectedCity.label} · ${matches.length} ${matches.length === 1 ? "option" : "options"}`}
           </small>
         </span>
-        <strong className="booking-total-value">
-          {nights ? `${nights} ${nights === 1 ? "night" : "nights"}` : "—"}
+        <strong className="booking-total-value booking-total-name">
+          {selectedHotel
+            ? selectedHotel.name
+            : `${guests || "?"} ${Number(guests) === 1 ? "guest" : "guests"}`}
         </strong>
       </div>
 
@@ -271,9 +246,9 @@ export function HotelEnquiry() {
       >
         Send enquiry on WhatsApp
       </a>
-      <p className="ledger-foot" aria-live="polite">
+      <p className="ledger-foot">
         We check what is available around your requirements and reply with
-        options and rates.
+        options and rates. Tell us your dates in the chat.
       </p>
     </form>
   );

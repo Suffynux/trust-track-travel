@@ -177,6 +177,7 @@ export function FleetTiers({
 export function FareBar() {
   const { tier, currency } = useJourney();
   const [show, setShow] = useState(false);
+  const [fieldOpen, setFieldOpen] = useState(false);
   const selected = tiers.find((t) => t.id === tier)!;
   const reference = fareTables[0].rows[tier];
 
@@ -184,10 +185,30 @@ export function FareBar() {
     const onScroll = () => setShow(window.scrollY > 520);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    // A native select or date picker opens as a full-width sheet on a phone,
+    // and this fixed bar sits on top of its last option and the Done button.
+    // Step aside while a form control has focus.
+    const isField = (el: EventTarget | null) =>
+      el instanceof HTMLElement &&
+      (el.tagName === "SELECT" ||
+        (el.tagName === "INPUT" &&
+          ["date", "number", "text", "search"].includes(
+            (el as HTMLInputElement).type,
+          )));
+    const onFocusIn = (e: FocusEvent) => isField(e.target) && setFieldOpen(true);
+    const onFocusOut = () => setFieldOpen(false);
+    document.addEventListener("focusin", onFocusIn);
+    document.addEventListener("focusout", onFocusOut);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("focusin", onFocusIn);
+      document.removeEventListener("focusout", onFocusOut);
+    };
   }, []);
 
-  if (!show || reference === undefined) return null;
+  if (!show || fieldOpen || reference === undefined) return null;
 
   const message = [
     "Booking request for Trust Track Travels",

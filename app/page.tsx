@@ -5,7 +5,7 @@ import { HotelEnquiry } from "./components/hotel-enquiry";
 import { HeroBackdrop, Media } from "./components/media";
 import { Arrow, Check } from "./components/icons";
 import { media, resolve } from "@/lib/media";
-import { fareTables, included, prestige, tiers } from "@/lib/fares";
+import { fareTables, included, prestige, tiers, type TierId } from "@/lib/fares";
 import { routes } from "@/lib/routes";
 import { site } from "@/lib/site";
 
@@ -75,36 +75,25 @@ const bundleExamples = [
   },
 ];
 
+/** One photo per tier, keyed off lib/fares so the two cannot drift apart. */
+function fleetPhotos() {
+  return Object.fromEntries(
+    tiers.map((tier) => [
+      tier.id,
+      <Media
+        key={tier.id}
+        slot={resolve(media.fleet[tier.id as keyof typeof media.fleet])}
+        sizes="(min-width: 72rem) 25vw, 50vw"
+      />,
+    ]),
+  ) as Partial<Record<TierId, React.ReactNode>>;
+}
+
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
 const sarAmount = (value: string) => Number(value.replace(/[^\d]/g, ""));
 
 export default function Home() {
-  const fleetPhotos = {
-    sedan: (
-      <Media
-        slot={resolve(media.fleet.sedan)}
-        sizes="(min-width: 72rem) 25vw, 50vw"
-      />
-    ),
-    suv: (
-      <Media
-        slot={resolve(media.fleet.suv)}
-        sizes="(min-width: 72rem) 25vw, 50vw"
-      />
-    ),
-    van: (
-      <Media
-        slot={resolve(media.fleet.van)}
-        sizes="(min-width: 72rem) 25vw, 50vw"
-      />
-    ),
-    coach: (
-      <Media
-        slot={resolve(media.fleet.coach)}
-        sizes="(min-width: 72rem) 25vw, 50vw"
-      />
-    ),
-  };
+  const photos = fleetPhotos();
 
   return (
     <>
@@ -213,7 +202,7 @@ export default function Home() {
           </div>
 
           <div data-reveal>
-            <FleetTiers photos={fleetPhotos} />
+            <FleetTiers photos={photos} />
           </div>
 
           <div className="prestige" data-reveal>
@@ -256,6 +245,9 @@ export default function Home() {
                 <li>Three star through to five, and serviced apartments.</li>
                 <li>Rates confirmed before you commit to anything.</li>
               </ul>
+              <Link className="link-arrow" href="/hotels">
+                See every hotel we book <Arrow />
+              </Link>
             </div>
 
             <div data-reveal style={delay(90)}>

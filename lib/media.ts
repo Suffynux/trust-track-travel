@@ -80,46 +80,42 @@ export const media = {
     ...wide,
   },
   fleet: {
+    // Keys match the tier ids in lib/fares.ts. They previously used the old
+    // tier names (suv, van, coach), so only the sedan card found its image.
     sedan: {
       src: "media/fleet/sedan.jpg",
       alt: "The Sedan",
       brief: "Three-quarter front, vehicle clean, plain background.",
       ...wide,
     },
-    suv: {
-      src: "media/fleet/suv.jpg",
+    staria: {
+      src: "media/fleet/van.jpg",
       alt: "The Hyundai Staria",
       brief: "Three-quarter front, matching angle and light to the others.",
       ...wide,
     },
-    van: {
-      src: "media/fleet/van.jpg",
+    hiace: {
+      src: "media/fleet/hiace.jpg",
       alt: "The Toyota Hiace",
       brief: "Three-quarter front, side door closed.",
       ...wide,
     },
-    coach: {
-      src: "media/fleet/coach.jpg",
-      alt: "The Coaster",
+    gmc: {
+      src: "media/fleet/suv.jpg",
+      alt: "The GMC",
       brief: "Three-quarter front, full vehicle in frame.",
       ...wide,
     },
-    hiace: {
-      src: "media/fleet/hiace.jpg",
-      alt: "The Toyota Hiace passenger van",
-      brief: "Three-quarter front, full passenger van in frame.",
+    coaster: {
+      src: "media/fleet/coach.jpg",
+      alt: "The Coaster",
+      brief: "Three-quarter front, full vehicle in frame.",
       ...wide,
     },
     bus: {
       src: "media/fleet/bus.jpg",
       alt: "The 47-seat coach bus",
       brief: "Three-quarter front, full-size coach in frame.",
-      ...wide,
-    },
-    prestige: {
-      src: "media/fleet/prestige.jpg",
-      alt: "The Prestige tier vehicle",
-      brief: "Three-quarter front. Darker, quieter treatment than the others.",
       ...wide,
     },
   },
@@ -163,12 +159,6 @@ export const media = {
       brief: "Exterior, daylight.",
       ...square,
     },
-    "jannat-al-mualla": {
-      src: "media/ziyarat/stops/jannat-al-mualla.jpg",
-      alt: "Jannat al-Mu'alla",
-      brief: "Exterior, respectful distance.",
-      ...square,
-    },
     "masjid-quba": {
       src: "media/ziyarat/stops/masjid-quba.jpg",
       alt: "Masjid Quba",
@@ -184,6 +174,18 @@ export const media = {
     "masjid-al-qiblatain": {
       src: "media/ziyarat/stops/masjid-al-qiblatain.jpg",
       alt: "Masjid al-Qiblatain",
+      brief: "Exterior, daylight.",
+      ...square,
+    },
+    "ghars-well": {
+      src: "media/ziyarat/stops/ghars-well.jpg",
+      alt: "Ghars Well",
+      brief: "Exterior, daylight.",
+      ...square,
+    },
+    "salman-al-farsi-farm": {
+      src: "media/ziyarat/stops/salman-al-farsi-farm.jpg",
+      alt: "Salman Al Farsi Farm",
       brief: "Exterior, daylight.",
       ...square,
     },
