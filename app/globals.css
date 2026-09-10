@@ -689,6 +689,8 @@ body {
 .nav-toggle {
   display: inline-flex;
   align-items: center;
+  /* The primary navigation control on a phone; it was 35px tall. */
+  min-height: 2.75rem;
   gap: 0.55rem;
   margin-left: auto;
   margin-right: 0.5rem;

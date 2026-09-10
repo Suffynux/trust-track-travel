@@ -47,13 +47,25 @@ marketing backdrop.
 
 ## Fleet — vehicle photography
 
+**These six slots are filled.** Real, licensed photographs of each vehicle are
+already in place — see [`public/media/fleet/CREDITS.md`](public/media/fleet/CREDITS.md)
+for the source and licence of each one.
+
+Photographs of your own fleet would be better still: they show the actual cars
+a guest will ride in, and they carry no attribution obligation. To swap one in,
+drop it at the same filename below and delete that row from CREDITS.md.
+
 | Drop the file at | Size | What it should show |
 | --- | --- | --- |
-| `public/media/fleet/sedan.jpg` | 1920 × 1080 | Three-quarter front, vehicle clean, plain background. |
-| `public/media/fleet/suv.jpg` | 1920 × 1080 | Three-quarter front, matching angle and light to the others. |
-| `public/media/fleet/van.jpg` | 1920 × 1080 | Three-quarter front, side door closed. |
-| `public/media/fleet/coach.jpg` | 1920 × 1080 | Three-quarter front, full vehicle in frame. |
-| `public/media/fleet/prestige.jpg` | 1920 × 1080 | Three-quarter front. Darker, quieter treatment than the others. |
+| `public/media/fleet/sedan.jpg` | 1920 × 1080 | Sedan tier. Three-quarter front, vehicle clean, plain background. |
+| `public/media/fleet/van.jpg` | 1920 × 1080 | Hyundai Staria tier. Three-quarter front, matching angle and light. |
+| `public/media/fleet/hiace.jpg` | 1920 × 1080 | Toyota Hiace tier. Three-quarter front, side door closed. |
+| `public/media/fleet/suv.jpg` | 1920 × 1080 | GMC tier. Three-quarter front, full vehicle in frame. |
+| `public/media/fleet/coach.jpg` | 1920 × 1080 | Coaster tier. Three-quarter front, full vehicle in frame. |
+| `public/media/fleet/bus.jpg` | 1920 × 1080 | 47-seat bus tier. Three-quarter front, full-size coach in frame. |
+
+The fleet cards crop with `object-fit: cover`, so leave a little space around
+the vehicle rather than filling the frame edge to edge.
 
 ## Route pages
 
@@ -88,6 +100,6 @@ marketing backdrop.
 
 ---
 
-**26 slots in total.** None are required; fill the ones you have.
-The hero and the four fleet photographs carry the most weight — those five
-change the site more than the other twenty put together.
+**27 slots in total.** The six fleet slots are filled; the rest are optional,
+so fill the ones you have. The hero carries the most weight of what remains —
+a calm 8–15 second loop there changes the site more than anything else left.

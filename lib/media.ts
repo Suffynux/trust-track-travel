@@ -84,37 +84,37 @@ export const media = {
     // tier names (suv, van, coach), so only the sedan card found its image.
     sedan: {
       src: "media/fleet/sedan.jpg",
-      alt: "The Sedan",
+      alt: "A silver Toyota Camry executive sedan, front three-quarter view",
       brief: "Three-quarter front, vehicle clean, plain background.",
       ...wide,
     },
     staria: {
       src: "media/fleet/van.jpg",
-      alt: "The Hyundai Staria",
+      alt: "A black Hyundai Staria people carrier, front three-quarter view",
       brief: "Three-quarter front, matching angle and light to the others.",
       ...wide,
     },
     hiace: {
       src: "media/fleet/hiace.jpg",
-      alt: "The Toyota Hiace",
+      alt: "A silver Toyota Hiace passenger van, front three-quarter view",
       brief: "Three-quarter front, side door closed.",
       ...wide,
     },
     gmc: {
       src: "media/fleet/suv.jpg",
-      alt: "The GMC",
+      alt: "A GMC Yukon XL full-size SUV, front three-quarter view",
       brief: "Three-quarter front, full vehicle in frame.",
       ...wide,
     },
     coaster: {
       src: "media/fleet/coach.jpg",
-      alt: "The Coaster",
+      alt: "A Toyota Coaster minibus, front three-quarter view",
       brief: "Three-quarter front, full vehicle in frame.",
       ...wide,
     },
     bus: {
       src: "media/fleet/bus.jpg",
-      alt: "The 47-seat coach bus",
+      alt: "A white full-size touring coach, front three-quarter view",
       brief: "Three-quarter front, full-size coach in frame.",
       ...wide,
     },

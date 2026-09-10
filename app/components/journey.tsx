@@ -184,7 +184,11 @@ export function FareBar() {
   const reference = fareTables[0].rows[tier];
 
   useEffect(() => {
+    // Session storage is browser-only, so the dismissal can only be restored
+    // after mount. Reading it during render would make the client's first
+    // render disagree with the server HTML.
     if (window.sessionStorage.getItem("farebar-dismissed") === "1") {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect -- client-only signal */
       setDismissed(true);
     }
 
