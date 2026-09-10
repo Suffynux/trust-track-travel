@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { Close } from "./icons";
 import { fareTables, tiers, type TierId } from "@/lib/fares";
 import {
   currencies,
@@ -178,10 +179,15 @@ export function FareBar() {
   const { tier, currency } = useJourney();
   const [show, setShow] = useState(false);
   const [fieldOpen, setFieldOpen] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
   const selected = tiers.find((t) => t.id === tier)!;
   const reference = fareTables[0].rows[tier];
 
   useEffect(() => {
+    if (window.sessionStorage.getItem("farebar-dismissed") === "1") {
+      setDismissed(true);
+    }
+
     const onScroll = () => setShow(window.scrollY > 520);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -208,7 +214,7 @@ export function FareBar() {
     };
   }, []);
 
-  if (!show || fieldOpen || reference === undefined) return null;
+  if (!show || fieldOpen || dismissed || reference === undefined) return null;
 
   const message = [
     "Booking request for Trust Track Travels",
@@ -238,6 +244,17 @@ export function FareBar() {
       >
         Send on WhatsApp
       </a>
+      <button
+        type="button"
+        className="farebar-close"
+        aria-label="Hide the fare bar"
+        onClick={() => {
+          setDismissed(true);
+          window.sessionStorage.setItem("farebar-dismissed", "1");
+        }}
+      >
+        <Close />
+      </button>
     </div>
   );
 }

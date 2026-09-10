@@ -2536,3 +2536,29 @@ body {
   color: var(--caption);
   line-height: 1.5;
 }
+
+/* Dismiss control on the mobile fare bar. Sized as a full 44px target so it
+   can be hit reliably with a thumb at the edge of the screen. */
+.farebar-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.5rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--on-field-muted);
+  cursor: pointer;
+  transition: color 0.16s ease;
+}
+
+.farebar-close:hover {
+  color: var(--on-field);
+}
+
+.farebar-close svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}

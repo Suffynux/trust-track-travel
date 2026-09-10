@@ -113,7 +113,7 @@ export default function FaresPage() {
                       <tr>
                         <th scope="col">Tier</th>
                         <th scope="col">
-                          {t.code === "ZYR" ? "3-hour tour" : "One-way"}
+                          {t.code === "ZYR" ? "2-hour tour" : "One-way"}
                         </th>
                       </tr>
                     </thead>

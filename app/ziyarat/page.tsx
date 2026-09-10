@@ -9,7 +9,7 @@ import { fareTables, tiers, ziyaratRoutes } from "@/lib/fares";
 export const metadata: Metadata = {
   title: "Ziyarat routes",
   description:
-    "Three-hour Ziyarat routes through the holy sites of Makkah and Madinah, stop by stop. Hotel pickup and drop-off, the driver waits at every stop, fares fixed per vehicle.",
+    "Two-hour Ziyarat routes through the holy sites of Makkah and Madinah, stop by stop. Hotel pickup and drop-off, the driver waits at every stop, fares fixed per vehicle.",
   alternates: { canonical: "/ziyarat" },
 };
 
@@ -57,7 +57,7 @@ export default function ZiyaratPage() {
             The routes, <em>stop by stop</em>
           </h1>
           <p className="lede">
-            Both routes run three hours from hotel pickup to drop-off, in the
+            Both routes run two hours from hotel pickup to drop-off, in the
             order below, with the driver waiting at every stop. You decide how
             long to stay; extra hours are quoted on request.
           </p>
@@ -116,7 +116,7 @@ export default function ZiyaratPage() {
                 </h2>
               </div>
               <p className="lede" data-reveal>
-                In driving order. The route is fixed so the three hours are
+                In driving order. The route is fixed so the two hours are
                 spent at the sites rather than deciding between them.
               </p>
             </div>
@@ -164,7 +164,7 @@ export default function ZiyaratPage() {
               </h2>
             </div>
             <p className="lede" data-reveal>
-              Per vehicle for the three hours, with the hourly rate if you want
+              Per vehicle for the two hours, with the hourly rate if you want
               longer. Booking both cities together takes 8% off.
             </p>
           </div>
@@ -186,7 +186,7 @@ export default function ZiyaratPage() {
                   <thead>
                     <tr>
                       <th scope="col">Tier</th>
-                      <th scope="col">3-hour tour</th>
+                      <th scope="col">2-hour tour</th>
                     </tr>
                   </thead>
                   <tbody>

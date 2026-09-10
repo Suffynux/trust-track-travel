@@ -111,7 +111,7 @@ export const fareTables = [
   {
     id: "zyr-mkh",
     code: "ZYR",
-    title: "Makkah Ziyarat, 3-hour route",
+    title: "Makkah Ziyarat, 2-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
     rows: { sedan: 200, staria: 250, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
     note: "An optional detour to Masjid Aisha (Ta'neem) is available for guests renewing Ihram for a second Umrah. GMC is SAR 350–450.",
@@ -119,7 +119,7 @@ export const fareTables = [
   {
     id: "zyr-med",
     code: "ZYR",
-    title: "Madinah Ziyarat, 3-hour route",
+    title: "Madinah Ziyarat, 2-hour route",
     detail: "Hotel pickup and drop-off · driver waits at every stop",
     rows: { sedan: 200, staria: 250, hiace: 300, gmc: 350, coaster: 450, bus: 550 } as FareRow,
     note: "GMC is SAR 350–450 depending on the vehicle.",
@@ -137,7 +137,7 @@ export const fareTables = [
 export const ziyaratRoutes = [
   {
     city: "Makkah",
-    duration: "3-hour route",
+    duration: "2-hour route",
     from: 200,
     stops: [
       "Jabal al-Noor",
@@ -150,7 +150,7 @@ export const ziyaratRoutes = [
   },
   {
     city: "Madinah",
-    duration: "3-hour route",
+    duration: "2-hour route",
     from: 200,
     stops: [
       "Masjid Quba",
