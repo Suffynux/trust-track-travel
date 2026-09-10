@@ -2562,3 +2562,29 @@ body {
   width: 0.85rem;
   height: 0.85rem;
 }
+
+/* The bar is a single row: nothing in it should wrap. */
+.farebar .btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.farebar-total {
+  min-width: 0;
+}
+
+.farebar-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.farebar-value small {
+  display: block;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-field-muted);
+  margin-top: 0.1rem;
+}

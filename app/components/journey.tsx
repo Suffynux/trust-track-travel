@@ -229,11 +229,10 @@ export function FareBar() {
   return (
     <div className="farebar">
       <span className="farebar-total">
-        <span className="farebar-label">
-          {selected.name} · Jeddah to Makkah
-        </span>
+        <span className="farebar-label">{selected.name}</span>
         <span className="farebar-value">
           {formatFare(reference, currency)}
+          <small>Jeddah to Makkah</small>
         </span>
       </span>
       <a
@@ -242,7 +241,7 @@ export function FareBar() {
         target="_blank"
         rel="noopener"
       >
-        Send on WhatsApp
+        Send
       </a>
       <button
         type="button"
