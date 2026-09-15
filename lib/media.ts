@@ -82,41 +82,64 @@ export const media = {
   fleet: {
     // Keys match the tier ids in lib/fares.ts. They previously used the old
     // tier names (suv, van, coach), so only the sedan card found its image.
+    //
+    // These are the operator's own vehicle images: cutouts composited onto the
+    // Indigo field so the cards read as one set. They are 16:9 like every
+    // other slot, but not all 1920 wide — each was sized to what its source
+    // could fill without upscaling into mush, so width/height are per-slot
+    // rather than the shared `wide`. Keep them matching the files on disk:
+    // next/image uses them to reserve space before the image loads.
     sedan: {
       src: "media/fleet/sedan.jpg",
-      alt: "A silver Toyota Camry executive sedan, front three-quarter view",
+      alt: "A black Toyota Camry executive sedan, front three-quarter view",
       brief: "Three-quarter front, vehicle clean, plain background.",
-      ...wide,
+      width: 1866,
+      height: 1049,
+      size: "1866 × 1049",
     },
     staria: {
       src: "media/fleet/van.jpg",
       alt: "A black Hyundai Staria people carrier, front three-quarter view",
       brief: "Three-quarter front, matching angle and light to the others.",
-      ...wide,
+      width: 1328,
+      height: 747,
+      size: "1328 × 747",
     },
     hiace: {
       src: "media/fleet/hiace.jpg",
-      alt: "A silver Toyota Hiace passenger van, front three-quarter view",
+      alt: "A black Toyota Hiace passenger van, front three-quarter view",
       brief: "Three-quarter front, side door closed.",
-      ...wide,
+      width: 1119,
+      height: 629,
+      size: "1119 × 629",
     },
     gmc: {
       src: "media/fleet/suv.jpg",
-      alt: "A GMC Yukon XL full-size SUV, front three-quarter view",
+      alt: "A black GMC Yukon Denali XL full-size SUV, front three-quarter view",
       brief: "Three-quarter front, full vehicle in frame.",
-      ...wide,
+      width: 1321,
+      height: 743,
+      size: "1321 × 743",
     },
+    // The only Coaster source available is 313 × 161, so this frame is small.
+    // It is sharp at its own size but soft once a card scales it up; replacing
+    // it with a larger image is the single biggest fleet improvement left.
     coaster: {
       src: "media/fleet/coach.jpg",
-      alt: "A Toyota Coaster minibus, front three-quarter view",
+      alt: "A white Toyota Coaster minibus, front three-quarter view",
       brief: "Three-quarter front, full vehicle in frame.",
-      ...wide,
+      width: 437,
+      height: 245,
+      size: "437 × 245",
     },
+    // Standing in with the Coaster until a 47-seat coach photograph exists.
     bus: {
       src: "media/fleet/bus.jpg",
-      alt: "A white full-size touring coach, front three-quarter view",
+      alt: "A white Toyota Coaster minibus, front three-quarter view",
       brief: "Three-quarter front, full-size coach in frame.",
-      ...wide,
+      width: 437,
+      height: 245,
+      size: "437 × 245",
     },
   },
   ziyarat: {

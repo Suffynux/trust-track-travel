@@ -47,25 +47,30 @@ marketing backdrop.
 
 ## Fleet — vehicle photography
 
-**These six slots are filled.** Real, licensed photographs of each vehicle are
-already in place — see [`public/media/fleet/CREDITS.md`](public/media/fleet/CREDITS.md)
-for the source and licence of each one.
+**These six slots are filled** from your own vehicle images in
+`public/TTL Car images/` — cutouts composited onto the Indigo field so the
+cards read as one set. See
+[`public/media/fleet/CREDITS.md`](public/media/fleet/CREDITS.md) for which
+source became which file, and how to rebuild one.
 
-Photographs of your own fleet would be better still: they show the actual cars
-a guest will ride in, and they carry no attribution obligation. To swap one in,
-drop it at the same filename below and delete that row from CREDITS.md.
+Unlike every other slot on this page, these are **not all 1920 × 1080**. Each
+frame is the largest 16:9 size its source could fill without being upscaled
+into mush. The ratio is identical across all six, so the cards crop the same
+way. `lib/media.ts` carries each slot's real size — if you replace a file,
+update those numbers to match it.
 
-| Drop the file at | Size | What it should show |
+| Drop the file at | Current size | What it should show |
 | --- | --- | --- |
-| `public/media/fleet/sedan.jpg` | 1920 × 1080 | Sedan tier. Three-quarter front, vehicle clean, plain background. |
-| `public/media/fleet/van.jpg` | 1920 × 1080 | Hyundai Staria tier. Three-quarter front, matching angle and light. |
-| `public/media/fleet/hiace.jpg` | 1920 × 1080 | Toyota Hiace tier. Three-quarter front, side door closed. |
-| `public/media/fleet/suv.jpg` | 1920 × 1080 | GMC tier. Three-quarter front, full vehicle in frame. |
-| `public/media/fleet/coach.jpg` | 1920 × 1080 | Coaster tier. Three-quarter front, full vehicle in frame. |
-| `public/media/fleet/bus.jpg` | 1920 × 1080 | 47-seat bus tier. Three-quarter front, full-size coach in frame. |
+| `public/media/fleet/sedan.jpg` | 1866 × 1049 | Sedan tier. Three-quarter front, vehicle clean, plain background. |
+| `public/media/fleet/van.jpg` | 1328 × 747 | Hyundai Staria tier. Three-quarter front, matching angle and light. |
+| `public/media/fleet/hiace.jpg` | 1119 × 629 | Toyota Hiace tier. Three-quarter front, side door closed. |
+| `public/media/fleet/suv.jpg` | 1321 × 743 | GMC tier. Three-quarter front, full vehicle in frame. |
+| `public/media/fleet/coach.jpg` | 437 × 245 | Coaster tier. **Low resolution** — a bigger source is the biggest win left. |
+| `public/media/fleet/bus.jpg` | 437 × 245 | 47-seat bus tier. **Currently the Coaster standing in** — needs a real coach. |
 
 The fleet cards crop with `object-fit: cover`, so leave a little space around
-the vehicle rather than filling the frame edge to edge.
+the vehicle rather than filling the frame edge to edge. Bigger sources are
+always better: nothing here is ever upscaled.
 
 ## Route pages
 
