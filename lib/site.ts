@@ -1,17 +1,25 @@
 /**
  * Single source of truth for contact details and currency.
- * Replace the three PLACEHOLDER values below and every CTA on the site updates.
+ * Change a value here and every CTA on the site updates with it.
  */
 
 export const site = {
   name: "Trust Track Travels",
   tagline: "Fixed-fare ground transport, Jeddah · Makkah · Madinah",
 
-  /** Digits only, with country code, no +, no spaces. Example: 966501234567 */
-  whatsapp: "966500000000", // PLACEHOLDER
-  /** Shown as a tel: link. */
-  phone: "+966 50 000 0000", // PLACEHOLDER
-  email: "hello@trusttracktravels.com", // PLACEHOLDER
+  /**
+   * Digits only, with country code, no +, no spaces — this is what wa.me
+   * expects. Every booking and enquiry button on the site funnels here, so
+   * if this is wrong the site has no working conversion path at all.
+   */
+  whatsapp: "966576476558",
+  /** Shown as a tel: link. Same line as the WhatsApp number. */
+  phone: "+966 57 647 6558",
+  /**
+   * TODO: confirm this mailbox exists and is monitored before launch. It is
+   * carried over from the original placeholder and has not been verified.
+   */
+  email: "hello@trusttracktravels.com",
 
   cities: "Makkah · Madinah · Jeddah",
 } as const;
@@ -23,24 +31,24 @@ export const site = {
  *
  * USD is fixed: the riyal is pegged at 1 USD = 3.75 SAR.
  * Non-USD currencies float — update them when they drift.
- * Last checked: August 2026.
+ * Last checked: 15 September 2026.
  */
 export const currencies = [
   { code: "SAR", symbol: "SAR ", perSar: 1, fixed: true },
   { code: "USD", symbol: "$", perSar: 1 / 3.75, fixed: true },
-  { code: "GBP", symbol: "£", perSar: 0.212, fixed: false },
-  { code: "EUR", symbol: "€", perSar: 0.228, fixed: false },
-  { code: "PKR", symbol: "₨", perSar: 74.1, fixed: false },
-  { code: "INR", symbol: "₹", perSar: 24.25, fixed: false },
-  { code: "BDT", symbol: "৳", perSar: 32.6, fixed: false },
-  { code: "IDR", symbol: "Rp ", perSar: 4_390, fixed: false },
-  { code: "MYR", symbol: "RM ", perSar: 1.13, fixed: false },
-  { code: "AED", symbol: "AED ", perSar: 0.979, fixed: false },
-  { code: "CAD", symbol: "C$", perSar: 0.365, fixed: false },
-  { code: "AUD", symbol: "A$", perSar: 0.408, fixed: false },
-  { code: "TRY", symbol: "₺", perSar: 11.7, fixed: false },
-  { code: "NGN", symbol: "₦", perSar: 410, fixed: false },
-  { code: "ZAR", symbol: "R", perSar: 4.72, fixed: false },
+  { code: "GBP", symbol: "£", perSar: 0.1976, fixed: false },
+  { code: "EUR", symbol: "€", perSar: 0.2308, fixed: false },
+  { code: "PKR", symbol: "₨", perSar: 74.03, fixed: false },
+  { code: "INR", symbol: "₹", perSar: 25.51, fixed: false },
+  { code: "BDT", symbol: "৳", perSar: 32.84, fixed: false },
+  { code: "IDR", symbol: "Rp ", perSar: 4_709, fixed: false },
+  { code: "MYR", symbol: "RM ", perSar: 1.087, fixed: false },
+  { code: "AED", symbol: "AED ", perSar: 0.9793, fixed: false },
+  { code: "CAD", symbol: "C$", perSar: 0.3705, fixed: false },
+  { code: "AUD", symbol: "A$", perSar: 0.3736, fixed: false },
+  { code: "TRY", symbol: "₺", perSar: 12.97, fixed: false },
+  { code: "NGN", symbol: "₦", perSar: 353.7, fixed: false },
+  { code: "ZAR", symbol: "R", perSar: 4.333, fixed: false },
 ] as const;
 
 /**
