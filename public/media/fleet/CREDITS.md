@@ -23,12 +23,12 @@ reserve space before the image loads, and a mismatch shifts the layout.
 
 | File | Tier | Source file | Frame |
 | --- | --- | --- | --- |
-| `sedan.jpg` | Sedan | `Attitude Black Mica camry.png` | 1866 × 1049 |
-| `van.jpg` | Hyundai Staria | `staria new.png` | 1328 × 747 |
-| `hiace.jpg` | Toyota Hiace | `toyota-hiace.png` | 1119 × 629 |
-| `suv.jpg` | GMC | `gmc new.png` | 1321 × 743 |
-| `coach.jpg` | Coaster | `coaster-removebg-preview.png` | 437 × 245 |
-| `bus.jpg` | 47-seat bus | `coaster-removebg-preview.png` | 437 × 245 |
+| `sedan.jpg` | Sedan | `Attitude Black Mica camry.png` | 1920 × 1080 |
+| `van.jpg` | Hyundai Staria | `staria new.png` | 1423 × 800 |
+| `hiace.jpg` | Toyota Hiace | `toyota-hiace.png` | 1492 × 839 |
+| `suv.jpg` | GMC | `gmc new.png` | 1670 × 939 |
+| `coach.jpg` | Coaster | `coaster-removebg-preview.png` | 516 × 290 |
+| `bus.jpg` | 47-seat bus | `coaster-removebg-preview.png` | 516 × 290 |
 
 ## Two things worth fixing when you can
 

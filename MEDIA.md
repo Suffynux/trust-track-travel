@@ -61,12 +61,12 @@ update those numbers to match it.
 
 | Drop the file at | Current size | What it should show |
 | --- | --- | --- |
-| `public/media/fleet/sedan.jpg` | 1866 × 1049 | Sedan tier. Three-quarter front, vehicle clean, plain background. |
-| `public/media/fleet/van.jpg` | 1328 × 747 | Hyundai Staria tier. Three-quarter front, matching angle and light. |
-| `public/media/fleet/hiace.jpg` | 1119 × 629 | Toyota Hiace tier. Three-quarter front, side door closed. |
-| `public/media/fleet/suv.jpg` | 1321 × 743 | GMC tier. Three-quarter front, full vehicle in frame. |
-| `public/media/fleet/coach.jpg` | 437 × 245 | Coaster tier. **Low resolution** — a bigger source is the biggest win left. |
-| `public/media/fleet/bus.jpg` | 437 × 245 | 47-seat bus tier. **Currently the Coaster standing in** — needs a real coach. |
+| `public/media/fleet/sedan.jpg` | 1920 × 1080 | Sedan tier. Three-quarter front, vehicle clean, plain background. |
+| `public/media/fleet/van.jpg` | 1423 × 800 | Hyundai Staria tier. Three-quarter front, matching angle and light. |
+| `public/media/fleet/hiace.jpg` | 1492 × 839 | Toyota Hiace tier. Three-quarter front, side door closed. |
+| `public/media/fleet/suv.jpg` | 1670 × 939 | GMC tier. Three-quarter front, full vehicle in frame. |
+| `public/media/fleet/coach.jpg` | 516 × 290 | Coaster tier. **Low resolution** — a bigger source is the biggest win left. |
+| `public/media/fleet/bus.jpg` | 516 × 290 | 47-seat bus tier. **Currently the Coaster standing in** — needs a real coach. |
 
 The fleet cards crop with `object-fit: cover`, so leave a little space around
 the vehicle rather than filling the frame edge to edge. Bigger sources are
