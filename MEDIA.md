@@ -66,7 +66,7 @@ update those numbers to match it.
 | `public/media/fleet/hiace.jpg` | 1492 × 839 | Toyota Hiace tier. Three-quarter front, side door closed. |
 | `public/media/fleet/suv.jpg` | 1670 × 939 | GMC tier. Three-quarter front, full vehicle in frame. |
 | `public/media/fleet/coach.jpg` | 516 × 290 | Coaster tier. **Low resolution** — a bigger source is the biggest win left. |
-| `public/media/fleet/bus.jpg` | 516 × 290 | 47-seat bus tier. **Currently the Coaster standing in** — needs a real coach. |
+| `public/media/fleet/bus.jpg` | 1920 × 1080 | 47-seat bus tier. Full-size Mercedes-Benz Tourismo coach; a third-party CC BY-SA image, credited in `public/media/fleet/CREDITS.md`. |
 
 The fleet cards crop with `object-fit: cover`, so leave a little space around
 the vehicle rather than filling the frame edge to edge. Bigger sources are

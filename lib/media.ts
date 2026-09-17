@@ -130,14 +130,14 @@ export const media = {
       height: 290,
       size: "516 × 290",
     },
-    // Standing in with the Coaster until a 47-seat coach photograph exists.
+    // A full-size Mercedes-Benz Tourismo coach, sourced under CC BY-SA 3.0.
+    // Attribution lives in public/media/fleet/CREDITS.md — keep it if you
+    // ever move or rebuild this frame.
     bus: {
       src: "media/fleet/bus.jpg",
-      alt: "A white Toyota Coaster minibus, front three-quarter view",
+      alt: "A silver Mercedes-Benz Tourismo full-size coach, front three-quarter view",
       brief: "Three-quarter front, full-size coach in frame.",
-      width: 516,
-      height: 290,
-      size: "516 × 290",
+      ...wide,
     },
   },
   ziyarat: {
