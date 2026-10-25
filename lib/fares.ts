@@ -39,7 +39,7 @@ export const tiers = [
     index: "04",
     name: "GMC",
     capacity: "Premium SUV · up to 6 guests",
-    anchor: "GMC Yukon XL, Suburban, or Land Cruiser",
+    anchor: "GMC Yukon XL",
     suits: "Travellers wanting an SUV rather than a van.",
   },
   {
@@ -97,7 +97,7 @@ export const fareTables = [
     code: "MED",
     title: "Madinah airport ↔ Madinah hotels",
     detail: "~18 km · 20–30 min · one-way, per vehicle",
-    rows: { sedan: 130, staria: 150, hiace: 200, gmc: 250, coaster: 350, bus: 450 } as FareRow,
+    rows: { sedan: 130, staria: 170, hiace: 200, gmc: 250, coaster: 350, bus: 450 } as FareRow,
     note: "GMC is SAR 250–300 depending on the vehicle. Priced the same in both directions.",
   },
   {
@@ -161,6 +161,17 @@ export const ziyaratRoutes = [
       "Salman Al Farsi Farm",
     ],
     note: "Hotel pickup and drop-off, with the driver waiting at every stop.",
+  },
+  {
+    city: "Badr",
+    duration: "From Madinah · ~150 km each way",
+    from: 350,
+    stops: [
+      "Masjid al-Arish",
+      "Badr battlefield",
+      "Martyrs of Badr Cemetery",
+    ],
+    note: "Badr (also written Badar) is a longer trip from Madinah. The starting fare is for a one-way transfer per vehicle. Return travel, sightseeing stops and total duration are confirmed with your quote; site access may vary.",
   },
 ] as const;
 

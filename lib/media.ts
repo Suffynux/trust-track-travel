@@ -83,12 +83,9 @@ export const media = {
     // Keys match the tier ids in lib/fares.ts. They previously used the old
     // tier names (suv, van, coach), so only the sedan card found its image.
     //
-    // These are the operator's own vehicle images: cutouts composited onto the
-    // Indigo field so the cards read as one set. They are 16:9 like every
-    // other slot, but not all 1920 wide — each was sized to what its source
-    // could fill without upscaling into mush, so width/height are per-slot
-    // rather than the shared `wide`. Keep them matching the files on disk:
-    // next/image uses them to reserve space before the image loads.
+    // Original operator images and generated replacements share the Indigo
+    // field. Sources and prompts are recorded in public/media/fleet/CREDITS.md.
+    // Keep each slot's dimensions matching the file on disk.
     sedan: {
       src: "media/fleet/sedan.jpg",
       alt: "A black Toyota Camry executive sedan, front three-quarter view",
@@ -96,12 +93,12 @@ export const media = {
       ...wide,
     },
     staria: {
-      src: "media/fleet/van.jpg",
+      src: "media/fleet/staria-v2.webp",
       alt: "A black Hyundai Staria people carrier, front three-quarter view",
       brief: "Three-quarter front, matching angle and light to the others.",
-      width: 1423,
-      height: 800,
-      size: "1423 × 800",
+      width: 1672,
+      height: 940,
+      size: "1672 × 940",
     },
     hiace: {
       src: "media/fleet/hiace.jpg",
@@ -119,25 +116,21 @@ export const media = {
       height: 939,
       size: "1670 × 939",
     },
-    // The only Coaster source available is 313 × 161, so this frame is small.
-    // It is sharp at its own size but soft once a card scales it up; replacing
-    // it with a larger image is the single biggest fleet improvement left.
     coaster: {
-      src: "media/fleet/coach.jpg",
+      src: "media/fleet/coaster-v2.webp",
       alt: "A white Toyota Coaster minibus, front three-quarter view",
       brief: "Three-quarter front, full vehicle in frame.",
-      width: 516,
-      height: 290,
-      size: "516 × 290",
+      width: 1672,
+      height: 941,
+      size: "1672 × 941",
     },
-    // A full-size Mercedes-Benz Tourismo coach, sourced under CC BY-SA 3.0.
-    // Attribution lives in public/media/fleet/CREDITS.md — keep it if you
-    // ever move or rebuild this frame.
     bus: {
-      src: "media/fleet/bus.jpg",
-      alt: "A silver Mercedes-Benz Tourismo full-size coach, front three-quarter view",
+      src: "media/fleet/bus-v2.webp",
+      alt: "A white full-size touring coach, front three-quarter view",
       brief: "Three-quarter front, full-size coach in frame.",
-      ...wide,
+      width: 1672,
+      height: 941,
+      size: "1672 × 941",
     },
   },
   ziyarat: {

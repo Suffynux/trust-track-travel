@@ -9,7 +9,7 @@ import { fareTables, tiers, ziyaratRoutes } from "@/lib/fares";
 export const metadata: Metadata = {
   title: "Ziyarat routes",
   description:
-    "Two-hour Ziyarat routes through the holy sites of Makkah and Madinah, stop by stop. Hotel pickup and drop-off, the driver waits at every stop, fares fixed per vehicle.",
+    "Ziyarat in Makkah and Madinah, plus Badr (Badar) from Madinah. Explore the stops, historical details and per-vehicle fares, with return visits quoted individually.",
   alternates: { canonical: "/ziyarat" },
 };
 
@@ -28,17 +28,28 @@ const stopSlots: Record<string, keyof typeof media.stops> = {
   "Salman Al Farsi Farm": "salman-al-farsi-farm",
 };
 
+// Historical details verified against Visit Madinah's Badr destination guide.
+const stopDetails: Partial<Record<string, string>> = {
+  "Masjid al-Arish":
+    "The mosque marks the site associated with the shelter from which Prophet Muhammad ﷺ directed the Battle of Badr.",
+  "Badr battlefield":
+    "The historic area where the Battle of Badr took place in Ramadan, 2 AH (624 CE). The surrounding valley helps place the events in their geographical setting.",
+  "Martyrs of Badr Cemetery":
+    "The cemetery commemorates the companions who were martyred at Badr. A respectful visit or an outside viewing depends on access on the day.",
+};
+
 const ziyaratMessage = [
   "Hello Trust Track Travels. I'd like to book a Ziyarat tour.",
   "",
-  "City (Makkah / Madinah / both):",
+  "Route (Makkah / Madinah / Badr / multiple):",
   "Date:",
   "Number of guests:",
   "Hotel:",
+  "For Badr: one-way transfer or return visit with sightseeing?",
 ].join("\n");
 
 export default function ZiyaratPage() {
-  const ziyaratTables = fareTables.filter((t) => t.id.startsWith("zyr"));
+  const ziyaratTables = fareTables.filter((t) => t.id.startsWith("zyr") || t.id === "badr");
 
   return (
     <>
@@ -57,20 +68,21 @@ export default function ZiyaratPage() {
             The routes, <em>stop by stop</em>
           </h1>
           <p className="lede">
-            Both routes run two hours from hotel pickup to drop-off, in the
-            order below, with the driver waiting at every stop. You decide how
-            long to stay; extra hours are quoted on request.
+            Makkah and Madinah tours run two hours from hotel pickup to
+            drop-off, with the driver waiting at every stop. Badr is a longer
+            trip from Madinah, with the itinerary, return journey and duration
+            agreed when you book. Extra hours are quoted on request.
           </p>
         </div>
       </section>
 
       <section className="band" aria-labelledby="routes-title">
         <p className="rail" aria-hidden="true">
-          Two routes
+          Three routes
         </p>
         <div className="shell">
           <h2 className="h2 band-head" id="routes-title">
-            Makkah and Madinah
+            Makkah, Madinah and Badr
           </h2>
 
           <div className="routes-grid">
@@ -84,6 +96,7 @@ export default function ZiyaratPage() {
                   <h3 className="route-city">{r.city}</h3>
                   <p className="route-from">
                     From <b><DisplayFare sar={r.from} /></b>
+                    {r.city === "Badr" && <small>One-way transfer</small>}
                   </p>
                 </div>
                 <ol className="stops">
@@ -116,12 +129,25 @@ export default function ZiyaratPage() {
                 </h2>
               </div>
               <p className="lede" data-reveal>
-                In driving order. The route is fixed so the two hours are
-                spent at the sites rather than deciding between them.
+                {r.city === "Badr"
+                  ? "Visit the historical sites associated with the Battle of Badr, about 150 km from Madinah. Confirm pickup, stop order, time at each site and your return journey when booking."
+                  : "In driving order. The route is fixed so the two hours are spent at the sites rather than deciding between them."}
               </p>
             </div>
             <div className="stop-tiles">
               {r.stops.map((s, i) => {
+                const description = stopDetails[s];
+                if (description) {
+                  return (
+                    <article key={s} className="stop-detail" data-reveal>
+                      <h3 className="stop-tile-name">
+                        <span className="stop-tile-index">{String(i + 1).padStart(2, "0")}</span>
+                        <span>{s}</span>
+                      </h3>
+                      <p>{description}</p>
+                    </article>
+                  );
+                }
                 const key = stopSlots[s];
                 const slot = key
                   ? (media.stops[key] as Slot)
@@ -147,6 +173,13 @@ export default function ZiyaratPage() {
                 );
               })}
             </div>
+            {r.city === "Badr" && (
+              <p className="band-foot">
+                <a className="link-arrow" href="https://visitmadinahsa.com/sa-en/destinations/The-Journey-of-the-Prophetic-Path-to-the-Great-Battle-of-Badr" target="_blank" rel="noopener noreferrer">
+                  Badr history · Visit Madinah <Arrow />
+                </a>
+              </p>
+            )}
           </div>
         </section>
       ))}
@@ -164,8 +197,10 @@ export default function ZiyaratPage() {
               </h2>
             </div>
             <p className="lede" data-reveal>
-              Per vehicle for the two hours, with the hourly rate if you want
-              longer. Booking both cities together takes 8% off.
+              Makkah and Madinah fares cover a two-hour tour per vehicle;
+              booking both together takes 8% off. Badr fares below cover a
+              one-way transfer only. Ask for a fixed quote for a return visit
+              with sightseeing.
             </p>
           </div>
 
@@ -186,7 +221,7 @@ export default function ZiyaratPage() {
                   <thead>
                     <tr>
                       <th scope="col">Tier</th>
-                      <th scope="col">2-hour tour</th>
+                      <th scope="col">{t.id === "badr" ? "One-way transfer" : "2-hour tour"}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -194,7 +229,7 @@ export default function ZiyaratPage() {
                       <tr key={tier.id}>
                         <th scope="row">{tier.name}</th>
                         <td className="cell-num">
-                          {t.rows[tier.id] === undefined ? "On request" : <DisplayFare sar={t.rows[tier.id]} />}
+                          {t.rows[tier.id] === undefined ? (t.id === "badr" ? "Unavailable" : "On request") : <DisplayFare sar={t.rows[tier.id]} />}
                         </td>
                       </tr>
                     ))}
@@ -221,8 +256,9 @@ export default function ZiyaratPage() {
             <p className="eyebrow">Book a route</p>
             <h2 className="h2">Pick your day, we&apos;ll set the fare</h2>
             <p className="lede">
-              Tell us the city, the date and how many of you there are. The
-              price comes back fixed, and the driver waits at every stop.
+              Tell us the route, the date and how many of you there are. For
+              Badr, include whether you need a one-way transfer or a return
+              visit with sightseeing. We confirm your itinerary and fixed fare.
             </p>
           </div>
           <div className="closer-actions">

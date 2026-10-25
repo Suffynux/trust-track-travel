@@ -27,6 +27,8 @@ import {
 type JourneyState = {
   tier: TierId;
   setTier: (t: TierId) => void;
+  fareBarDismissed: boolean;
+  dismissFareBar: () => void;
   currency: CurrencyCode;
   setCurrency: (c: CurrencyCode) => void;
 };
@@ -41,8 +43,28 @@ function useJourney() {
 
 export function JourneyProvider({ children }: { children: React.ReactNode }) {
   const [tier, setTier] = useState<TierId>("staria");
+  const [fareBarDismissed, setFareBarDismissed] = useState(false);
   const [currency, setCurrency] = useState<CurrencyCode>("SAR");
   const manualCurrency = useRef(false);
+
+  const chooseTier = useCallback((next: TierId) => {
+    setTier(next);
+    // Every explicit selection reopens the bar, even for the current tier.
+    setFareBarDismissed(false);
+    window.sessionStorage.removeItem("farebar-dismissed");
+  }, []);
+
+  const dismissFareBar = useCallback(() => {
+    setFareBarDismissed(true);
+    window.sessionStorage.setItem("farebar-dismissed", "1");
+  }, []);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("farebar-dismissed") === "1") {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect -- client-only signal */
+      setFareBarDismissed(true);
+    }
+  }, []);
 
   const chooseCurrency = useCallback((next: CurrencyCode) => {
     manualCurrency.current = true;
@@ -82,8 +104,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   /* eslint-enable react-hooks/set-state-in-effect */
 
   const value = useMemo(
-    () => ({ tier, setTier, currency, setCurrency: chooseCurrency }),
-    [tier, currency, chooseCurrency],
+    () => ({
+      tier,
+      setTier: chooseTier,
+      fareBarDismissed,
+      dismissFareBar,
+      currency,
+      setCurrency: chooseCurrency,
+    }),
+    [tier, chooseTier, fareBarDismissed, dismissFareBar, currency, chooseCurrency],
   );
 
   return (
@@ -161,8 +190,10 @@ export function FleetTiers({
             <span className="tier-cap">{t.capacity}</span>
             <span className="tier-anchor">{t.anchor}</span>
             <span className="tier-fare">
+              {t.id === "gmc" && "From "}
               {formatFare(reference.rows[t.id] ?? 0, currency)}
               <small>Jeddah airport to Makkah</small>
+              {t.id === "gmc" && <small>Price varies by GMC model.</small>}
             </span>
           </span>
         </button>
@@ -176,22 +207,13 @@ export function FleetTiers({
 /* ------------------------------------------------------------------ */
 
 export function FareBar() {
-  const { tier, currency } = useJourney();
+  const { tier, currency, fareBarDismissed, dismissFareBar } = useJourney();
   const [show, setShow] = useState(false);
   const [fieldOpen, setFieldOpen] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
   const selected = tiers.find((t) => t.id === tier)!;
   const reference = fareTables[0].rows[tier];
 
   useEffect(() => {
-    // Session storage is browser-only, so the dismissal can only be restored
-    // after mount. Reading it during render would make the client's first
-    // render disagree with the server HTML.
-    if (window.sessionStorage.getItem("farebar-dismissed") === "1") {
-      /* eslint-disable-next-line react-hooks/set-state-in-effect -- client-only signal */
-      setDismissed(true);
-    }
-
     const onScroll = () => setShow(window.scrollY > 520);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -218,7 +240,7 @@ export function FareBar() {
     };
   }, []);
 
-  if (!show || fieldOpen || dismissed || reference === undefined) return null;
+  if (!show || fieldOpen || fareBarDismissed || reference === undefined) return null;
 
   const message = [
     "Booking request for Trust Track Travels",
@@ -251,10 +273,7 @@ export function FareBar() {
         type="button"
         className="farebar-close"
         aria-label="Hide the fare bar"
-        onClick={() => {
-          setDismissed(true);
-          window.sessionStorage.setItem("farebar-dismissed", "1");
-        }}
+        onClick={dismissFareBar}
       >
         <Close />
       </button>

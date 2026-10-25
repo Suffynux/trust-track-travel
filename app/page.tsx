@@ -83,6 +83,7 @@ function fleetPhotos() {
       <Media
         key={tier.id}
         slot={resolve(media.fleet[tier.id as keyof typeof media.fleet])}
+        fit={tier.id === "coaster" || tier.id === "bus" ? "contain" : "cover"}
         sizes="(min-width: 72rem) 25vw, 50vw"
       />,
     ]),

@@ -27,8 +27,8 @@ export const bookingRoutes = [
   { id: "med-mak", code: "INT", name: "Madinah → Makkah", fares: { sedan: 350, staria: 450, hiace: 550, gmc: [750, 850], coaster: 850, bus: 950 } },
   { id: "mak-ziyarat", code: "ZYR", name: "Makkah Ziyarat", fares: { sedan: 200, staria: 250, hiace: 300, gmc: [350, 450], coaster: 450, bus: 550 } },
   { id: "med-ziyarat", code: "ZYR", name: "Madinah Ziyarat", fares: { sedan: 200, staria: 250, hiace: 300, gmc: [350, 450], coaster: 450, bus: 550 } },
-  { id: "med-airport", code: "MED", name: "Madinah hotel → Madinah airport", fares: { sedan: 130, staria: 150, hiace: 200, gmc: [250, 300], coaster: 350, bus: 450 } },
-  { id: "airport-med", code: "MED", name: "Madinah airport → Madinah hotel", fares: { sedan: 130, staria: 150, hiace: 200, gmc: [250, 300], coaster: 350, bus: 450 } },
+  { id: "med-airport", code: "MED", name: "Madinah hotel → Madinah airport", fares: { sedan: 130, staria: 170, hiace: 200, gmc: [250, 300], coaster: 350, bus: 450 } },
+  { id: "airport-med", code: "MED", name: "Madinah airport → Madinah hotel", fares: { sedan: 130, staria: 170, hiace: 200, gmc: [250, 300], coaster: 350, bus: 450 } },
   { id: "med-badr", code: "BAD", name: "Madinah → Badr", fares: { sedan: 350, staria: 450, hiace: 550, gmc: 750, coaster: 850 } },
   { id: "badr-med", code: "BAD", name: "Badr → Madinah", fares: { sedan: 350, staria: 450, hiace: 550, gmc: 750, coaster: 850 } },
 ] as const satisfies readonly { id: string; code: string; name: string; fares: BookingFareRow }[];

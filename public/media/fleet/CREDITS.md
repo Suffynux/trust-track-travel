@@ -1,8 +1,25 @@
 # Fleet photography — sources
 
-Every image in this folder except `bus.jpg` comes from the operator's own
-vehicle image set, kept in `public/TTL Car images/`, and carries no
-attribution obligation.
+## Current generated images
+
+The active Staria, Coaster and bus images were created with the built-in
+imagegen tool and exported as WebP at quality 88:
+
+| File | Dimensions | Source |
+| --- | --- | --- |
+| `staria-v2.webp` | 1672 × 940 | Edited from the operator's `van.jpg`, with `suv.jpg` as the facing-direction reference. |
+| `coaster-v2.webp` | 1672 × 941 | Generated illustration of a white Toyota Coaster. |
+| `bus-v2.webp` | 1672 × 941 | Generated illustration of a white touring coach. |
+
+The Coaster and bus images are illustrative fleet imagery, rather than
+photographs of the operator's actual vehicles. Exact prompts are saved in
+[`docs/fleet-image-prompts.md`](../../../docs/fleet-image-prompts.md).
+The original JPEGs and their source files remain available below.
+
+## Original images
+
+The original JPEGs except `bus.jpg` come from the operator's own vehicle
+image set, kept in `public/TTL Car images/`.
 
 `bus.jpg` is the one third-party photograph, and its licence **requires the
 credit below to stay with the site**:
@@ -42,7 +59,7 @@ reserve space before the image loads, and a mismatch shifts the layout.
 | `coach.jpg` | Coaster | `coaster-removebg-preview.png` | 516 × 290 |
 | `bus.jpg` | 47-seat bus | `mercedes-tourismo-coach-removebg.png` (Commons, see above) | 1920 × 1080 |
 
-## Two things worth fixing when you can
+## Limitations of the original images
 
 **The Coaster is low resolution.** Both Coaster sources are tiny — the
 vehicle itself is only about 190 px across in each. The result is sharp at

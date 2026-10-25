@@ -47,9 +47,10 @@ marketing backdrop.
 
 ## Fleet — vehicle photography
 
-**These six slots are filled** from your own vehicle images in
-`public/TTL Car images/` — cutouts composited onto the Indigo field so the
-cards read as one set. See
+**These six slots are filled** with your vehicle images and generated
+replacements, on the Indigo field so the cards read as one set. The Staria
+has an edited orientation; the Coaster and bus are generated illustrations.
+Original vehicle images remain in `public/TTL Car images/`. See
 [`public/media/fleet/CREDITS.md`](public/media/fleet/CREDITS.md) for which
 source became which file, and how to rebuild one.
 
@@ -62,15 +63,15 @@ update those numbers to match it.
 | Drop the file at | Current size | What it should show |
 | --- | --- | --- |
 | `public/media/fleet/sedan.jpg` | 1920 × 1080 | Sedan tier. Three-quarter front, vehicle clean, plain background. |
-| `public/media/fleet/van.jpg` | 1423 × 800 | Hyundai Staria tier. Three-quarter front, matching angle and light. |
+| `public/media/fleet/staria-v2.webp` | 1672 × 940 | Hyundai Staria tier. Edited front three-quarter view, matching the other vehicles' direction. |
 | `public/media/fleet/hiace.jpg` | 1492 × 839 | Toyota Hiace tier. Three-quarter front, side door closed. |
 | `public/media/fleet/suv.jpg` | 1670 × 939 | GMC tier. Three-quarter front, full vehicle in frame. |
-| `public/media/fleet/coach.jpg` | 516 × 290 | Coaster tier. **Low resolution** — a bigger source is the biggest win left. |
-| `public/media/fleet/bus.jpg` | 1920 × 1080 | 47-seat bus tier. Full-size Mercedes-Benz Tourismo coach; a third-party CC BY-SA image, credited in `public/media/fleet/CREDITS.md`. |
+| `public/media/fleet/coaster-v2.webp` | 1672 × 941 | Coaster tier. Generated white Toyota Coaster, front three-quarter view. |
+| `public/media/fleet/bus-v2.webp` | 1672 × 941 | 47-seat bus tier. Generated white touring coach, front three-quarter view. |
 
-The fleet cards crop with `object-fit: cover`, so leave a little space around
-the vehicle rather than filling the frame edge to edge. Bigger sources are
-always better: nothing here is ever upscaled.
+The fleet cards use `object-fit: cover` for the smaller vehicles and
+`contain` for the Coaster and bus so the complete vehicle remains visible.
+Leave space around the vehicle rather than filling the frame edge to edge.
 
 ## Route pages
 

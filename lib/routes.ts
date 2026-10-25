@@ -132,7 +132,7 @@ export const routes: Route[] = [
       "The short one. Twenty minutes, which is exactly why it gets overcharged at the kerb on the way out.",
     intro:
       "Arrivals or departures, both directions, at the same fixed fare. On departures we work backwards from your flight time so you leave the hotel with room to spare, and your chauffeur helps with bags at the terminal door.",
-    fares: { sedan: 130, staria: 150, hiace: 200, gmc: 250, coaster: 350, bus: 450 },
+    fares: { sedan: 130, staria: 170, hiace: 200, gmc: 250, coaster: 350, bus: 450 },
     facts: [
       { label: "Distance", value: "~18 km" },
       { label: "Journey time", value: "20–30 min" },

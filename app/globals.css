@@ -1489,6 +1489,7 @@ body {
 .tier-media .slot {
   position: absolute;
   inset: 0;
+  background: var(--field);
 }
 
 .tier-media img {
@@ -1668,6 +1669,12 @@ body {
   letter-spacing: -0.01em;
 }
 
+.route-from small {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.5625rem;
+}
+
 .stops {
   list-style: none;
   margin: 0;
@@ -1742,6 +1749,24 @@ body {
 .stop-tile {
   display: flex;
   flex-direction: column;
+}
+
+.stop-detail {
+  padding: 1.25rem;
+  border: 1px solid var(--line-strong);
+}
+
+.stop-detail p {
+  margin-top: 0.75rem;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--caption);
+}
+
+@media (max-width: 45.99rem) {
+  .stop-detail {
+    grid-column: 1 / -1;
+  }
 }
 
 .stop-tile .media,
