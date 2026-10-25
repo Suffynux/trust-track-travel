@@ -489,6 +489,12 @@ export default function Home() {
             >
               Call {site.phone}
             </a>
+            <a
+              className="btn btn-outline chamfer is-clipped"
+              href={`tel:${site.ukPhone.replace(/\s/g, "")}`}
+            >
+              Call UK {site.ukPhone}
+            </a>
           </div>
         </div>
       </section>

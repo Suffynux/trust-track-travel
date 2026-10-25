@@ -111,7 +111,10 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a>
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`}>Saudi Arabia: {site.phone}</a>
+              </li>
+              <li>
+                <a href={`tel:${site.ukPhone.replace(/\s/g, "")}`}>UK: {site.ukPhone}</a>
               </li>
               <li>
                 <a href={`mailto:${site.email}`}>{site.email}</a>

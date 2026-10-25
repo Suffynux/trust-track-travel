@@ -15,6 +15,8 @@ export const site = {
   whatsapp: "966576476558",
   /** Shown as a tel: link. Same line as the WhatsApp number. */
   phone: "+966 57 647 6558",
+  /** Additional UK contact line, shown alongside the Saudi number. */
+  ukPhone: "+44 7448 447888",
   /**
    * TODO: confirm this mailbox exists and is monitored before launch. It is
    * carried over from the original placeholder and has not been verified.
